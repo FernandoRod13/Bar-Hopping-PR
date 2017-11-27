@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { Employee } from './../../domainLayer/structures/Employee';
 @Injectable()
 export class EmployeesRepoService {
 
   constructor(db: AngularFirestore) { }
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
-  addNewEmployee(employeeData: any): void {
+  addNewEmployee(employeeData: Employee): void {
 
   }
   /**This function will update data related to a specific employee already in the database. */
-  editEmployeeInformation(employeeID: string, employeeData: any): void {
+  editEmployeeInformation(employeeData: Employee): void {
 
   }
   /**This function will asign an employee to a specific trip. This may remove an exisiting trip asignment. */
@@ -18,15 +19,15 @@ export class EmployeesRepoService {
 
   }
   /**This function will return an observable collection of all employees registered in the database. */
-  getAllEmployees(): Observable<any> {
+  getAllEmployees(): Observable<Employee[]> {
     return null;
   }
   /**This function will return an observable employee object which phone number is specified (if any exists). */
-  findEmployeeByPhoneNumber(phoneNumber: string): Observable<any> {
+  findEmployeeByPhoneNumber(phoneNumber: string): Observable<Employee> {
     return null;
   }
   /**This function will return an observable employee object which email is specified (if any exists). */
-  findEmployeeByEmail(email: string): Observable<any> {
+  findEmployeeByEmail(email: string): Observable<Employee> {
     return null;
   }
 

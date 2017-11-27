@@ -10,8 +10,9 @@ import { PartnersRepoService } from './repositories/partners/partners-repo.servi
 import { TransactionsRepoService } from './repositories/transactions/transactions-repo.service';
 import { TripsRepoService } from './repositories/trips/trips-repo.service';
 
-import { LocationService } from './domainLayer/services/location/location.service'
-import { TransactionsService } from './domainLayer/services/transactions/transactions.service'
+import { LocationService } from './domainLayer/services/location/location.service';
+import { TransactionsService } from './domainLayer/services/transactions/transactions.service';
+
 
 
 @NgModule({
