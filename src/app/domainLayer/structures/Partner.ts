@@ -1,7 +1,7 @@
 import {Address}  from './Address';
 
 export class Partner {
-    id: string;
+    pId: string;
     address: Address;
     name: string;
     phone: string;

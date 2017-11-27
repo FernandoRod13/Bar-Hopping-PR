@@ -1,6 +1,6 @@
 import {Address} from './Address'
 export class Employee {
-    id: string;
+    eId: string;
     address: Address;
     name: string;
     phone: string;

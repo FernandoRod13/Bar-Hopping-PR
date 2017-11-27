@@ -1,7 +1,7 @@
 export class Transaction {
-    customerId: string;
+    cId: string;
     date: Date;
     guests: [string];
     tripCost: number;
-    tripId: string;
+    tId: string;
 }

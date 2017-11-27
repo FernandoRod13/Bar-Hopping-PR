@@ -9,4 +9,5 @@ export class Trip{
     manifest: TripManifest;
     tripRoute: TripRoute;
     type: string;
+    staff: [string]; // the ids of the employees
 }

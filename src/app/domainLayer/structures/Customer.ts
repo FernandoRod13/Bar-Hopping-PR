@@ -1,5 +1,5 @@
 export class Customer {
-    id: string;
+    cId: string;
     name: string;
     email: string;
 }

@@ -1,3 +1,3 @@
 export class TripRoute {
-    tripStopsIds: [String];
+    tripStopsIds: [String]; // the ids of the Partners
 }
