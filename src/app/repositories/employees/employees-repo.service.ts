@@ -17,6 +17,17 @@ export class EmployeesRepoService {
   assignTripToEmployee(employeeID: string, tripID: string): void {
 
   }
-  
+  /**This function will return an observable collection of all employees registered in the database. */
+  getAllEmployees(): Observable<any> {
+    return null;
+  }
+  /**This function will return an observable employee object which phone number is specified (if any exists). */
+  findEmployeeByPhoneNumber(phoneNumber: string): Observable<any> {
+    return null;
+  }
+  /**This function will return an observable employee object which email is specified (if any exists). */
+  findEmployeeByEmail(email: string): Observable<any> {
+    return null;
+  }
 
 }
