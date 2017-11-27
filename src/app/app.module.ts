@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
@@ -21,10 +22,11 @@ import { TransactionsService } from './domainLayer/services/transactions/transac
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [CustomersRepoService, EmployeesRepoService, PartnersRepoService, TransactionsRepoService, TripsRepoService ,
-              LocationService, TransactionsService ],
+              LocationService, TransactionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
