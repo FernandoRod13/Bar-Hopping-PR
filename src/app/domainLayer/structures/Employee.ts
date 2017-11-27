@@ -8,14 +8,17 @@ export class Employee {
     role: string;
     startDate: Date;
 
-    constructor(json: any) {
-        const data = json.data();
-        this.id = json.id;
-        this.name = data.firstName + ' ' + data.lastName;
-        this.phone = data.phone;
-        this.email = data.email;
-        this.role = data.role;
-        this.address = null;
-        this.startDate = data.startDate;
+    constructor(id: string, name: string, phone: string, email: string, role: string, start: Date, address: Address) {
+        this.eId = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.address = address;
+        this.startDate = start;
+    }
+    /**This fucntion will format this employee's data for database update purposes. */
+    exportData(): any {
+        return null;
     }
 }

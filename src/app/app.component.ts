@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeesRepoService } from './repositories/employees/employees-repo.service';
+import { Employee } from './domainLayer/structures/Employee';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,10 +8,9 @@ import { EmployeesRepoService } from './repositories/employees/employees-repo.se
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  constructor(private employeeService: EmployeesRepoService){}
+  constructor(private employeeService: EmployeesRepoService) { }
   ngOnInit() {
-    this.employeeService.findEmployeesByPhoneNumber('7876244083').subscribe(employees => {
-      console.log(employees);
-    });
+    const emp = new Employee('some', 'fernando', '1234', 'fernan.rod.dj@hormail.com', 'software lead', new Date(), null);
+    this.employeeService.addNewEmployee(emp);
   }
 }
