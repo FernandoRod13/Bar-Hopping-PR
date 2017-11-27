@@ -22,7 +22,11 @@ export class EmployeesRepoService {
   }
   /**This function will return an observable collection of all employees registered in the database. */
   getAllEmployees(): Observable<Employee[]> {
-    return this.employeesCollection.valueChanges();
+    return this.employeesCollection.snapshotChanges().map( item => {
+      return item.map( data => {
+        return new Employee(data.payload.doc);
+      });
+    });
   }
   /**This function will return an observable list employee object which phone number is specified (if any exists). */
   findEmployeesByPhoneNumber(phoneNumber: string): Observable<Employee[]> {
