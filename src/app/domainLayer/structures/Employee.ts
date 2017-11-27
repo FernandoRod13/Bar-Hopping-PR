@@ -4,4 +4,5 @@ export class Employee {
     phone: string;
     email: string;
     role: string;
+    startDate: Date;
 }
