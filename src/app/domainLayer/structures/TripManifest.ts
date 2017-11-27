@@ -1,6 +1,6 @@
 import {TripGroup} from './TripGroup';
 
-export class TripManifest{
+export class TripManifest {
     participants: [TripGroup];
     size: number;
 }

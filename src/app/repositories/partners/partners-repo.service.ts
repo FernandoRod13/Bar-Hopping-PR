@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { Partner } from './../../domainLayer/structures/Partner';
+import { PartnerFactory } from './../../domainLayer/factories//partnerFactory';
+import { AuthenticationService } from './../../domainLayer/services//authentication/authentication.service';
 @Injectable()
 
 export class PartnersRepoService {
 
-  constructor(db: AngularFirestore) { }
+  private partnersCollection: AngularFirestoreCollection<Partner>;
+  constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: PartnerFactory) {
+    this.partnersCollection = db.collection('partners');
+  }
   /**This function will add a new partner to the database. */
-  addNewPartner(partnerData: any): void {
+  addNewPartner(partnerData: Partner): void {
 
   }
   /**This function will edit information in the database related to a specific partner. */
-  editPartnerInfo(partnerID: string, partnerData: any): void {
+  editPartnerInfo(partnerData: Partner): void {
 
   }
   /**This function will add editing right to a user for a specific partner. */
@@ -23,12 +29,14 @@ export class PartnersRepoService {
 
   }
   /**This function will return an observable collection of all our partners. */
-  getAllPartners(): Observable<any> {
+  getAllPartners(): Observable<Partner[]> {
     return null;
   }
   /**This function will return an observable object of a specific partner. */
-  getSpecificPartner(partnerID: string): Observable<any> {
-    return null;
+  getSpecificPartner(partnerID: string): Observable<Partner> {
+    return this.partnersCollection.doc(partnerID).snapshotChanges().map( item => {
+      return this.factory.createPartner(item.payload);
+    });
   }
 
 }

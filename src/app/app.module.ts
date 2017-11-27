@@ -15,7 +15,7 @@ import { AuthenticationService } from './domainLayer/services//authentication/au
 import { LocationService } from './domainLayer/services/location/location.service';
 import { TransactionsService } from './domainLayer/services/transactions/transactions.service';
 import { EmployeeFactory } from './domainLayer/factories/employeeFactory';
-
+import { PartnerFactory } from './domainLayer/factories/partnerFactory';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { EmployeeFactory } from './domainLayer/factories/employeeFactory';
     AngularFireAuthModule
   ],
   providers: [CustomersRepoService, EmployeesRepoService, PartnersRepoService, TransactionsRepoService, TripsRepoService ,
-              LocationService, TransactionsService, AuthenticationService, EmployeeFactory],
+              LocationService, TransactionsService, AuthenticationService, EmployeeFactory, PartnerFactory],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
