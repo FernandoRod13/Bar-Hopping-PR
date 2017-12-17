@@ -21,11 +21,20 @@ import { TransactionsService } from './domainLayer/services/transactions/transac
 import { EmployeeFactory } from './domainLayer/factories/employeeFactory';
 import { PartnerFactory } from './domainLayer/factories/partnerFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
+import { HomePageComponent } from './ui-layer/homePage/homePage.component';
+import { PartnersComponent } from './ui-layer/partners/partners.component';
+import { TripsComponent } from './ui-layer/trips/trips.component';
+import { AccountComponent } from './ui-layer/account/account.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomePageComponent,
+    PartnersComponent,
+    TripsComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

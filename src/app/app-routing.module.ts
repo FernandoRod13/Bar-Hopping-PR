@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { LoginComponent } from './ui-layer//authentication/login/login.component';
 import { Router } from '@angular/router/src/router';
+import { HomePageComponent } from './ui-layer/homePage/homePage.component';
+import { LoginComponent } from './ui-layer/authentication/login/login.component';
+import { PartnersComponent } from './ui-layer/partners/partners.component';
+import { TripsComponent } from './ui-layer/trips/trips.component';
+import { AccountComponent } from './ui-layer/account/account.component';
+
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full'}
+    { path: 'home', component: HomePageComponent },
+    { path: 'catalogue', component: PartnersComponent },
+    { path: 'trips', component: TripsComponent },
+    { path: 'account', component: AccountComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full'}
+    
 ];
 
 

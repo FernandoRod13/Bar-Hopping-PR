@@ -18,10 +18,11 @@ export class CustomersRepoService {
  
   }
 
-  /**This function will add a new customer to the database. */
+  /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
   addNewCustomer(customerData: Customer): void {
-
+    this.auth.createNewUser(customerData.email, 'BarHopping1');
   }
+
   /** This function will send an email to the customer. */
   sendEmailVerification(customerData: Customer, subject: string, body: string): void {
 
