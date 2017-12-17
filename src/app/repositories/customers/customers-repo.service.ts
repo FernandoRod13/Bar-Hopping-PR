@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from './../../domainLayer/services//authentication/authentication.service';
 import { Customer } from './../../domainLayer/structures/Customer';
 @Injectable()
 
 export class CustomersRepoService {
 
-  constructor(db: AngularFirestore) { }
+  private customerCollection: AngularFirestoreCollection<Customer>;
+
+  constructor(private db: AngularFirestore, private auth: AuthenticationService,) {
+    this.customerCollection = db.collection('customers');
+  }
 
    /**This function will authenticate a customer, login */
   authCustomer(customerEmail: string, customerPassword: string): void {
-
+ 
   }
 
-  /**This function will add a new customer to the database. */
+  /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
   addNewCustomer(customerData: Customer): void {
-
+    this.auth.createNewUser(customerData.email, 'BarHopping1');
   }
+
   /** This function will send an email to the customer. */
   sendEmailVerification(customerData: Customer, subject: string, body: string): void {
 

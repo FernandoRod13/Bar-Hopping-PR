@@ -6,7 +6,10 @@ import { AuthenticationService } from './../../domainLayer/services//authenticat
 import { EmployeeFactory } from './../../domainLayer/factories//employeeFactory';
 @Injectable()
 export class EmployeesRepoService {
+
+
   private employeesCollection: AngularFirestoreCollection<Employee>;
+  
   constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: EmployeeFactory) {
     this.employeesCollection = db.collection('employees');
   }
