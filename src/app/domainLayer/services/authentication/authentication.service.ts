@@ -6,8 +6,17 @@ export class AuthenticationService {
   constructor(private afAuth: AngularFireAuth) { }
   /**This function will add a new user to firebase authentication using an email and password. */
   createNewUser(email: string, password: string) {
-   this.afAuth.auth.createUserWithEmailAndPassword(email, password).then( user => {
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
       console.log(user);
-   });
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+  loginUser(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password).then(user => {
+      console.log(user);
+    }).catch(error => {
+      console.log(error);
+    });
   }
 }
