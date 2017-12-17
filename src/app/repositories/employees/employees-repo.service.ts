@@ -16,6 +16,8 @@ export class EmployeesRepoService {
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
   addNewEmployee(employeeData: Employee): void {
     this.auth.createNewUser(employeeData.email, 'BarHopping1');
+    // const useriD = 'someID';
+    // this.employeesCollection.doc(useriD).set(employeeData.exportData());
   }
   /**This function will update data related to a specific employee already in the database. */
   editEmployeeInformation(employeeData: Employee): void {
