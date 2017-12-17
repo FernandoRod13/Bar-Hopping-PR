@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from './../../domainLayer/services//authentication/authentication.service';
 import { Customer } from './../../domainLayer/structures/Customer';
 @Injectable()
 
 export class CustomersRepoService {
 
-  constructor(db: AngularFirestore) { }
+  private customerCollection: AngularFirestoreCollection<Customer>;
+
+  constructor(private db: AngularFirestore, private auth: AuthenticationService,) {
+    this.customerCollection = db.collection('customers');
+  }
 
    /**This function will authenticate a customer, login */
   authCustomer(customerEmail: string, customerPassword: string): void {
-
+ 
   }
 
   /**This function will add a new customer to the database. */
