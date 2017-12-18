@@ -20,6 +20,7 @@ import { LocationService } from './domainLayer/services/location/location.servic
 import { TransactionsService } from './domainLayer/services/transactions/transactions.service';
 import { EmployeeFactory } from './domainLayer/factories/employeeFactory';
 import { PartnerFactory } from './domainLayer/factories/partnerFactory';
+import { TransactionFactory } from './domainLayer/factories/transactionFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
 import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { PartnersComponent } from './ui-layer/partners/partners.component';
@@ -48,8 +49,19 @@ import { EmployeeDashboardComponent } from './ui-layer/dashboards/employee-dashb
     FormsModule,
     RoutingModule
   ],
-  providers: [CustomersRepoService, EmployeesRepoService, PartnersRepoService, TransactionsRepoService, TripsRepoService ,
-              LocationService, TransactionsService, AuthenticationService, EmployeeFactory, PartnerFactory],
+  providers: [
+    CustomersRepoService,
+    EmployeesRepoService,
+    PartnersRepoService,
+    TransactionsRepoService,
+    TripsRepoService,
+    LocationService,
+    TransactionsService,
+    AuthenticationService,
+    EmployeeFactory,
+    PartnerFactory,
+    TransactionFactory
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
