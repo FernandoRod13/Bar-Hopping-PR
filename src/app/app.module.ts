@@ -25,6 +25,7 @@ import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { PartnersComponent } from './ui-layer/partners/partners.component';
 import { TripsComponent } from './ui-layer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
+import { EmployeeDashboardComponent } from './ui-layer/dashboards/employee-dashboard/employee-dashboard.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AccountComponent } from './ui-layer/account/account.component';
     HomePageComponent,
     PartnersComponent,
     TripsComponent,
-    AccountComponent
+    AccountComponent,
+    EmployeeDashboardComponent
   ],
   imports: [
     BrowserModule,
