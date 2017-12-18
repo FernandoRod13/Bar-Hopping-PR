@@ -6,6 +6,7 @@ import { LoginComponent } from './ui-layer/authentication/login/login.component'
 import { PartnersComponent } from './ui-layer/partners/partners.component';
 import { TripsComponent } from './ui-layer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
+import { EmployeeDashboardComponent } from './ui-layer/dashboards/employee-dashboard/employee-dashboard.component';
 
 
 const appRoutes: Routes = [
@@ -14,8 +15,10 @@ const appRoutes: Routes = [
     { path: 'catalogue', component: PartnersComponent },
     { path: 'trips', component: TripsComponent },
     { path: 'account', component: AccountComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full'}
-    
+    { path: 'dashboard', children: [
+        {path: 'employees', component: EmployeeDashboardComponent}
+    ]},
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 
