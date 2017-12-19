@@ -22,6 +22,13 @@ export class EmployeesRepoService {
     this.afAuth.auth.createUserWithEmailAndPassword(employeeData.email, password)
     .then(user => {
 
+
+    this.afAuth.auth.sendPasswordResetEmail(employeeData.email).then(function() {
+      // Email sent.
+      }).catch(function(error) {
+      // An error happened.
+      });
+
       this.addEmployeeToCollection(user.uid,employeeData);
           
   }).catch(error => {

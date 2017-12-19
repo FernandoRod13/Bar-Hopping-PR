@@ -17,25 +17,19 @@ export class EmployeeDashboardComponent implements OnInit {
   }
   onCreateAccount(form: any) {
     if (form.valid) {
-      if (form.value.password1.length > 7) {
-        {
         const address = new Address(form.value.city, form.value.line1, form.value.line2, form.value.state, form.value.zip);
         const startDay = new Date();
         const employee = new Employee("", form.value.name, form.value.phone, form.value.email
         , form.value.role, startDay  ,address);
 
-        this.EmployeeRepo.createNewEmployee(employee,form.value.password1);
+        this.EmployeeRepo.createNewEmployee(employee,"Barhopping1");
         console.log("Insert Succefull");
-        }
-      }else {
-        console.log('short password');
-      }
+        
     } else {
       console.log('empty fields');
     }
   }
 
-  editAccount
 
 
 
