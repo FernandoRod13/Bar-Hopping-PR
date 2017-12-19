@@ -1,8 +1,8 @@
 import {Address} from './Address';
 export class Employee {
     eId: string;
-    address: Address;
     name: string;
+    address: Address;
     phone: string;
     email: string;
     role: string;
@@ -18,7 +18,16 @@ export class Employee {
         this.startDate = start;
     }
     /**This fucntion will format this employee's data for database update purposes. */
-    exportData(): any {
-        return null;
+    parseToJSON(): any {
+        var employee = {
+            name: this.name,
+            adress: this.address.parseToJSON(),
+            phone: this.phone,
+            email: this.email,
+            role: this.role,
+            startDate: this.name
+        };
+        return employee;
     }
 }
+

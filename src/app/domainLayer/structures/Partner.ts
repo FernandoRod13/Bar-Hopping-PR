@@ -24,11 +24,17 @@ export class Partner {
         this.announcement = announcement;
     }
 
-    exportData(): any {
-        return null;
+    parseToJSON(): any {
+        var partner = {
+            address: this.address.parseToJSON(),
+            name: this.name,
+            phone: this.phone,
+            manager: this.manager,
+            type: this.type,
+            description: this.description,
+            image: this.image,
+            announcement: this.announcement,
+        };
+        return partner;
     }
-
-
-
-
 }

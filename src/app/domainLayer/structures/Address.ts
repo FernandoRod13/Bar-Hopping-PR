@@ -12,4 +12,15 @@ export class Address {
         this.state = state;
         this.zip = zip;
     }
-}
+    parseToJSON(): any {
+        var address = {
+            city: this.city,
+            line1: this.line1,
+            line2: this.line2,
+            state: this.state,
+            zip: this.zip    
+        };
+        return address;
+        }
+    }
+

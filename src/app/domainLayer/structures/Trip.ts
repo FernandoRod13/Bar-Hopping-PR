@@ -11,3 +11,4 @@ export class Trip{
     type: string;
     staff: [string]; // the ids of the employees
 }
+

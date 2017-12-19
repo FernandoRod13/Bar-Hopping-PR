@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+
+import { Customer } from './../../structures/Customer';
 import * as firebase from 'firebase/app';
+
+
 @Injectable()
 export class AuthenticationService {
-  constructor(private afAuth: AngularFireAuth) { }
-  /**This function will add a new user to firebase authentication using an email and password. */
-  createNewUser(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
-      console.log(user);
-    }).catch(error => {
-      console.log(error);
-    });
-  }
+
+  
+
+  constructor(private afAuth: AngularFireAuth) {
+   }
+ 
+
   loginUser(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password).then(user => {
       console.log(user);

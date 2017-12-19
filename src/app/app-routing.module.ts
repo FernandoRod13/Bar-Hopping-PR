@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router/src/router';
 import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
+import { CreateAccountComponent } from './ui-layer/authentication/create-account/create-account.component';
 import { PartnersComponent } from './ui-layer/partners/partners.component';
 import { TripsComponent } from './ui-layer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
+import { EmployeeDashboardComponent } from './ui-layer/dashboards/employee-dashboard/employee-dashboard.component';
 
 
 const appRoutes: Routes = [
@@ -14,8 +16,11 @@ const appRoutes: Routes = [
     { path: 'catalogue', component: PartnersComponent },
     { path: 'trips', component: TripsComponent },
     { path: 'account', component: AccountComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full'}
-    
+    { path: 'create-account', component: CreateAccountComponent },
+    { path: 'dashboard', children: [
+        {path: 'employees', component: EmployeeDashboardComponent}
+    ]},
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 
