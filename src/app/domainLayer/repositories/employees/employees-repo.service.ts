@@ -17,7 +17,7 @@ export class EmployeesRepoService {
   }
 
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
-  addNewEmployee(employeeData: Employee, password: string): void {
+  createNewEmployee(employeeData: Employee, password: string): void {
     
     this.afAuth.auth.createUserWithEmailAndPassword(employeeData.email, password)
     .then(user => {

@@ -1,26 +1,29 @@
 <div class="container-fluid">
     <div class="row">
-      <div id="login-card" class="col-md-6 offset-md-3 align-self-center content">
+      <div id="create-account-card" class="col-md-6 offset-md-3 align-self-center content">
         <mat-card>
           <mat-card-title>Create Account</mat-card-title>
-          <form class="login-form" (ngSubmit)="onCreateAccount(form)" #form="ngForm">
-              <mat-form-field class="full-width field">
+          <form class="create-account-form " (ngSubmit)="onCreateAccount(form)" #form="ngForm">
+            
+              <mat-form-field class="col-md-12 full-width field">
                   <input matInput placeholder="Name" required name="name" type="text" ngModel>
                   <mat-hint>Pepito Morales</mat-hint>
               </mat-form-field>
-            <mat-form-field class="full-width field">
+            <mat-form-field class="col-md-12 full-width field">
               <input matInput placeholder="Email" required name="email" type="email" ngModel>
               <mat-hint>Ex: john.smith@gmail.com</mat-hint>
             </mat-form-field>
-            <mat-form-field class="full-width field">
+            <mat-form-field class="col-md-12 full-width field">
               <input matInput placeholder="Password" required name="password1" type="password" ngModel>
               <mat-hint>Password must be at least 8 characters long.</mat-hint>
             </mat-form-field>
-            <mat-form-field class="full-width field">
+            <mat-form-field class="col-md-12 full-width field">
                 <input matInput placeholder="Password" required name="password2" type="password" ngModel>
                 <mat-hint>Confirm your password.</mat-hint>
               </mat-form-field>
-            <button mat-raised-button color="primary" class="login-button" type="submit">Create Account</button>
+              <br><br>
+            <button mat-raised-button color="primary" class="col-md-12 login-button " type="submit">Create Account</button>
+          
           </form>
         </mat-card>
       </div>

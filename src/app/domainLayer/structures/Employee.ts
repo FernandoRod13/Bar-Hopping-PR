@@ -21,11 +21,11 @@ export class Employee {
     parseToJSON(): any {
         var employee = {
             name: this.name,
-            adress: this.address.parseToJSON(),
+            address: this.address.parseToJSON(),
             phone: this.phone,
             email: this.email,
             role: this.role,
-            startDate: this.name
+            startDate: this.startDate
         };
         return employee;
     }

@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     { path: 'account', component: AccountComponent },
     { path: 'create-account', component: CreateAccountComponent },
     { path: 'dashboard', children: [
-        {path: 'employees', component: EmployeeDashboardComponent}
+    { path: 'employees', component: EmployeeDashboardComponent}
     ]},
     { path: '', redirectTo: '/home', pathMatch: 'full'},
 ];

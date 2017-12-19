@@ -1,0 +1,65 @@
+
+
+
+<div class="container-fluid">
+        <div class="row">
+          <div id="create-employee-card" class="col-md-8 offset-md-2 align-self-center content">
+            <mat-card>
+            <mat-card-title>Create account for Employee</mat-card-title>
+              <form class="create-employee-form " (ngSubmit)="onCreateAccount(form)" #form="ngForm">
+                  <mat-form-field class="col-md-12 full-width field">
+                      <input matInput placeholder="Name" required name="name" type="text" ngModel>
+                      <mat-hint>Pepito Morales</mat-hint>
+                  </mat-form-field>
+                <mat-form-field class="col-md-12 full-width field">
+                  <input matInput placeholder="Email" required name="email" type="email" ngModel>
+                  <mat-hint>Ex: john.smith@gmail.com</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="col-md-12 full-width field">
+                  <input matInput placeholder="Password" required name="password1" type="password" ngModel>
+                  <mat-hint>Password must be at least 8 characters long.</mat-hint>
+                </mat-form-field>
+                <br><br>
+
+                <mat-card-content>Personal Information:</mat-card-content>
+                <mat-form-field class="col-md-12 full-width field">
+                        <input matInput placeholder="phone" required name="phone" type="text" ngModel>
+                        <mat-hint>ex: 798-987-2823</mat-hint>
+                      </mat-form-field>
+                    
+                    <mat-form-field class="col-md-12 full-width field">
+                              <input matInput placeholder="role" required name="role" type="text" ngModel>
+                    <mat-hint>ex: Driver, developer</mat-hint>
+                    </mat-form-field>
+                <br><br>
+                <mat-card-content>Address:</mat-card-content>
+                <mat-form-field class="col-md-12 full-width field">
+                        <input matInput placeholder="line 1" required name="line1" type="text" ngModel>
+                        <mat-hint>ex: Street 18 3r4</mat-hint>
+                    </mat-form-field>
+                  <mat-form-field class="col-md-12 full-width field">
+                        <input matInput placeholder="line 2" required name="line2" type="text" ngModel>
+                    <mat-hint>ex: unit 12</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="city" required name="city" type="text" ngModel>
+                    <mat-hint>ex: Chicago</mat-hint>
+                  </mat-form-field>
+                <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="state" required name="state" type="text" ngModel>
+                    <mat-hint>ex: GA</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-12 full-width field">
+                        <input matInput placeholder="zip code" required name="zip" type="text" ngModel>
+                        <mat-hint>ex: 00973</mat-hint>
+                      </mat-form-field>
+
+                <br><br>
+                
+                <button mat-raised-button color="primary" class="col-md-12 login-button " type="submit">Create Account</button>
+              
+              </form>
+            </mat-card>
+          </div>
+        </div>
+      </div>
