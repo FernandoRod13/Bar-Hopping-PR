@@ -13,6 +13,7 @@ export class EmployeesRepoService {
   constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: EmployeeFactory) {
     this.employeesCollection = db.collection('employees');
   }
+  
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
   addNewEmployee(employeeData: Employee): void {
     this.auth.createNewUser(employeeData.email, 'BarHopping1');

@@ -9,12 +9,13 @@ import { AuthenticationService } from './../../domainLayer/services//authenticat
 export class PartnersRepoService {
 
   private partnersCollection: AngularFirestoreCollection<Partner>;
+
   constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: PartnerFactory) {
     this.partnersCollection = db.collection('partners');
   }
   /**This function will add a new partner to the database. */
   addNewPartner(partnerData: Partner): void {
-
+  
   }
   /**This function will edit information in the database related to a specific partner. */
   editPartnerInfo(partnerData: Partner): void {
@@ -32,6 +33,15 @@ export class PartnersRepoService {
   getAllPartners(): Observable<Partner[]> {
     return null;
   }
+
+  // getPartnerByPhoneNumber(phoneNumber: string): Observable<Partner[]> {
+  //   return this.db.collection('partners', ref => ref.where('phone', '==', phoneNumber)).snapshotChanges().map( item => {
+  //     return item.map( data => {
+  //       return this.factory.createPartner(item.payload);
+  //     });
+  //   });
+  // }
+
   /**This function will return an observable object of a specific partner. */
   getSpecificPartner(partnerID: string): Observable<Partner> {
     return this.partnersCollection.doc(partnerID).snapshotChanges().map( item => {
