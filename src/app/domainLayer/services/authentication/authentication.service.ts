@@ -33,9 +33,9 @@ export class AuthenticationService {
     //   }
     // }
    }
- 
-  loginUser(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+
+  loginUser(email: string, password: string): Promise<void> {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
     .then(user => {
       console.log(user);
 

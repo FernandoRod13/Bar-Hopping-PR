@@ -27,8 +27,9 @@ import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { PartnersComponent } from './ui-layer/partners/partners.component';
 import { TripsComponent } from './ui-layer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
-import { EmployeeDashboardComponent } from './ui-layer/dashboards/employee-dashboard/employee-dashboard.component';
 import { CreateAccountComponent } from './ui-layer/authentication/create-account/create-account.component';
+import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component';
+import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,9 @@ import { CreateAccountComponent } from './ui-layer/authentication/create-account
     PartnersComponent,
     TripsComponent,
     AccountComponent,
-    EmployeeDashboardComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    EmployeeManagerComponent,
+    EmployeeContainerComponent
   ],
   imports: [
     BrowserModule,

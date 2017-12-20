@@ -7,9 +7,8 @@ import { CreateAccountComponent } from './ui-layer/authentication/create-account
 import { PartnersComponent } from './ui-layer/partners/partners.component';
 import { TripsComponent } from './ui-layer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
-import { EmployeeDashboardComponent } from './ui-layer/dashboards/employee-dashboard/employee-dashboard.component';
-
-
+import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component'
+import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomePageComponent },
@@ -19,9 +18,16 @@ const appRoutes: Routes = [
     { path: 'partners', component: PartnersComponent },
     { path: 'create-account', component: CreateAccountComponent },
     { path: 'dashboard', children: [
-    { path: 'employees', component: EmployeeDashboardComponent}
+        { path: 'trips', component: TripsComponent },
+        { path: 'catalogue', component: PartnersComponent },
+        { path: 'account', component: AccountComponent },
     ]},
-    { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'employee', redirectTo: '/employee/hr', pathMatch: 'full'},
+    { path: 'employee', component: EmployeeContainerComponent, children: [
+        { path: 'account', component: AccountComponent },
+        { path: 'hr', component: EmployeeManagerComponent },
+    ]},
+    { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 

@@ -1,20 +1,13 @@
-<html>
-  
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-  
-</head>
-  
-  <body>
-   
-<h2>Hello there, Welcome </h2>
-    
-  
-
-</body>
- 
-  </html>
-  
-  
+<mat-toolbar color="primary">
+  <span>Bar Hopping PR</span>
+  <!-- This fills the remaining space of the current row -->
+  <div class="button-row">
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/login">Login</a>
+    <a mat-button routerLink="/catalogue">Catalogue</a>
+    <a mat-button routerLink="/trips">Trips</a>
+    <a mat-button routerLink="/account">Account</a>
+    <a mat-button routerLink="/create-account">Create Account</a>
+    <a mat-button routerLink="/dashboard/employees">Employee</a>
+  </div>
+</mat-toolbar>

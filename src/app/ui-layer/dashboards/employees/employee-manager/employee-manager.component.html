@@ -1,0 +1,78 @@
+<div *ngIf="!addingEmployee">
+    <button mat-raised-button color="primary" (click)="onCreateNewEmployee()" style="margin:15px">Add Employee</button>
+    <mat-card *ngFor="let emp of employees" class="card">
+        <mat-card-title>{{emp.getFullName()}}</mat-card-title>
+        <mat-card-subtitle>{{emp.email}}</mat-card-subtitle>
+        <mat-card-actions>
+            <button mat-button color="primary" (click)="onEditEmployee(emp)">Edit</button>
+            <button mat-button color="warn">Remove</button>
+          </mat-card-actions>
+    </mat-card>
+</div>
+<div *ngIf="addingEmployee" class="container-fluid">
+    <div class="row">
+      <div id="create-employee-card" class="col-md-8 offset-md-2 align-self-center content">
+        <mat-card>
+        <mat-card-title *ngIf="updatingData">Update Employee Information</mat-card-title>
+        <mat-card-title *ngIf="!updatingData">Add New Employee</mat-card-title>
+          <form class="create-employee-form " (ngSubmit)="onSubmitForm(form)" #form="ngForm">
+                <mat-form-field class="col-md-12 field">
+                    <input matInput placeholder="First Name" required name="firstName" type="text" [(ngModel)]="employee.firstName">
+                    <mat-hint>Ex: John</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="col-md-12 field">
+                    <input matInput placeholder="Last Name" required name="lastName" type="text" [(ngModel)]="employee.lastName">
+                    <mat-hint>Ex: Smith</mat-hint>
+                </mat-form-field>
+            <mat-form-field class="col-md-12 full-width field">
+              <input matInput placeholder="Email" required name="email" type="email" [(ngModel)]="employee.email">
+              <mat-hint>Ex: john.smith@gmail.com</mat-hint>
+            </mat-form-field>
+            <br><br>
+
+            <mat-card-content>Personal Information:</mat-card-content>
+            <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="phone" required name="phone" type="text" [(ngModel)]="employee.phone">
+                    <mat-hint>ex: 798-987-2823</mat-hint>
+                  </mat-form-field>
+                
+                <mat-form-field class="col-md-12 full-width field">
+                          <input matInput placeholder="role" required name="role" type="text" [(ngModel)]="employee.role">
+                <mat-hint>ex: Driver, developer</mat-hint>
+                </mat-form-field>
+            <br><br>
+            <mat-card-content>Address:</mat-card-content>
+            <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="line 1" required name="line1" type="text" [(ngModel)]="employee.address.line1">
+                    <mat-hint>ex: Street 18 3r4</mat-hint>
+                </mat-form-field>
+              <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="line 2" required name="line2" type="text" [(ngModel)]="employee.address.line2">
+                <mat-hint>ex: unit 12</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="col-md-12 full-width field">
+                <input matInput placeholder="city" required name="city" type="text" [(ngModel)]="employee.address.city">
+                <mat-hint>ex: Chicago</mat-hint>
+              </mat-form-field>
+            <mat-form-field class="col-md-12 full-width field">
+                <input matInput placeholder="state" required name="state" type="text" [(ngModel)]="employee.address.state">
+                <mat-hint>ex: GA</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="zip code" required name="zip" type="text" [(ngModel)]="employee.address.zip">
+                    <mat-hint>ex: 00973</mat-hint>
+                  </mat-form-field>
+
+            <br><br>
+            <div class="row">
+                <button mat-raised-button class="col-md-3 login-button" (click)="onAddEmployee()">Cancel</button>
+                <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="updatingData">Update Employee Information</button>
+                <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="!updatingData">Add New Employee</button>
+
+            </div>
+                  
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>

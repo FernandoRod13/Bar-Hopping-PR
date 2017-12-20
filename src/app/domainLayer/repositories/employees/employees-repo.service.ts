@@ -13,31 +13,14 @@ export class EmployeesRepoService {
 
   constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: UserFactory
   , private afAuth: AngularFireAuth) {
-    this.employeesCollection = db.collection('employees');
+    this.employeesCollection = db.collection('users');
   }
 
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
-  createNewEmployee(employeeData: Employee, password: string): void {
-    this.afAuth.auth.createUserWithEmailAndPassword(employeeData.email, password)
-    .then(user => {
-
-
-    this.afAuth.auth.sendPasswordResetEmail(employeeData.email).then(function() {
-      // Email sent.
-      }).catch(function(error) {
-      // An error happened.
-      });
-
-      this.addEmployeeToCollection(user.uid, employeeData);
-  }).catch(error => {
-    console.log(error);
-  });
-}
-
-addEmployeeToCollection(employeeID: string, employeeData: Employee) {
-this.employeesCollection.doc(employeeID).set(employeeData.parseToJSON());
-console.log('Employee succesfully added to the collection');
-}
+  addNewEmployee(employeeData: Employee) {
+    this.employeesCollection.add(employeeData.parseToJSON());
+    console.log('Employee succesfully added to the collection');
+  }
   /**This function will update data related to a specific employee already in the database. */
   editEmployeeInformation(employeeData: Employee): void {
     this.employeesCollection.doc(employeeData.eId).update(employeeData.parseToJSON());
@@ -50,7 +33,7 @@ console.log('Employee succesfully added to the collection');
   }
   /**This function will return an observable collection of all employees registered in the database. */
   getAllEmployees(): Observable<Employee[]> {
-    return this.employeesCollection.snapshotChanges().map( item => {
+    return this.db.collection('users', ref => ref.where('userType', '==', 'Employee')).snapshotChanges().map( item => {
       return item.map( data => {
         return this.factory.composeEmployee(data.payload.doc);
       });
@@ -58,7 +41,7 @@ console.log('Employee succesfully added to the collection');
   }
   /**This function will return an observable list employee object which phone number is specified (if any exists). */
   findEmployeesByPhoneNumber(phoneNumber: string): Observable<Employee[]> {
-    return this.db.collection('employees', ref => ref.where('phone', '==', phoneNumber)).snapshotChanges().map( item => {
+    return this.db.collection('users', ref => ref.where('userType', '==', 'Employee').where('phone', '==', phoneNumber)).snapshotChanges().map( item => {
       return item.map( data => {
         return this.factory.composeEmployee(data.payload.doc);
       });
@@ -66,7 +49,7 @@ console.log('Employee succesfully added to the collection');
   }
   /**This function will return an observable employee object which email is specified (if any exists). */
   findEmployeeByEmail(email: string): Observable<Employee[]> {
-    return this.db.collection('employees', ref => ref.where('email', '==', email)).snapshotChanges().map( item => {
+    return this.db.collection('employees', ref => ref.where('userType', '==', 'Employee').where('email', '==', email)).snapshotChanges().map( item => {
       return item.map( data => {
         return this.factory.composeEmployee(data.payload.doc);
       });
