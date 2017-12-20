@@ -8,12 +8,15 @@ import { Partner } from './../../domainLayer/structures/Partner';
   styleUrls: ['./partners.component.css']
 })
 export class PartnersComponent implements OnInit, OnDestroy {
+  
   private partnersRef: any;
+  
 
   constructor(private repo: PartnersRepoService) { }
 
   ngOnInit() {
     this.partnersRef = this.repo.getAllPartners().subscribe();
+    console.log(this.partnersRef);
   }
   ngOnDestroy() {
     this.partnersRef.unsubscribe();
