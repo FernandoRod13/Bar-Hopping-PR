@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 import { Customer } from './../../structures/Customer';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
+import { UserFactory } from '../../factories/userFactory';
 
 @Injectable()
 
@@ -12,8 +13,9 @@ export class CustomersRepoService {
 
   private customerCollection: AngularFirestoreCollection<Customer>;
 
-  constructor(private db: AngularFirestore, private auth: AuthenticationService, private afAuth: AngularFireAuth) {
-    this.customerCollection = db.collection('customers');
+  constructor(private db: AngularFirestore, private auth: AuthenticationService, private afAuth: AngularFireAuth,
+  private factory: UserFactory) {
+    this.customerCollection = db.collection('users');
   }
 
 
@@ -28,7 +30,7 @@ export class CustomersRepoService {
         this.afAuth.auth.createUserWithEmailAndPassword(customerData.email, password)
           .then(user => {
 
-            this.addCustomerToCollection(user.uid,customerData);
+            this.addCustomerToCollection(user.uid, customerData);
                 
         }).catch(error => {
           console.log(error) 
@@ -62,12 +64,17 @@ export class CustomersRepoService {
   }
   /**This function will return an observable collection of all our customers. */
   getAllCustomers(): Observable<Customer[]> {
-    
-    return null;
+    return this.db.collection('users', ref => ref.where('userType', '==', 'Customer')).snapshotChanges().map( item => {
+      return item.map( data => {
+        return this.factory.composeCustomer(data.payload.doc);
+      });
+    });
   }
   /**This function will return an observable object of a specific customer. */
   getSpecificCustomer(customerID: string): Observable<Customer> {
-    return null;
+    return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
+      return this.factory.composeCustomer(data.payload);
+    });
   }
 
 }
