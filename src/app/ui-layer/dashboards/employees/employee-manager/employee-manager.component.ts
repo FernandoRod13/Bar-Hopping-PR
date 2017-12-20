@@ -63,12 +63,9 @@ export class EmployeeManagerComponent implements OnInit, OnDestroy {
     }
     }else {
       if (form.valid) {
-
-        const address = new Address(form.value.city, form.value.line1, form.value.line2, form.value.state, form.value.zip);
-        const startDay = new Date();
-        const employee = new Employee('',form.value.firstName, form.value.lastName, form.value.phone, form.value.email, form.value, startDay, address);
-        this.repo.addNewEmployee(employee);
+        this.repo.addNewEmployee(this.employee);
         this.employee = null;
+        this.updatingData = false;
         this.addingEmployee = false;
         console.log('Insert Succefull');
     } else {

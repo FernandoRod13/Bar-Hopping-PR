@@ -25,7 +25,7 @@ export class Partner {
     }
 
     parseToJSON(): any {
-        var partner = {
+        const partner = {
             address: this.address.parseToJSON(),
             name: this.name,
             phone: this.phone,

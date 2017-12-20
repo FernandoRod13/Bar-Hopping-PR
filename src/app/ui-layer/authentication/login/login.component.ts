@@ -13,6 +13,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  onShowRegister() {
+    this.router.navigate(['/create-account']);
+  }
+
   onLogin(form: any) {
     if (form.valid) {
       if (form.value.password.length > 7) {
