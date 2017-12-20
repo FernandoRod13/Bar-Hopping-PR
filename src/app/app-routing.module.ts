@@ -16,6 +16,7 @@ const appRoutes: Routes = [
     { path: 'catalogue', component: PartnersComponent },
     { path: 'trips', component: TripsComponent },
     { path: 'account', component: AccountComponent },
+    { path: 'partners', component: PartnersComponent },
     { path: 'create-account', component: CreateAccountComponent },
     { path: 'dashboard', children: [
     { path: 'employees', component: EmployeeDashboardComponent}

@@ -17,6 +17,7 @@ export class PartnersRepoService {
   /**This function will add a new partner to the database. */
   addNewPartner(partnerData: Partner): void {
     this.partnersCollection.add(partnerData.parseToJSON());
+    
   }
   /**This function will edit information in the database related to a specific partner. */
   editPartnerInfo(partnerData: Partner): void {
@@ -34,10 +35,11 @@ export class PartnersRepoService {
   getAllPartners(): Observable<Partner[]> {
     return this.partnersCollection.snapshotChanges().map( item => {
       return item.map( data => {
+        console.log(data);
         return this.factory.createPartner(data.payload.doc);
       });
     });
-  }
+  } 
 
   // getPartnerByPhoneNumber(phoneNumber: string): Observable<Partner[]> {
   //   return this.db.collection('partners', ref => ref.where('phone', '==', phoneNumber)).snapshotChanges().map( item => {

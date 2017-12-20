@@ -21,6 +21,7 @@ import { TransactionsService } from './domainLayer/services/transactions/transac
 import { UserFactory } from './domainLayer/factories/userFactory';
 import { PartnerFactory } from './domainLayer/factories/partnerFactory';
 import { TransactionFactory } from './domainLayer/factories/transactionFactory';
+import { TripFactory } from './domainLayer/factories/tripFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
 import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { PartnersComponent } from './ui-layer/partners/partners.component';
@@ -59,9 +60,10 @@ import { CreateAccountComponent } from './ui-layer/authentication/create-account
     LocationService,
     TransactionsService,
     AuthenticationService,
-    EmployeeFactory,
+    UserFactory,
     PartnerFactory,
-    TransactionFactory
+    TransactionFactory,
+    TripFactory
   ],
   bootstrap: [AppComponent]
 })
