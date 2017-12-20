@@ -10,6 +10,7 @@ import { AccountComponent } from './ui-layer/account/account.component';
 import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component';
 import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
 import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
+import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomePageComponent },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
         { path: 'account', component: AccountComponent },
         { path: 'hr', component: EmployeeManagerComponent },
         { path: 'partners', component: PartnerManagerComponent },
+        { path: 'trips', component: TripManagerComponent },
     ]},
     { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
