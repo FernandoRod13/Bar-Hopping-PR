@@ -7,8 +7,9 @@ import { CreateAccountComponent } from './ui-layer/authentication/create-account
 import { PartnersComponent } from './ui-layer/partners/partners.component';
 import { TripsComponent } from './ui-layer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
-import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component'
+import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component';
 import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
+import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomePageComponent },
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
     { path: 'employee', component: EmployeeContainerComponent, children: [
         { path: 'account', component: AccountComponent },
         { path: 'hr', component: EmployeeManagerComponent },
+        { path: 'partners', component: PartnerManagerComponent },
     ]},
     { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];

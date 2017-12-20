@@ -30,6 +30,7 @@ import { AccountComponent } from './ui-layer/account/account.component';
 import { CreateAccountComponent } from './ui-layer/authentication/create-account/create-account.component';
 import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component';
 import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
+import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/empl
     AccountComponent,
     CreateAccountComponent,
     EmployeeManagerComponent,
-    EmployeeContainerComponent
+    EmployeeContainerComponent,
+    PartnerManagerComponent
   ],
   imports: [
     BrowserModule,

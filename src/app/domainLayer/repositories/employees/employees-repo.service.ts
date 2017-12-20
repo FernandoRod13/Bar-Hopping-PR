@@ -31,6 +31,12 @@ export class EmployeesRepoService {
   assignTripToEmployee(employeeID: string, tripID: string): void {
 
   }
+
+  /**This function will asign an employee to a specific trip. This may remove an exisiting trip asignment. */
+  removeEmployee(employee: Employee): Promise<void> {
+    return this.employeesCollection.doc(employee.eId).ref.delete();
+  }
+
   /**This function will return an observable collection of all employees registered in the database. */
   getAllEmployees(): Observable<Employee[]> {
     return this.db.collection('users', ref => ref.where('userType', '==', 'Employee')).snapshotChanges().map( item => {
