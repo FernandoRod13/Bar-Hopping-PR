@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './../../../domainLayer/services/authentication/authentication.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +8,7 @@ import { AuthenticationService } from './../../../domainLayer/services/authentic
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
   onLogin(form: any) {
     if (form.valid) {
       if (form.value.password.length > 7) {
-        this.auth.loginUser(form.value.email, form.value.password);
+        this.auth.loginUser(form.value.email, form.value.password).then(() => {
+          this.router.navigate(['/home']);
+        });
       }else {
         console.log('short password');
       }
