@@ -46,6 +46,10 @@ export class EmployeeManagerComponent implements OnInit, OnDestroy {
     this.addingEmployee = !this.addingEmployee;
   }
 
+  onRemoveEmployee(employee: Employee) {
+    this.repo.removeEmployee(employee);
+  }
+
   onSubmitForm(form: any) {
     if (this.updatingData) {
       if (form.valid) {

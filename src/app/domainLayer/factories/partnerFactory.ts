@@ -11,4 +11,9 @@ export class PartnerFactory {
         return new Partner(json.id, address, data.name, data.phone, data.manager, data.type, data.description, data.image,
         data.announcement);
     }
+
+    composeEmptyPartner() {
+        const address = new Address('', '', '', '', '');
+        return new Partner('', address, '', '', '', '', '', '', '');
+    }
 }
