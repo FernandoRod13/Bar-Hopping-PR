@@ -1,9 +1,47 @@
-<button mat-raised-button color="primary"  style="margin:15px">Add New Trip</button>
+<div *ngIf="!addingNewTrip">
+<button mat-raised-button color="primary"  style="margin:15px" (click)="onAddNewTrip()">Add New Trip</button>
   <mat-card *ngFor="let trip of tripList" class="card">
       <mat-card-title>{{trip.date | date}}</mat-card-title>
       <mat-card-subtitle>{{trip.staff}}</mat-card-subtitle>
       <mat-card-actions>
-          <!-- <button mat-button color="primary" (click)="onUpdatePartner(part)">Edit</button>
-          <button mat-button color="warn" (click)="onRemovePartner(part)">Remove</button> -->
+          <button mat-button color="primary" (click)="onUpdateTrip(trip)">Edit</button>
+          <button mat-button color="warn" (click)="onRemoveTrip(trip)">Remove</button>
         </mat-card-actions>
   </mat-card>
+</div>
+
+<div *ngIf="addingNewTrip" class="container-fluid">
+    <div class="row">
+      <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
+        <mat-card>
+          
+        <mat-card-title *ngIf="updatingTrip">Update Trip Information</mat-card-title>
+        <mat-card-title *ngIf="!updatingTrip">Add New trip</mat-card-title>
+          <form class="create-Trip-form " (ngSubmit)="onSubmitForm(form)" #form="ngForm">
+                <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="Capacity" required name="capacity" type="number" [(ngModel)]="trip.capacity">
+                    <mat-hint>Ex: Number of seats available</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="col-md-12 full-width field">
+                    <input matInput placeholder="Date" required name="date" type="text" [(ngModel)]="trip.date">
+                    <mat-hint> Dic 31, 9:00 pm </mat-hint>
+                </mat-form-field>
+
+            <mat-form-field class="col-md-12 full-width field">
+              <input matInput placeholder="Type" required name="typeOfTrip" type="text" [(ngModel)]="trip.typeOfTrip">
+              <mat-hint>Ex: Custom or default.</mat-hint>
+            </mat-form-field>
+            <br><br>
+  
+            <div class="row">
+                <button mat-raised-button class="col-md-3 login-button" (click)="onShowForm()">Cancel</button>
+                <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="updatingTrip">Update Trip Information</button>
+                <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="!updatingTrip">Add New Trip</button>
+  
+            </div>
+                  
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>

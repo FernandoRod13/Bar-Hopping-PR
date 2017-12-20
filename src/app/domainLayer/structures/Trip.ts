@@ -8,19 +8,19 @@ export class Trip {
     date: Date;
     manifest: TripManifest;
     tripRoute: TripRoute;
-    type: string;
+    typeOfTrip: string;
     staff: [string]; // the ids of the employees
 
 
     constructor(id: string, capacity: number, date: Date, manifest: TripManifest,
-        tripRoute: TripRoute, type: string, staff: [string]) {
+        tripRoute: TripRoute, typeOfTrip: string, staff: [string]) {
 
         this.id = id;
         this.capacity = capacity;
         this.date = date;
         this.manifest = manifest;
         this.tripRoute = tripRoute;
-        this.type = type;
+        this.typeOfTrip = typeOfTrip;
         this.staff = staff;
 
     }
@@ -32,7 +32,7 @@ export class Trip {
             date:  this.date,
             manifest:  this.manifest,
             tripRoute:  this.tripRoute,
-            type:  this.type,
+            typeOfTrip:  this.typeOfTrip,
             staff:  this.staff,
            
         };

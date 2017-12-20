@@ -15,6 +15,7 @@ export class PartnerManagerComponent implements OnInit, OnDestroy {
   public partner: Partner;
   constructor(private repo: PartnersRepoService, private factory: PartnerFactory) { }
 
+  
   ngOnInit() {
     this.addingNewPartner = false;
     this.updatingData = false;

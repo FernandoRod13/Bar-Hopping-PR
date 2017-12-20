@@ -192,4 +192,8 @@ export class TripsRepoService {
     });
   }
 
+  removeTrip(tripId: string): void {
+    this.tripsCollection.doc(tripId).ref.delete();
+  }
+
 }

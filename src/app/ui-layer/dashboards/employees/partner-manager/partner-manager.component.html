@@ -12,11 +12,12 @@
 
 <div *ngIf="addingNewPartner" class="container-fluid">
   <div class="row">
-    <div id="create-employee-card" class="col-md-8 offset-md-2 align-self-center content">
+    <div id="create-partner-card" class="col-md-8 offset-md-2 align-self-center content">
       <mat-card>
+
       <mat-card-title *ngIf="updatingData">Update Partner Information</mat-card-title>
       <mat-card-title *ngIf="!updatingData">Add New Partner</mat-card-title>
-        <form class="create-employee-form " (ngSubmit)="onSubmitForm(form)" #form="ngForm">
+        <form class="create-partner-form " (ngSubmit)="onSubmitForm(form)" #form="ngForm">
               <mat-form-field class="col-md-12 full-width field">
                   <input matInput placeholder="Name" required name="name" type="text" [(ngModel)]="partner.name">
                   <mat-hint>Ex: Harana</mat-hint>
