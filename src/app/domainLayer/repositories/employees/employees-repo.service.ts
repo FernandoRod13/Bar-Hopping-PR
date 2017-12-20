@@ -4,21 +4,20 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { Employee } from './../../structures/Employee';
 import { AuthenticationService } from './../../services/authentication/authentication.service';
-import { EmployeeFactory } from './../../factories/employeeFactory';
+import { UserFactory } from './../../factories/userFactory';
 @Injectable()
 export class EmployeesRepoService {
 
 
   private employeesCollection: AngularFirestoreCollection<Employee>;
-  
-  constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: EmployeeFactory
-  ,private afAuth: AngularFireAuth) {
+
+  constructor(private db: AngularFirestore, private auth: AuthenticationService, private factory: UserFactory
+  , private afAuth: AngularFireAuth) {
     this.employeesCollection = db.collection('employees');
   }
 
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
   createNewEmployee(employeeData: Employee, password: string): void {
-    
     this.afAuth.auth.createUserWithEmailAndPassword(employeeData.email, password)
     .then(user => {
 
@@ -29,20 +28,17 @@ export class EmployeesRepoService {
       // An error happened.
       });
 
-      this.addEmployeeToCollection(user.uid,employeeData);
-          
+      this.addEmployeeToCollection(user.uid, employeeData);
   }).catch(error => {
-    console.log(error) 
+    console.log(error);
   });
 }
 
 addEmployeeToCollection(employeeID: string, employeeData: Employee) {
 this.employeesCollection.doc(employeeID).set(employeeData.parseToJSON());
-console.log("Employee succesfully added to the collection");
+console.log('Employee succesfully added to the collection');
 }
-  
   /**This function will update data related to a specific employee already in the database. */
-  
   editEmployeeInformation(employeeData: Employee): void {
     this.employeesCollection.doc(employeeData.eId).update(employeeData.parseToJSON());
   }
@@ -56,7 +52,7 @@ console.log("Employee succesfully added to the collection");
   getAllEmployees(): Observable<Employee[]> {
     return this.employeesCollection.snapshotChanges().map( item => {
       return item.map( data => {
-        return this.factory.createEmployee(data.payload.doc);
+        return this.factory.composeEmployee(data.payload.doc);
       });
     });
   }
@@ -64,7 +60,7 @@ console.log("Employee succesfully added to the collection");
   findEmployeesByPhoneNumber(phoneNumber: string): Observable<Employee[]> {
     return this.db.collection('employees', ref => ref.where('phone', '==', phoneNumber)).snapshotChanges().map( item => {
       return item.map( data => {
-        return this.factory.createEmployee(data.payload.doc);
+        return this.factory.composeEmployee(data.payload.doc);
       });
     });
   }
@@ -72,7 +68,7 @@ console.log("Employee succesfully added to the collection");
   findEmployeeByEmail(email: string): Observable<Employee[]> {
     return this.db.collection('employees', ref => ref.where('email', '==', email)).snapshotChanges().map( item => {
       return item.map( data => {
-        return this.factory.createEmployee(data.payload.doc);
+        return this.factory.composeEmployee(data.payload.doc);
       });
     });
   }

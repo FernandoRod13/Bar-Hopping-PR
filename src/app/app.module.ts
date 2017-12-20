@@ -18,7 +18,7 @@ import { TripsRepoService } from './domainLayer/repositories/trips/trips-repo.se
 import { AuthenticationService } from './domainLayer/services//authentication/authentication.service';
 import { LocationService } from './domainLayer/services/location/location.service';
 import { TransactionsService } from './domainLayer/services/transactions/transactions.service';
-import { EmployeeFactory } from './domainLayer/factories/employeeFactory';
+import { UserFactory } from './domainLayer/factories/userFactory';
 import { PartnerFactory } from './domainLayer/factories/partnerFactory';
 import { TransactionFactory } from './domainLayer/factories/transactionFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
