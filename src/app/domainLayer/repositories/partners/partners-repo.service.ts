@@ -20,8 +20,9 @@ export class PartnersRepoService {
   }
   /**This function will edit information in the database related to a specific partner. */
   editPartnerInfo(partnerData: Partner): void {
-    this.partnersCollection.doc(partnerData.pId).update(partnerData.parseToJSON());
+     this.partnersCollection.doc(partnerData.pId).update(partnerData.parseToJSON());
   }
+
   /**This function will add editing right to a user for a specific partner. */
   addPartnerEditor(partnerID: string, userID: string): void {
     // TODO
