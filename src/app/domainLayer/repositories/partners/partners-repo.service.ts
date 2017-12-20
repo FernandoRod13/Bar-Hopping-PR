@@ -37,7 +37,7 @@ export class PartnersRepoService {
         return this.factory.createPartner(data.payload.doc);
       });
     });
-  } 
+  }
 
   // getPartnerByPhoneNumber(phoneNumber: string): Observable<Partner[]> {
   //   return this.db.collection('partners', ref => ref.where('phone', '==', phoneNumber)).snapshotChanges().map( item => {
