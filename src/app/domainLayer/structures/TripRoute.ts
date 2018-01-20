@@ -6,12 +6,6 @@ export class TripRoute {
         this.tripStopsIds = tripsStopsIds;
     }
 
-    parseToJSON(): any {
-        var tripRoute = {
-            tripsStopIds: this.tripStopsIds
-        };
-        return tripRoute;
-    }
 
 }
 

@@ -8,14 +8,6 @@ export class TripGroup {
         this.customerName = customerName;
         this.guests = guests;
     }
-
-    parseToJSON(): any {
-        var tripGroup = {
-            customerName: this.customerName,
-            guests: this.guests
-        };
-        return tripGroup;
-    } 
     
 }
 

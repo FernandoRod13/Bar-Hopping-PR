@@ -21,20 +21,7 @@ export class Employee {
         this.startDate = start;
     }
     /**This fucntion will format this employee's data for database update purposes. */
-    parseToJSON(): any {
-        const employee = {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            address: this.address.parseToJSON(),
-            phone: this.phone,
-            email: this.email,
-            role: this.role,
-            startDate: this.startDate,
-            userType: 'Employee'
-        };
-        return employee;
-    }
-
+    
     getFullName(): string {
         return this.firstName + ' ' + this.lastName;
     }

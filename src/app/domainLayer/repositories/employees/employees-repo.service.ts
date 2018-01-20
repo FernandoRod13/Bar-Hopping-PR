@@ -3,6 +3,8 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { Employee } from './../../structures/Employee';
+import { Address } from './../../structures/Address';
+
 import { AuthenticationService } from './../../services/authentication/authentication.service';
 import { UserFactory } from './../../factories/userFactory';
 @Injectable()
@@ -18,14 +20,13 @@ export class EmployeesRepoService {
 
   /**This function will add a new employee to the database. This function will triger a cloud fucntion to notify employee of credentials. */
   addNewEmployee(employeeData: Employee) {
-    this.employeesCollection.add(employeeData.parseToJSON());
+    this.employeesCollection.add(this.parseEmployeeToJSON(employeeData));
     console.log('Employee succesfully added to the collection');
   }
   /**This function will update data related to a specific employee already in the database. */
   editEmployeeInformation(employeeData: Employee): void {
-    this.employeesCollection.doc(employeeData.eId).update(employeeData.parseToJSON());
+    this.employeesCollection.doc(employeeData.eId).update(this.parseEmployeeToJSON(employeeData));
   }
-
 
   /**This function will asign an employee to a specific trip. This may remove an exisiting trip asignment. */
   assignTripToEmployee(employeeID: string, tripID: string): void {
@@ -61,5 +62,32 @@ export class EmployeesRepoService {
       });
     });
   }
+
+// this methods are to export objects to JSON
+parseEmployeeToJSON(employeeData: Employee): any {
+  const employee = {
+      firstName: employeeData.firstName,
+      lastName: employeeData.lastName,
+      address: this.parseAddressToJSON(employeeData.address),
+      phone: employeeData.phone,
+      email: employeeData.email,
+      role: employeeData.role,
+      startDate: employeeData.startDate,
+      userType: 'Employee'
+  };
+  return employee;
+}
+
+parseAddressToJSON(addressData: Address): any {
+  var address = {
+      city: addressData.city,
+      line1: addressData.line1,
+      line2: addressData.line2,
+      state: addressData.state,
+      zip: addressData.zip    
+  };
+  return address;
+  }
+
 
 }

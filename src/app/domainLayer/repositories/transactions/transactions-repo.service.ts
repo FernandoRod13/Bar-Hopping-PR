@@ -13,7 +13,7 @@ export class TransactionsRepoService {
    }
   /**This function will add a new transaction to the database if transaction was successful. */
   addNewTransaction(transactionDetails: Transaction): void {
-    this.transactionCollection.add(transactionDetails.parseToJSON());
+    this.transactionCollection.add(this.parseTransactionToJSON(transactionDetails));
   }
   /**This fucntion will query for all transactions registered to a specific user int the database. */
   getUserTransactions(userID: string): Observable<Transaction[]> {
@@ -31,4 +31,16 @@ export class TransactionsRepoService {
       });
     });
   }
+
+  parseTransactionToJSON(transactionDetails: Transaction): any {
+    var transaction = {
+        cId: transactionDetails.cId,
+        date: transactionDetails.date,
+        guests: transactionDetails.guests,
+        tripCost: transactionDetails.tripCost,
+        tId: transactionDetails.tId,
+       
+    };
+    return transaction;
+}
 }

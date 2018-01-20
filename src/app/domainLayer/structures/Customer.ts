@@ -9,11 +9,4 @@ export class Customer {
         this.email = email;
     };
 
-    parseToJSON(): any {
-    var customer = {
-        name: this.name,
-        email: this.email
-    };
-    return customer;
-    }
 }

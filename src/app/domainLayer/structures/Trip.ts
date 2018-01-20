@@ -25,18 +25,6 @@ export class Trip {
 
     }
 
-    
-    parseToJSON(): any {
-        var trip = {
-            capacity: this.capacity,
-            date:  this.date,
-            manifest:  this.manifest,
-            tripRoute:  this.tripRoute,
-            typeOfTrip:  this.typeOfTrip,
-            staff:  this.staff,
-           
-        };
-        return trip;
-    }
+
 }
 

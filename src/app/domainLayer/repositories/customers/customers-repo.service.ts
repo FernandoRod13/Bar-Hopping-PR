@@ -38,7 +38,7 @@ export class CustomersRepoService {
       }
 
   addCustomerToCollection(customerID: string, customerData: Customer) {
-    this.customerCollection.doc(customerID).set(customerData.parseToJSON());
+    this.customerCollection.doc(customerID).set(this.parseCustomerToJSON(customerData));
 
   }
 
@@ -76,5 +76,18 @@ export class CustomersRepoService {
       return this.factory.composeCustomer(data.payload);
     });
   }
+
+
+  // Methods to export from object to JSON 
+  parseCustomerToJSON(customerData: Customer){
+
+    var customer = {
+        name: customerData.name,
+        email: customerData.email
+    };
+
+    return customer;
+    
+}
 
 }

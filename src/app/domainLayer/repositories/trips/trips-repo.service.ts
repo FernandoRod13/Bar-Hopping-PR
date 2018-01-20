@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Trip } from '../../structures/Trip';
-import { TripFactory } from '../../factories/tripFactory';
 import { TripGroup } from '../../structures/TripGroup';
 import { TripManifest } from '../../structures/TripManifest';
+import { TripRoute } from '../../structures/TripRoute';
+import { TripFactory } from '../../factories/tripFactory';
+
+
 
 @Injectable()
 export class TripsRepoService {
@@ -17,7 +20,7 @@ export class TripsRepoService {
 
   /**This function will add a new trip to the database if trip was successful. */
   addNewTrip(tripDetails: Trip): void {
-    this.tripsCollection.add(tripDetails.parseToJSON());
+    this.tripsCollection.add(this.parseTripToJSON(tripDetails));
   }
 
   /**This function will edit a trip max capacity */
@@ -27,7 +30,7 @@ export class TripsRepoService {
       var maxCapacity = trip.capacity
       var newMaxCapacity = maxCapacity + addedCapacity;
       trip.capacity = newMaxCapacity;
-      this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+      this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
     });
 
 
@@ -40,7 +43,7 @@ export class TripsRepoService {
     this.getSpecificTrip(tripId).subscribe(trip => {
 
       trip.date = newDate;
-      this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+      this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
     });
 
   }
@@ -49,8 +52,8 @@ export class TripsRepoService {
   addGroupToTrip(tripGroup: TripGroup, tripId: string): void {
     this.getSpecificTrip(tripId).subscribe(trip => {
 
-      trip.manifest.participants.push(tripGroup.parseToJSON());
-      this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+      trip.manifest.participants.push(this.parseTripGroupToJSON(tripGroup));
+      this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
     });
 
   }
@@ -76,7 +79,7 @@ export class TripsRepoService {
       if (indexOfTripGroupToRemove != -1) {
         trip.manifest.participants.splice(indexOfTripGroupToRemove, 1);
         trip.manifest.size = trip.manifest.size - tripGroupSizeToRemove;
-        this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+        this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
       }
       else {
         console.log('Trip Group not found');
@@ -89,7 +92,7 @@ export class TripsRepoService {
     this.getSpecificTrip(tripId).subscribe(trip => {
 
       trip.tripRoute.tripStopsIds.push(partnerId);
-      this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+      this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
 
     });
 
@@ -112,7 +115,7 @@ export class TripsRepoService {
       }
       if (indexOfPartnerIdToRemove != -1) {
         trip.tripRoute.tripStopsIds.splice(indexOfPartnerIdToRemove, 1);
-        this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+        this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
       }
       else {
         console.log('Trip Stop not found');
@@ -125,7 +128,7 @@ export class TripsRepoService {
   addStaffToTrip(newStaffId: string, tripId: string): void {
     this.getSpecificTrip(tripId).subscribe(trip => {
       trip.staff.push(newStaffId);
-      this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+      this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
     });
   }
 
@@ -145,7 +148,7 @@ export class TripsRepoService {
       }
       if (indexOfStaffToRemove != -1) {
         trip.staff.splice(indexOfStaffToRemove, 1);
-        this.tripsCollection.doc(tripId).update(trip.parseToJSON());
+        this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
       }
       else {
         console.log('Staff id not found');
@@ -177,9 +180,9 @@ export class TripsRepoService {
   getTripManifest(tripId: string): Observable<TripManifest> {
     return this.tripsCollection.doc(tripId).snapshotChanges().map(item => {
       var trip = this.factory.composeTrip(item.payload);
-        return trip.manifest;
-      })
-    
+      return trip.manifest;
+    })
+
   }
   /**This fucntion will query for all trips registered to a specific user int the database. */
   getUserTrips(userID: string): Observable<any> {
@@ -195,5 +198,51 @@ export class TripsRepoService {
   removeTrip(tripId: string): void {
     this.tripsCollection.doc(tripId).ref.delete();
   }
+
+
+  parseTripToJSON(tripDetails: Trip): any {
+    var trip = {
+      capacity: tripDetails.capacity,
+      date: tripDetails.date,
+      manifest: this.parseManifestToJSON(tripDetails.manifest),
+      tripRoute: this.parseRouteToJSON(tripDetails.tripRoute),
+      typeOfTrip: tripDetails.typeOfTrip,
+      staff: tripDetails.staff,
+
+    };
+    return trip;
+  }
+
+  parseManifestToJSON(tripManifestDetails: TripManifest): any {
+    var listOfparticipants = []
+
+    for (let tripGroup of tripManifestDetails.participants){
+      listOfparticipants.push(this.parseTripGroupToJSON(tripGroup))
+    }
+
+
+    var tripManifest = {
+      participants: listOfparticipants,
+      size: tripManifestDetails.size
+    }
+
+    return tripManifest;
+  }
+
+  parseRouteToJSON(tripRouteDetails: TripRoute): any {
+    
+    var tripRoute = {
+        tripsStopIds: tripRouteDetails.tripStopsIds
+    };
+    return tripRoute;
+}
+
+parseTripGroupToJSON(tripGroupDetails: TripGroup): any {
+  var tripGroup = {
+      customerName: tripGroupDetails.customerName,
+      guests: tripGroupDetails.guests
+  };
+  return tripGroup;
+} 
 
 }

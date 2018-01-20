@@ -16,17 +16,4 @@ export class Transaction {
         this.cId = cId;
 
     }
-
-    
-    parseToJSON(): any {
-        var transaction = {
-            cId: this.cId,
-            date: this.date,
-            guests: this.guests,
-            tripCost: this.tripCost,
-            tId: this.tId,
-           
-        };
-        return transaction;
-    }
 }
