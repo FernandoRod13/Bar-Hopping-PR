@@ -26,6 +26,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
   private addingNewTrip: boolean;
   private updatingTrip: boolean;
+  private showTrips: boolean;
   private trip: any;
 
 
@@ -35,6 +36,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.addingNewTrip = false;
     this.updatingTrip = false;
+    this.showTrips = true;
     this.trip = null;
     this.tripListRef = this.tripsRepo.getAllTrips().subscribe(trips => {
       this.tripList = trips;
@@ -60,13 +62,25 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   }
 
   onAddNewTrip() {
+    this.addingNewTrip = true;
     this.updatingTrip = false;
+    this.showTrips = false;
     this.trip = this.factory.composeEmptyTrip();
+  }
+
+  onShowTrips(){
+    this.addingNewTrip = false;
+    this.updatingTrip = false;
+    this.showTrips = true;
+
+
   }
 
 
   onUpdateTrip(trip: Trip) {
     this.updatingTrip = true;
+    this.showTrips = false;
+    this.addingNewTrip = false;
     this.trip = trip;
   }
 
@@ -84,6 +98,30 @@ export class TripManagerComponent implements OnInit, OnDestroy {
       this.trip = null;
       this.updatingTrip = false;
       this.addingNewTrip = false;
+      this.showTrips = true;
+
+    } else {
+      console.log('empty fields');
+    }
+
+  }
+  onSubmitEditTrip(form : any) {
+    if (form.valid) {
+      //this.repo.addNewTrip(this.trip);
+      
+      const dateToUse = new Date(this.trip.date)
+
+
+      
+      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.stops, this.trip.staff, this.trip.type)
+
+
+      this.tripsRepo.addNewTrip(trip);
+      console.log('edit succesfull');
+      this.trip = null;
+      this.updatingTrip = false;
+      this.addingNewTrip = false;
+      this.showTrips = true;
 
     } else {
       console.log('empty fields');

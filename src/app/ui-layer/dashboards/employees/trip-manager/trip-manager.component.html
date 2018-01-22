@@ -1,4 +1,4 @@
-<div *ngIf="!addingNewTrip">
+<div *ngIf="showTrips">
   <button mat-raised-button color="primary" style="margin:15px" (click)="onAddNewTrip()">Add New Trip</button>
 
 
@@ -37,7 +37,7 @@
     <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
       <mat-card>
 
-        <mat-card-title *ngIf="!updatingTrip">Add New trip</mat-card-title>
+        <mat-card-title *ngIf="addingNewTrip">Add New trip</mat-card-title>
 
         <form class="create-Trip-form " (ngSubmit)="onSubmitAddingTrip(form)" #form="ngForm">
 
@@ -77,7 +77,7 @@
           <br>
 
           <div class="row">
-            <button mat-raised-button class="col-md-3 login-button" (click)="onShowForm()">Cancel</button>
+            <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>
             <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="updatingTrip">Update Trip Information</button>
             <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="!updatingTrip">Add New Trip</button>
 
@@ -88,3 +88,64 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<div *ngIf="updatingTrip" class="container-fluid">
+    <div class="row">
+      <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
+        <mat-card>
+  
+          <mat-card-title *ngIf="updatingTrip">Edit trip</mat-card-title>
+  
+          <form class="edit-Trip-form " (ngSubmit)="onSubmitEditTrip(form)" #form="ngForm">
+  
+            <mat-form-field class="col-md-12 full-width field">
+              <input matInput placeholder="Capacity" required name="capacity" type="number" value="20" [(ngModel)]="trip.capacity">
+            </mat-form-field>
+  
+            <mat-form-field class="col-md-12 full-width field">
+              <input placeholder="Date of the trip" matInput [matDatepicker]="myDatepicker" required name="date" [(ngModel)]="trip.date">
+              <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #myDatepicker></mat-datepicker>
+            </mat-form-field>
+  
+            <mat-form-field class="col-md-12 full-width field">
+              <mat-select placeholder="Staff" required name="staff" multiple [(ngModel)]="trip.staff">
+                <mat-option *ngFor="let employee of employeesList" [value]="employee.eId"> {{employee.firstName}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="col-md-12 full-width field">
+              <mat-select placeholder="Trip Stops" required name="stops" multiple [(ngModel)]="trip.stops">
+                <mat-option *ngFor="let partner of partnerList" [value]="partner.pId"> {{partner.name}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+  
+            <mat-form-field class="col-md-12 full-width field">
+              <mat-select placeholder="Type of trip" required name="type" [(ngModel)]="trip.type">
+                <mat-option value="default" selected>default</mat-option>
+                <mat-option value="custom">custom</mat-option>
+  
+              </mat-select>
+              <!-- <input matInput placeholder="Type" required name="typeOfTrip" type="text" [(ngModel)]="trip.typeOfTrip">
+                <mat-hint>Ex: Custom or default.</mat-hint> -->
+            </mat-form-field>
+            <br>
+            <br>
+  
+            <div class="row">
+              <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>
+              <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="updatingTrip">Update Trip Information</button>
+              <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="!updatingTrip">Add New Trip</button>
+  
+            </div>
+  
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
