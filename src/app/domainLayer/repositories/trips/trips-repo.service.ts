@@ -164,7 +164,7 @@ export class TripsRepoService {
 
     return this.tripsCollection.snapshotChanges().map(item => {
       return item.map(data => {
-        return this.factory.composeTrip(data.payload.doc);
+        return this.factory.composeTripFromDB(data.payload.doc);
       });
     });
 
@@ -179,7 +179,7 @@ export class TripsRepoService {
   /**This fucntion will query for the manifest of that trip. */
   getTripManifest(tripId: string): Observable<TripManifest> {
     return this.tripsCollection.doc(tripId).snapshotChanges().map(item => {
-      var trip = this.factory.composeTrip(item.payload);
+      var trip = this.factory.composeTripFromDB(item.payload);
       return trip.manifest;
     })
 
@@ -191,7 +191,7 @@ export class TripsRepoService {
   }
   getSpecificTrip(tripId: string): Observable<Trip> {
     return this.tripsCollection.doc(tripId).snapshotChanges().map(item => {
-      return this.factory.composeTrip(item.payload);
+      return this.factory.composeTripFromDB(item.payload);
     });
   }
 
@@ -201,22 +201,38 @@ export class TripsRepoService {
 
 
   parseTripToJSON(tripDetails: Trip): any {
-    var trip = {
-      capacity: tripDetails.capacity,
-      date: tripDetails.date,
-      manifest: this.parseManifestToJSON(tripDetails.manifest),
-      tripRoute: this.parseRouteToJSON(tripDetails.tripRoute),
-      typeOfTrip: tripDetails.typeOfTrip,
-      staff: tripDetails.staff,
 
-    };
-    return trip;
+    if (tripDetails.manifest) {
+      var trip = {
+        capacity: tripDetails.capacity,
+        date: tripDetails.date,
+        manifest: this.parseManifestToJSON(tripDetails.manifest),
+        tripRoute: this.parseRouteToJSON(tripDetails.tripRoute),
+        typeOfTrip: tripDetails.typeOfTrip,
+        staff: tripDetails.staff,
+
+      };
+      return trip;
+    }
+    else {
+      var tripWithoutManifest = {
+        capacity: tripDetails.capacity,
+        date: tripDetails.date,
+        tripRoute: this.parseRouteToJSON(tripDetails.tripRoute),
+        typeOfTrip: tripDetails.typeOfTrip,
+        staff: tripDetails.staff,
+
+      };
+      return tripWithoutManifest
+
+
+    }
   }
 
   parseManifestToJSON(tripManifestDetails: TripManifest): any {
     var listOfparticipants = []
 
-    for (let tripGroup of tripManifestDetails.participants){
+    for (let tripGroup of tripManifestDetails.participants) {
       listOfparticipants.push(this.parseTripGroupToJSON(tripGroup))
     }
 
@@ -230,19 +246,19 @@ export class TripsRepoService {
   }
 
   parseRouteToJSON(tripRouteDetails: TripRoute): any {
-    
+
     var tripRoute = {
-        tripsStopIds: tripRouteDetails.tripStopsIds
+      tripsStopIds: tripRouteDetails.tripStopsIds
     };
     return tripRoute;
-}
+  }
 
-parseTripGroupToJSON(tripGroupDetails: TripGroup): any {
-  var tripGroup = {
+  parseTripGroupToJSON(tripGroupDetails: TripGroup): any {
+    var tripGroup = {
       customerName: tripGroupDetails.customerName,
       guests: tripGroupDetails.guests
-  };
-  return tripGroup;
-} 
+    };
+    return tripGroup;
+  }
 
 }

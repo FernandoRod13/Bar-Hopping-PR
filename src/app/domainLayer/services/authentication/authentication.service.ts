@@ -38,7 +38,6 @@ export class AuthenticationService {
       // No user is signed in.
     }
     
-  }
-   
+  } 
   
 }

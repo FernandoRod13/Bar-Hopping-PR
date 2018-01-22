@@ -54,6 +54,13 @@ export class EmployeesRepoService {
       });
     });
   }
+
+  findEmployeeByID(employeeId: string): Observable<Employee> {
+    return this.employeesCollection.doc(employeeId).snapshotChanges().map( item => {
+      return this.factory.composeEmployee(item.payload);
+    });
+  }
+
   /**This function will return an observable employee object which email is specified (if any exists). */
   findEmployeeByEmail(email: string): Observable<Employee[]> {
     return this.db.collection('employees', ref => ref.where('userType', '==', 'Employee').where('email', '==', email)).snapshotChanges().map( item => {

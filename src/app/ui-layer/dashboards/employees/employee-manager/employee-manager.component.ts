@@ -25,7 +25,7 @@ export class EmployeeManagerComponent implements OnInit, OnDestroy {
       this.employees = list;
     });
 
-  }
+  } 
 
   ngOnDestroy() {
     this.employeesRef.unsubscribe();
