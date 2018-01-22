@@ -7,12 +7,12 @@
     <mat-card-title>Trip Date: {{trip.date | date}}</mat-card-title>
 
 
-
-    <mat-card *ngFor="let pid of trip.tripRoute.tripStopsIds" class="card">
+    <!--This is to display the Trip stops
+     <mat-card *ngFor="let pid of trip.tripRoute.tripStopsIds" class="card">
         <mat-card-subtitle> Stops: {{partnersNames[pid]}}</mat-card-subtitle>
-      </mat-card>
+      </mat-card> -->
 
-      
+
     <mat-card *ngFor="let id of trip.staff" class="card">
       <mat-card-subtitle> Staff: {{employeesNames[id]}}</mat-card-subtitle>
     </mat-card>
