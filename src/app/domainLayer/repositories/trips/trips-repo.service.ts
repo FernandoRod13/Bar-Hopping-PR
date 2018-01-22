@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Trip } from '../../structures/Trip';
 import { TripGroup } from '../../structures/TripGroup';
 import { TripManifest } from '../../structures/TripManifest';
-import { TripRoute } from '../../structures/TripRoute';
+
 import { TripFactory } from '../../factories/tripFactory';
 
 
@@ -23,6 +23,23 @@ export class TripsRepoService {
     this.tripsCollection.add(this.parseTripToJSON(tripDetails));
   }
 
+
+  /**This function will edit a trip date */
+  editTrip(tripDetails: Trip): void {
+
+    this.getSpecificTrip(tripDetails.id).subscribe(trip => {
+
+
+      this.tripsCollection.doc(tripDetails.id).update(this.parseTripToJSON(tripDetails));
+    });
+
+  }
+
+
+
+
+
+
   /**This function will edit a trip max capacity */
   addBussesToTheTrip(addedCapacity: number, tripId: string): void {
 
@@ -36,6 +53,8 @@ export class TripsRepoService {
 
 
   }
+
+
 
   /**This function will edit a trip date */
   editTripDate(newDate: Date, tripId: string): void {
@@ -91,7 +110,7 @@ export class TripsRepoService {
   addStopToTrip(partnerId: string, tripId: string): void {
     this.getSpecificTrip(tripId).subscribe(trip => {
 
-      trip.tripRoute.tripStopsIds.push(partnerId);
+      trip.tripRoute.push(partnerId);
       this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
 
     });
@@ -103,7 +122,7 @@ export class TripsRepoService {
 
     this.getSpecificTrip(tripId).subscribe(trip => {
 
-      var tripStopIds = trip.tripRoute.tripStopsIds;
+      var tripStopIds = trip.tripRoute;
       var i = 0;
       var indexOfPartnerIdToRemove = -1;
 
@@ -114,7 +133,7 @@ export class TripsRepoService {
         i++;
       }
       if (indexOfPartnerIdToRemove != -1) {
-        trip.tripRoute.tripStopsIds.splice(indexOfPartnerIdToRemove, 1);
+        trip.tripRoute.splice(indexOfPartnerIdToRemove, 1);
         this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
       }
       else {
@@ -207,7 +226,7 @@ export class TripsRepoService {
         capacity: tripDetails.capacity,
         date: tripDetails.date,
         manifest: this.parseManifestToJSON(tripDetails.manifest),
-        tripRoute: this.parseRouteToJSON(tripDetails.tripRoute),
+        tripRoute: tripDetails.tripRoute,
         typeOfTrip: tripDetails.typeOfTrip,
         staff: tripDetails.staff,
 
@@ -218,7 +237,7 @@ export class TripsRepoService {
       var tripWithoutManifest = {
         capacity: tripDetails.capacity,
         date: tripDetails.date,
-        tripRoute: this.parseRouteToJSON(tripDetails.tripRoute),
+        tripRoute: tripDetails.tripRoute,
         typeOfTrip: tripDetails.typeOfTrip,
         staff: tripDetails.staff,
 
@@ -243,14 +262,6 @@ export class TripsRepoService {
     }
 
     return tripManifest;
-  }
-
-  parseRouteToJSON(tripRouteDetails: TripRoute): any {
-
-    var tripRoute = {
-      tripsStopIds: tripRouteDetails.tripStopsIds
-    };
-    return tripRoute;
   }
 
   parseTripGroupToJSON(tripGroupDetails: TripGroup): any {

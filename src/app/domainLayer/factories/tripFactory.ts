@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Address } from '../structures/Address';
 import { TripManifest } from '../structures/TripManifest';
-import { TripRoute } from '../structures/TripRoute';
 import { Trip } from '../structures/Trip'
 import { TripGroup } from '../structures/TripGroup'
 
@@ -12,10 +11,7 @@ export class TripFactory {
 
     composeTripFromDB(json: any): Trip {
         const data = json.data();
-
         
-        const tripRoute = new TripRoute(data.tripRoute)
-
         // Create the manifest 
         if (data.manifest) {
             const tripGroupsJSON = data.manifest.participants;
@@ -26,11 +22,12 @@ export class TripFactory {
                 tripGroups.push(tripGroup);
             }
             const tripManifest = new TripManifest(tripGroups, data.manifest.size)
-            return new Trip(data.id, data.capacity, data.date, tripRoute, data.typeOfTrip, data.staff, tripManifest);
+            
+            return new Trip(json.id, data.capacity, data.date, data.tripRoute, data.typeOfTrip, data.staff, tripManifest);
         }
 
         else {
-            return new Trip(data.id, data.capacity, data.date, tripRoute, data.typeOfTrip, data.staff);
+            return new Trip(json.id, data.capacity, data.date, data.tripRoute, data.typeOfTrip, data.staff);
         }
 
 
@@ -38,10 +35,7 @@ export class TripFactory {
 
     composeNewTrip(capacity: number, date: Date, tripRouteList: [string], staff: [string], type: string): Trip {
 
-
-        const tripRoute = new TripRoute(tripRouteList)
-
-        return new Trip('', capacity, date, tripRoute, type, staff);
+        return new Trip('', capacity, date, tripRouteList, type, staff);
 
     }
 
@@ -51,11 +45,10 @@ export class TripFactory {
         let participants: [TripGroup];
 
         const manifest = new TripManifest(participants, 0)
-        let tripRouteIds: [string];
-        let tripRoute = new TripRoute(tripRouteIds)
+        let tripRoute: [string];
         let staff: [string];
 
-        return new Trip('', 25, date, tripRoute, 'Default', staff, manifest);
+        return new Trip('', 25, date, tripRoute, 'default', staff);
     }
 
 }

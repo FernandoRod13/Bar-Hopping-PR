@@ -1,18 +1,18 @@
 
 import { TripManifest } from './TripManifest';
-import { TripRoute } from './TripRoute';
+
 
 export class Trip {
     id?: string;
     capacity: number;
     date: Date;
     manifest?: TripManifest;
-    tripRoute: TripRoute;
+    tripRoute: [string]; // the ids of the Partners
     typeOfTrip: string;
     staff: [string]; // the ids of the employees
 
-
-    constructor(id: string, capacity: number, date: Date, tripRoute: TripRoute,
+ 
+    constructor(id: string, capacity: number, date: Date, tripRoute: [string],
         typeOfTrip: string, staff: [string], manifest?: TripManifest) {
 
         if (manifest) {

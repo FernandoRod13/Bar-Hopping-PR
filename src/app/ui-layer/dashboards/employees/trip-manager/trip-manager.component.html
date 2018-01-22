@@ -4,20 +4,22 @@
 
   <mat-card *ngFor="let trip of tripList" class="card">
 
+
+    <mat-card-title>Trip Id: {{trip.id}}</mat-card-title>
     <mat-card-title>Trip Date: {{trip.date | date}}</mat-card-title>
 
+    <mat-card-subtitle class="d-inline">Stops:</mat-card-subtitle>
+    <!--This is to display the Trip stops-->
+    <mat-card-subtitle *ngFor="let pid of trip.tripRoute" class="d-inline">
+      || {{partnersNames[pid]}}
+    </mat-card-subtitle>
+    <br>
+    <mat-card-subtitle class="d-inline">Staff:</mat-card-subtitle>
+    <mat-card-subtitle *ngFor="let id of trip.staff" class="d-inline">
+      || {{employeesNames[id]}}
+    </mat-card-subtitle>
 
-    <!--This is to display the Trip stops
-     <mat-card *ngFor="let pid of trip.tripRoute.tripStopsIds" class="card">
-        <mat-card-subtitle> Stops: {{partnersNames[pid]}}</mat-card-subtitle>
-      </mat-card> -->
 
-
-    <mat-card *ngFor="let id of trip.staff" class="card">
-      <mat-card-subtitle> Staff: {{employeesNames[id]}}</mat-card-subtitle>
-    </mat-card>
-
-    
 
 
     <mat-card-actions>
@@ -58,14 +60,14 @@
           </mat-form-field>
 
           <mat-form-field class="col-md-12 full-width field">
-            <mat-select placeholder="Trip Stops" required name="stops" multiple [(ngModel)]="trip.stops">
+            <mat-select placeholder="Trip Stops" required name="tripRoute" multiple [(ngModel)]="trip.tripRoute">
               <mat-option *ngFor="let partner of partnerList" [value]="partner.pId"> {{partner.name}} </mat-option>
             </mat-select>
           </mat-form-field>
 
 
           <mat-form-field class="col-md-12 full-width field">
-            <mat-select placeholder="Type of trip" required name="type" [(ngModel)]="trip.type">
+            <mat-select placeholder="Type of trip" required name="typeOfTrip" [(ngModel)]="trip.typeOfTrip">
               <mat-option value="default" selected>default</mat-option>
               <mat-option value="custom">custom</mat-option>
 
@@ -94,58 +96,60 @@
 
 
 <div *ngIf="updatingTrip" class="container-fluid">
-    <div class="row">
-      <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
-        <mat-card>
-  
-          <mat-card-title *ngIf="updatingTrip">Edit trip</mat-card-title>
-  
-          <form class="edit-Trip-form " (ngSubmit)="onSubmitEditTrip(form)" #form="ngForm">
-  
-            <mat-form-field class="col-md-12 full-width field">
-              <input matInput placeholder="Capacity" required name="capacity" type="number" value="20" [(ngModel)]="trip.capacity">
-            </mat-form-field>
-  
-            <mat-form-field class="col-md-12 full-width field">
-              <input placeholder="Date of the trip" matInput [matDatepicker]="myDatepicker" required name="date" [(ngModel)]="trip.date">
-              <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-              <mat-datepicker #myDatepicker></mat-datepicker>
-            </mat-form-field>
-  
-            <mat-form-field class="col-md-12 full-width field">
-              <mat-select placeholder="Staff" required name="staff" multiple [(ngModel)]="trip.staff">
-                <mat-option *ngFor="let employee of employeesList" [value]="employee.eId"> {{employee.firstName}} </mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <mat-form-field class="col-md-12 full-width field">
-              <mat-select placeholder="Trip Stops" required name="stops" multiple [(ngModel)]="trip.stops">
-                <mat-option *ngFor="let partner of partnerList" [value]="partner.pId"> {{partner.name}} </mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-  
-            <mat-form-field class="col-md-12 full-width field">
-              <mat-select placeholder="Type of trip" required name="type" [(ngModel)]="trip.type">
-                <mat-option value="default" selected>default</mat-option>
-                <mat-option value="custom">custom</mat-option>
-  
-              </mat-select>
-              <!-- <input matInput placeholder="Type" required name="typeOfTrip" type="text" [(ngModel)]="trip.typeOfTrip">
+  <div class="row">
+    <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
+      <mat-card>
+
+        <mat-card-title *ngIf="updatingTrip">Edit Trip:</mat-card-title>
+
+        <form class="edit-Trip-form " (ngSubmit)="onSubmitEditTrip(form)" #form="ngForm">
+
+          <mat-card-title>ID: {{trip.id}}</mat-card-title>
+
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Capacity:" required name="capacity" type="number" value="20" [(ngModel)]="trip.capacity">
+          </mat-form-field>
+
+          <mat-form-field class="col-md-12 full-width field">
+            <input placeholder="Date of the trip:" matInput [matDatepicker]="myDatepicker" required name="date" [(ngModel)]="trip.date">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-12 full-width field">
+            <mat-select placeholder="Staff:" required name="staff" multiple [(ngModel)]="trip.staff">
+              <mat-option *ngFor="let employee of employeesList" [value]="employee.eId"> {{employee.firstName}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-12 full-width field">
+            <mat-select placeholder="Trip Stops:" required name="tripRoute" multiple [(ngModel)]="trip.tripRoute">
+              <mat-option *ngFor="let partner of partnerList" [value]="partner.pId"> {{partner.name}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field class="col-md-12 full-width field">
+            <mat-select placeholder="Type of trip:" required name="typeOfTrip" [(ngModel)]="trip.typeOfTrip">
+              <mat-option value="default" selected>default</mat-option>
+              <mat-option value="custom">custom</mat-option>
+
+            </mat-select>
+            <!-- <input matInput placeholder="Type" required name="typeOfTrip" type="text" [(ngModel)]="trip.typeOfTrip">
                 <mat-hint>Ex: Custom or default.</mat-hint> -->
-            </mat-form-field>
-            <br>
-            <br>
-  
-            <div class="row">
-              <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>
-              <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="updatingTrip">Update Trip Information</button>
-              <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="!updatingTrip">Add New Trip</button>
-  
-            </div>
-  
-          </form>
-        </mat-card>
-      </div>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <div class="row">
+            <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>
+            <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="updatingTrip">Update Trip Information</button>
+            <button mat-raised-button color="primary" class="col-md-9" type="submit" *ngIf="!updatingTrip">Add New Trip</button>
+
+          </div>
+
+        </form>
+      </mat-card>
     </div>
   </div>
+</div>

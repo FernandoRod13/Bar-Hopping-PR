@@ -73,7 +73,6 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.updatingTrip = false;
     this.showTrips = true;
 
-
   }
 
 
@@ -86,11 +85,11 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
   onSubmitAddingTrip(form: any) {
     if (form.valid) {
-      //this.repo.addNewTrip(this.trip);
+      
       
       const dateToUse = new Date(this.trip.date)
       
-      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.stops, this.trip.staff, this.trip.type)
+      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.tripRoute, this.trip.staff, this.trip.typeOfTrip)
 
 
       this.tripsRepo.addNewTrip(trip);
@@ -105,18 +104,12 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     }
 
   }
+
+
+
   onSubmitEditTrip(form : any) {
     if (form.valid) {
-      //this.repo.addNewTrip(this.trip);
-      
-      const dateToUse = new Date(this.trip.date)
-
-
-      
-      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.stops, this.trip.staff, this.trip.type)
-
-
-      this.tripsRepo.addNewTrip(trip);
+      this.tripsRepo.editTrip(this.trip)
       console.log('edit succesfull');
       this.trip = null;
       this.updatingTrip = false;
