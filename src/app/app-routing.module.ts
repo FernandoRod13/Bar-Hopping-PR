@@ -24,13 +24,13 @@ const appRoutes: Routes = [
         { path: 'catalogue', component: PartnersComponent },
         { path: 'account', component: AccountComponent },
     ]},
-    { path: 'employee', redirectTo: '/employee/hr', pathMatch: 'full'},
     { path: 'employee', component: EmployeeContainerComponent, children: [
         { path: 'account', component: AccountComponent },
         { path: 'hr', component: EmployeeManagerComponent },
         { path: 'partners', component: PartnerManagerComponent },
         { path: 'trips', component: TripManagerComponent },
     ]},
+    { path: 'employee', redirectTo: '/employee/hr', pathMatch: 'full'},
     { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

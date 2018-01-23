@@ -1,0 +1,11 @@
+<mat-form-field>
+  <input name="location" id="location" matInput placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+    type="text" class="form-control" #search [formControl]="searchControl" required>
+  <mat-error *ngIf="searchControl.hasError('required')">
+    Location is
+    <strong>required</strong>
+  </mat-error>
+</mat-form-field>
+<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+  <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+</agm-map>
