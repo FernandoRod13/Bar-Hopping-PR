@@ -12,6 +12,5 @@ export class Address {
         this.state = state;
         this.zip = zip;
     }
-    
-    }
+}
 

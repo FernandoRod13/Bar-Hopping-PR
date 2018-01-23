@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './angular-material.module';
 import { RoutingModule } from './app-routing.module';
+import { AgmCoreModule, MapsAPILoader} from '@agm/core';
+import {} from '@types/googlemaps';
 
 import { CustomersRepoService } from './domainLayer/repositories/customers/customers-repo.service';
 import { EmployeesRepoService } from './domainLayer/repositories/employees/employees-repo.service';
@@ -32,6 +34,7 @@ import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employ
 import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
 import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
 import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
+import { LocationpickerComponent } from './ui-layer/locationpicker/locationpicker.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manag
     EmployeeManagerComponent,
     EmployeeContainerComponent,
     PartnerManagerComponent,
-    TripManagerComponent
+    TripManagerComponent,
+    LocationpickerComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,12 @@ import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manag
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    RoutingModule
+    ReactiveFormsModule,
+    RoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCfrieDSC6mpqJFVO-TbDIVCJ9O8Frt51U',
+      libraries: ['places']
+    })
   ],
   providers: [
     CustomersRepoService,

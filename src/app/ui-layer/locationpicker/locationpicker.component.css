@@ -1,0 +1,20 @@
+agm-map {
+  height: 300px;
+}
+
+input {
+  height: auto;
+  text-align: left;
+}
+
+input:hover {
+  border: none;
+}
+
+input:focus {
+  border: none;
+}
+
+.mat-form-field {
+  display: inline !important;
+}
