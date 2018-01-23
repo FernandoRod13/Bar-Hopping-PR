@@ -1,0 +1,9 @@
+.jumbotron .container {
+    position: relative;
+    left: auto;
+    right: auto;
+    height:600vh;
+    width: 100vw;
+    padding:100px 0;
+    text-align: center;
+  }

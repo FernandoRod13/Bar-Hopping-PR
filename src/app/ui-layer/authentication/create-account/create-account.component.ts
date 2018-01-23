@@ -21,7 +21,7 @@ export class CreateAccountComponent implements OnInit {
         if (form.value.password1 === form.value.password2) {
         const customer = new Customer('', form.value.name, form.value.email);
         this.CustomerRepo.createNewCustomer(customer, form.value.password1);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
         } else {
           console.log('passwords are differents');
         }
