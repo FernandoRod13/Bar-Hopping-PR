@@ -1,14 +1,32 @@
-<mat-toolbar color="primary">
-
-  <span>Bar Hopping PR</span>
-
-  <!-- This fills the remaining space of the current row -->
-  <div class="button-row">
-    <a mat-button routerLink="/home">Home</a>
-    <a mat-button routerLink="/employee/hr">Employee Manager</a>
-    <a mat-button routerLink="/employee/partners">Partner Manager</a>
-    <a mat-button routerLink="/employee/trips">Trip Manager</a>
-    <a mat-button routerLink="/employee/account">Account</a>
-  </div>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened="true">
+    <div>
+      <h3>Bar Hopping</h3>
+    </div>
+    <mat-nav-list>
+        <mat-list-item routerLink="/employee/hr">
+          <mat-icon mat-list-icon>people</mat-icon>
+          Employee Manager 
+        </mat-list-item>
+        <mat-list-item routerLink="/employee/partners">
+          <mat-icon mat-list-icon>store</mat-icon>
+          Partner Manager
+        </mat-list-item>
+        <mat-list-item routerLink="/employee/trips">
+          <mat-icon mat-list-icon>directions_bus</mat-icon>
+          Trip Manager
+        </mat-list-item>
+        <mat-list-item routerLink="/employee/account">
+          <mat-icon mat-list-icon>account_circle</mat-icon>
+          Account
+        </mat-list-item>
+        <mat-list-item routerLink="/home">
+          <mat-icon mat-list-icon>home</mat-icon>
+          Home
+        </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

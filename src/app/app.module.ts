@@ -35,6 +35,7 @@ import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/empl
 import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
 import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
 import { LocationpickerComponent } from './ui-layer/locationpicker/locationpicker.component';
+import { AuthGuardService } from './domainLayer/services/authentication/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { LocationpickerComponent } from './ui-layer/locationpicker/locationpicke
     UserFactory,
     PartnerFactory,
     TransactionFactory,
-    TripFactory
+    TripFactory,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

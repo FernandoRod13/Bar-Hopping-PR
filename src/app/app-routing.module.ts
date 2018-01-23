@@ -11,6 +11,7 @@ import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employ
 import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/employee-container/employee-container.component';
 import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
 import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
+import { AuthGuardService } from './domainLayer/services/authentication/auth-guard.service';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomePageComponent },
@@ -24,14 +25,14 @@ const appRoutes: Routes = [
         { path: 'catalogue', component: PartnersComponent },
         { path: 'account', component: AccountComponent },
     ]},
-    { path: 'employee', component: EmployeeContainerComponent, children: [
+    { path: 'employee', canActivate: [AuthGuardService], component: EmployeeContainerComponent, children: [
         { path: 'account', component: AccountComponent },
         { path: 'hr', component: EmployeeManagerComponent },
         { path: 'partners', component: PartnerManagerComponent },
         { path: 'trips', component: TripManagerComponent },
     ]},
     { path: 'employee', redirectTo: '/employee/hr', pathMatch: 'full'},
-    { path: '', redirectTo: '/login', pathMatch: 'full'}
+    { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 
