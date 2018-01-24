@@ -78,7 +78,7 @@ export class LocationpickerComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
-          const location = new Location(this.latitude, this.longitude, place.name, '');
+          const location = new Location(this.latitude, this.longitude, place.formatted_address, '');
           this.announceLocation(location);
 
         });
