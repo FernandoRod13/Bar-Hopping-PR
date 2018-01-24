@@ -1,0 +1,75 @@
+<mat-card class="container">
+    <mat-card-title>Add New Partner</mat-card-title>
+    <mat-horizontal-stepper>
+      <mat-step label="Search Location" optional="true">
+        <app-locationpicker></app-locationpicker>
+        <div class="action-menu">
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Verify Your Data" optional="false">
+        <form>
+          <mat-card-content>General Information:</mat-card-content>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Name" required name="name" type="text" [(ngModel)]="partner.name">
+            <mat-hint>Ex: Harana</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Announcement" required name="announcement" type="text" [(ngModel)]="partner.announcement">
+            <mat-hint>Ex: Happy hours, thursdays and fridays at 7pm! </mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Description" required name="description" type="text" [(ngModel)]="partner.description">
+            <mat-hint>Ex: A great place to hangout with friends after a long day of work.</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Manager's Name" required name="manager" type="text" [(ngModel)]="partner.manager">
+            <mat-hint>Ex: Carlos Estrada </mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-card-content>Personal Information:</mat-card-content>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="phone" required name="phone" type="text" [(ngModel)]="partner.phone">
+            <mat-hint>ex: 798-987-2823</mat-hint>
+          </mat-form-field>
+  
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="type" required name="type" type="text" [(ngModel)]="partner.type">
+            <mat-hint>ex: Bar, Club, Restaurant</mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-card-content>Address:</mat-card-content>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="line 1" required name="line1" type="text" [(ngModel)]="partner.address.line1">
+            <mat-hint>ex: Street 18 3r4</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="line 2" required name="line2" type="text" [(ngModel)]="partner.address.line2">
+            <mat-hint>ex: unit 12</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="city" required name="city" type="text" [(ngModel)]="partner.address.city">
+            <mat-hint>ex: Chicago</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="state" required name="state" type="text" [(ngModel)]="partner.address.state">
+            <mat-hint>ex: GA</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="zip code" required name="zip" type="text" [(ngModel)]="partner.address.zip">
+            <mat-hint>ex: 00973</mat-hint>
+          </mat-form-field>
+  
+          <br>
+          <br>
+        </form>
+        <div class="action-menu">
+          <button mat-raised-button matStepperPrevious>back</button>
+          <button mat-raised-button color="primary">Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+  
