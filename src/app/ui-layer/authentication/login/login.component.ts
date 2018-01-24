@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       if (form.value.password.length > 7) {
         this.auth.loginUser(form.value.email, form.value.password).then(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashboard']);
         });
       }else {
         console.log('short password');

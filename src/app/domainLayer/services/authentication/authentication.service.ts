@@ -9,27 +9,29 @@ import * as firebase from 'firebase/app';
 export class AuthenticationService {
 
   user: any;
-  
+
   constructor(private afAuth: AngularFireAuth) {
 
     this.afAuth.authState.subscribe(user => {
-    if(user) this.user = user;
-    })
-    
-   }
+      if (user) {
+        this.user = user;
+      }
+    });
+
+  }
 
   loginUser(email: string, password: string): Promise<void> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then(user => {
-      console.log(user);
+      .then(user => {
+        console.log(user);
 
-    }).catch(error => {
-      console.log(error);
-    });
+      }).catch(error => {
+        console.log(error);
+      });
   }
 
-  getUserInfo(){
-    var user = firebase.auth().currentUser;
+  getUserInfo() {
+    const user = firebase.auth().currentUser;
     if (user) {
       return user;
       // User is signed in.
@@ -37,7 +39,5 @@ export class AuthenticationService {
       return null;
       // No user is signed in.
     }
-    
-  } 
-  
+  }
 }
