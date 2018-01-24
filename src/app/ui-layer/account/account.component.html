@@ -1,16 +1,5 @@
 <mat-card class="container">
-  <mat-card-title>Add New Partner</mat-card-title>
-  <mat-horizontal-stepper>
-    <mat-step label="Search Location" optional="true">
-      <app-locationpicker></app-locationpicker>
-      <div class="action-menu">
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step label="Verify Your Data" optional="false">
-      <div class="action-menu">
-        <button mat-raised-button matStepperPrevious>back</button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
+  <mat-card-title>Account Info</mat-card-title>
 </mat-card>
+
+<app-add-partner-form></app-add-partner-form>
