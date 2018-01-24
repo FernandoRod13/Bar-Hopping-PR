@@ -10,14 +10,20 @@ import { Partner } from './../../domainLayer/structures/Partner';
 export class PartnersComponent implements OnInit, OnDestroy {
   
   private partnersRef: any;
+  private partnerList: any;
   
 
   constructor(private repo: PartnersRepoService) { }
 
   ngOnInit() {
-    this.partnersRef = this.repo.getAllPartners().subscribe();
-    console.log(this.partnersRef);
+    this.partnersRef = this.repo.getAllPartners().subscribe(partners => {
+      this.partnerList = partners;
+    });
   }
+
+
+
+  
   ngOnDestroy() {
     this.partnersRef.unsubscribe();
   }

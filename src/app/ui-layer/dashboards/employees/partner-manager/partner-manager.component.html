@@ -1,8 +1,8 @@
 <div *ngIf="!addingNewPartner">
   <button mat-raised-button color="primary"  style="margin:15px" (click)="onAddNewPartner()">Add Partner</button>
-  <mat-card *ngFor="let part of partnerList" class="card">
-      <mat-card-title>{{part.name}}</mat-card-title>
-      <mat-card-subtitle>{{part.phone}}</mat-card-subtitle>
+  <mat-card *ngFor="let partner of partnerList" class="card">
+      <mat-card-title>{{partner.name}}</mat-card-title>
+      <mat-card-subtitle>{{partner.phone}}</mat-card-subtitle>
       <mat-card-actions>
           <button mat-button color="primary" (click)="onUpdatePartner(part)">Edit</button>
           <button mat-button color="warn" (click)="onRemovePartner(part)">Remove</button>

@@ -1,3 +1,11 @@
-<p>
-  all the partners will go in here  
-</p>
+
+
+<div *ngIf="!addingNewPartner" class="container-fluid">
+  <mat-card *ngFor="let partner of partnerList" class="card">
+      <mat-card-title>{{partner.name}}</mat-card-title>
+      <p>About: {{partner.description}}</p>
+      <p>Announcement: {{partner.announcement}}</p>
+      <p>Services: {{partner.type}}</p>
+      <p>Phone: {{partner.phone}}</p>
+  </mat-card>
+</div>
