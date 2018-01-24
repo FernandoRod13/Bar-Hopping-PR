@@ -15,6 +15,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   private tripListRef: any;
   private partnerListRef: any;
   private employeesRef: any;
+  
 
   private tripList: Trip[];
   private employeesList: Employee[];
@@ -27,6 +28,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   private addingNewTrip: boolean;
   private updatingTrip: boolean;
   private showTrips: boolean;
+  private manifestExist: boolean;
   private trip: any;
 
 
@@ -36,6 +38,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.addingNewTrip = false;
     this.updatingTrip = false;
+    this.manifestExist = false;
     this.showTrips = true;
     this.trip = null;
     this.tripListRef = this.tripsRepo.getAllTrips().subscribe(trips => {
@@ -65,6 +68,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.addingNewTrip = true;
     this.updatingTrip = false;
     this.showTrips = false;
+    this.manifestExist = false;
     this.trip = this.factory.composeEmptyTrip();
   }
 
@@ -72,11 +76,20 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.addingNewTrip = false;
     this.updatingTrip = false;
     this.showTrips = true;
+    this.manifestExist = false;
 
   }
 
 
   onUpdateTrip(trip: Trip) {
+
+    if (trip.manifest){
+      this.manifestExist = true;
+    }
+    else{
+      this.manifestExist = false;
+    }
+
     this.updatingTrip = true;
     this.showTrips = false;
     this.addingNewTrip = false;
@@ -98,6 +111,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
       this.updatingTrip = false;
       this.addingNewTrip = false;
       this.showTrips = true;
+      this.manifestExist = false;
 
     } else {
       console.log('empty fields');
@@ -109,19 +123,24 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
   onSubmitEditTrip(form : any) {
     if (form.valid) {
+
+      console.log(form);
+      console.log("trp");
+      console.log(this.trip);
       this.tripsRepo.editTrip(this.trip)
       console.log('edit succesfull');
-      this.trip = null;
+      
       this.updatingTrip = false;
       this.addingNewTrip = false;
       this.showTrips = true;
+      this.manifestExist = false;
+      this.trip = null;
 
     } else {
       console.log('empty fields');
     }
 
   }
-
 
   onRemoveTrip(trip: Trip) {
     this.tripsRepo.removeTrip(trip.id);

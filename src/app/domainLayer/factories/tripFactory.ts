@@ -16,9 +16,11 @@ export class TripFactory {
         if (data.manifest) {
             const tripGroupsJSON = data.manifest.participants;
 
-            let tripGroups: [TripGroup]
-            for (let entry of tripGroupsJSON) {
-                var tripGroup = new TripGroup(entry.customerID, entry.customerName, entry.guests);
+            let tripGroups: any = []
+
+            for (let entry of tripGroupsJSON) 
+            {
+                var tripGroup = new TripGroup(entry.customerId, entry.customerName, entry.guests);
                 tripGroups.push(tripGroup);
             }
             const tripManifest = new TripManifest(tripGroups, data.manifest.size)

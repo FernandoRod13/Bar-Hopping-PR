@@ -265,11 +265,12 @@ export class TripsRepoService {
   }
 
   parseTripGroupToJSON(tripGroupDetails: TripGroup): any {
-    var tripGroup = {
+    var tripGroupToReturn = {
       customerName: tripGroupDetails.customerName,
-      guests: tripGroupDetails.guests
+      customerId:tripGroupDetails.customerId,
+      // guests: tripGroupDetails.guests
     };
-    return tripGroup;
+    return tripGroupToReturn;
   }
 
 }

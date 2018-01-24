@@ -1,9 +1,7 @@
-.jumbotron .container {
-    position: relative;
-    left: auto;
-    right: auto;
-    height:600vh;
-    width: 100vw;
-    padding:100px 0;
-    text-align: center;
-  }
+.mybackground {
+  background: url('../bar-hopping-logo1.gif') center center fixed;
+  height: 100%;
+  opacity: 50%;
+  background-size:100%;
+width: 100%;
+}
