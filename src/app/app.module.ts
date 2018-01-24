@@ -36,6 +36,8 @@ import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner
 import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
 import { LocationpickerComponent } from './ui-layer/locationpicker/locationpicker.component';
 import { AuthGuardService } from './domainLayer/services/authentication/auth-guard.service';
+import { AddPartnerFormComponent } from './ui-layer/dashboards/employees/add-partner-form/add-partner-form.component';
+import { LocationDataTransfeerService } from './domainLayer/services/data-transfer/location-data-transfeer.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { AuthGuardService } from './domainLayer/services/authentication/auth-gua
     EmployeeContainerComponent,
     PartnerManagerComponent,
     TripManagerComponent,
-    LocationpickerComponent
+    LocationpickerComponent,
+    AddPartnerFormComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { AuthGuardService } from './domainLayer/services/authentication/auth-gua
     PartnerFactory,
     TransactionFactory,
     TripFactory,
-    AuthGuardService
+    AuthGuardService,
+    LocationDataTransfeerService
   ],
   bootstrap: [AppComponent]
 })
