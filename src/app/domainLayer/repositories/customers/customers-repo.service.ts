@@ -14,30 +14,30 @@ export class CustomersRepoService {
   private customerCollection: AngularFirestoreCollection<Customer>;
 
   constructor(private db: AngularFirestore, private auth: AuthenticationService, private afAuth: AngularFireAuth,
-  private factory: UserFactory) {
+    private factory: UserFactory) {
     this.customerCollection = db.collection('users');
   }
 
 
-   /**This function will authenticate a customer, login */
+  /**This function will authenticate a customer, login */
   authCustomer(customerEmail: string, customerPassword: string): void {
- 
+
   }
 
   /**This function will add a new user to firebase authentication using an email and password. */
   createNewCustomer(customerData: Customer, password: string) {
     console.log("Customer Data: ");
     console.log(customerData);
-    
-        this.afAuth.auth.createUserWithEmailAndPassword(customerData.email, password)
-          .then(user => {
 
-            this.addCustomerToCollection(user.uid, customerData);
-                
-        }).catch(error => {
-          console.log(error) 
-        });
-      }
+    this.afAuth.auth.createUserWithEmailAndPassword(customerData.email, password)
+      .then(user => {
+
+        this.addCustomerToCollection(user.uid, customerData);
+
+      }).catch(error => {
+        console.log(error)
+      });
+  }
 
   addCustomerToCollection(customerID: string, customerData: Customer) {
     this.customerCollection.doc(customerID).set(this.parseCustomerToJSON(customerData));
@@ -66,8 +66,8 @@ export class CustomersRepoService {
   }
   /**This function will return an observable collection of all our customers. */
   getAllCustomers(): Observable<Customer[]> {
-    return this.db.collection('users', ref => ref.where('userType', '==', 'Customer')).snapshotChanges().map( item => {
-      return item.map( data => {
+    return this.db.collection('users', ref => ref.where('userType', '==', 'Customer')).snapshotChanges().map(item => {
+      return item.map(data => {
         return this.factory.composeCustomer(data.payload.doc);
       });
     });
@@ -76,7 +76,7 @@ export class CustomersRepoService {
   getSpecificCustomer(customerID: string): Observable<Customer> {
     return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
       console.log(data.payload.data());
-      if(data.payload.data() == undefined){
+      if (data.payload.data() == undefined) {
         console.log("Hay error");
         throw new Error('is an employee');
       }
@@ -84,18 +84,47 @@ export class CustomersRepoService {
     });
   }
 
+  itsCustomer(customerID: string): Observable<boolean> {
+    console.log(customerID)
+
+    return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
+      
+      console.log("Entro aqui1")
+      console.log(data.payload);
+      if(data.payload.data() == null){
+        console.log("Entro aqui2")
+        return false;
+      }
+
+      if (data.payload.data().userType == "Customer") {
+        console.log("Entro aqui33")
+        return true;
+      }
+      else {
+        console.log("Entro aqui4")
+        return false;
+      }
+    })
+    ;
+    
+  }
+
+
+
+
+
 
   // Methods to export from object to JSON 
   parseCustomerToJSON(customerData: Customer): any {
 
     var customer = {
-        name: customerData.name,
-        email: customerData.email,
-        userType: customerData.userType
+      name: customerData.name,
+      email: customerData.email,
+      userType: customerData.userType
     };
 
     return customer;
-    
-}
+
+  }
 
 }

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private auth: AuthenticationService, private router: Router,
-    location: Location,  private customerRepo: CustomersRepoService) {
+    location: Location, private customerRepo: CustomersRepoService) {
     this.shortPassword = false;
     this.wrongPassword = false;
 
@@ -44,47 +44,30 @@ export class LoginComponent implements OnInit {
           if (response == 0) {
             this.wrongPassword = true;
           }
-
           else {
 
-            this.customerRepo.getSpecificCustomer(response.uid).subscribe(
-              result => {
-                console.log("Entro aqui")
-                if (result.userType == "Customer") {
+            this.customerRepo.itsCustomer(response.uid).subscribe(
+              response => {
+
+                if (response) {
+                  console.log("Ist Customer");
                   this.router.navigate(['/home']);
                 }
-                this.employeeData = result
-                result;
-              }
-              ,
-              error => function (error) {
-
-                // Se supone que aquiiiii es que tira el route para los employee pero
-                // Esta mierda no coge el error 
-                console.log("Error:: " + error)
-              }
-            )
-
-
-          
-            //this.router.navigate(['/home']);
+                else {
+                  this.router.navigate(['/employee']);
+                  console.log("Its employeeee");
+                }
+              });
           }
-
-
-        }),
-          (Error) => {
-            console.log("ErrorInLogin: " + Error)
-          };
+        });
       }
-
       else {
         this.shortPassword = true;
       }
-    } else {
+      
+    }
+    else {
       console.log('empty fields');
     }
-
-
-
   }
-}
+} 
