@@ -26,6 +26,8 @@ export class CustomersRepoService {
 
   /**This function will add a new user to firebase authentication using an email and password. */
   createNewCustomer(customerData: Customer, password: string) {
+    console.log("Customer Data: ");
+    console.log(customerData);
     
         this.afAuth.auth.createUserWithEmailAndPassword(customerData.email, password)
           .then(user => {
@@ -73,17 +75,23 @@ export class CustomersRepoService {
   /**This function will return an observable object of a specific customer. */
   getSpecificCustomer(customerID: string): Observable<Customer> {
     return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
-      return this.factory.composeCustomer(data.payload);
+      console.log(data.payload.data());
+      if(data.payload.data() == undefined){
+        console.log("Hay error");
+        throw new Error('is an employee');
+      }
+      return this.factory.composeCustomer(data.payload.data())
     });
   }
 
 
   // Methods to export from object to JSON 
-  parseCustomerToJSON(customerData: Customer){
+  parseCustomerToJSON(customerData: Customer): any {
 
     var customer = {
         name: customerData.name,
-        email: customerData.email
+        email: customerData.email,
+        userType: customerData.userType
     };
 
     return customer;

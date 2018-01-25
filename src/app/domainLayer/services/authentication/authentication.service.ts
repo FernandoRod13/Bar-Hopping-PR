@@ -20,15 +20,18 @@ export class AuthenticationService {
 
   }
 
-  loginUser(email: string, password: string): Promise<void> {
+  loginUser(email: string, password: string): Promise<any> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log(user);
+    .then(function(firebaseUser) {
+      
+        return firebaseUser
+    })
+    .catch(function(error) {
 
-      }).catch(error => {
-        console.log(error);
-      });
-  }
+      
+        return 0
+    });
+    }
 
   getUserInfo() {
     const user = firebase.auth().currentUser;

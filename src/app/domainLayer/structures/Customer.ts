@@ -2,11 +2,20 @@ export class Customer {
     cId?: string;
     name: string;
     email: string;
+    userType: string;
 
-    constructor(id: string, name: string, email: string) {
-        this.cId = id;
+    constructor( name: string, email: string, id?: string,) {
+        if(id){
+            this.cId = id;
+            this.name = name;
+            this.email = email;
+            this.userType = "Customer"
+        }
+        else{
         this.name = name;
         this.email = email;
+        this.userType = "Customer"
+        }
     };
 
 }

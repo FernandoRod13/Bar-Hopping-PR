@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PartnersRepoService} from './../../domainLayer/repositories/partners/partners-repo.service';
+import { PartnersRepoService } from './../../domainLayer/repositories/partners/partners-repo.service';
 import { Observable } from 'rxjs/Observable';
 import { Partner } from './../../domainLayer/structures/Partner';
 @Component({
@@ -8,10 +8,10 @@ import { Partner } from './../../domainLayer/structures/Partner';
   styleUrls: ['./partners.component.css']
 })
 export class PartnersComponent implements OnInit, OnDestroy {
-  
+
   private partnersRef: any;
   private partnerList: any;
-  
+
 
   constructor(private repo: PartnersRepoService) { }
 
@@ -23,7 +23,7 @@ export class PartnersComponent implements OnInit, OnDestroy {
 
 
 
-  
+
   ngOnDestroy() {
     this.partnersRef.unsubscribe();
   }

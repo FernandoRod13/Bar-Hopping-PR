@@ -12,14 +12,17 @@ import { EmployeeContainerComponent } from './ui-layer/dashboards/employees/empl
 import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner-manager/partner-manager.component';
 import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
 import { AuthGuardService } from './domainLayer/services/authentication/auth-guard.service';
+
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomePageComponent },
-    { path: 'catalogue', component: PartnersComponent },
-    { path: 'trips', component: TripsComponent },
-    { path: 'account', component: AccountComponent },
-    { path: 'partners', component: PartnersComponent },
+    // { path: 'catalogue', component: PartnersComponent },
+    // { path: 'trips', component: TripsComponent },
+    // { path: 'account', component: AccountComponent },
+    // { path: 'partners', component: PartnersComponent },
     { path: 'create-account', component: CreateAccountComponent },
+    
+    
     { path: 'dashboard', children: [
         { path: 'trips', component: TripsComponent },
         { path: 'catalogue', component: PartnersComponent },
