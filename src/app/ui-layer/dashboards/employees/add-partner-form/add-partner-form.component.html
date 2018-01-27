@@ -2,13 +2,13 @@
     <mat-card-title>Add New Partner</mat-card-title>
     <mat-horizontal-stepper>
       <mat-step label="Search Location" optional="true">
-        <app-locationpicker></app-locationpicker>
+        <app-locationpicker (onFoundLocation)="recieveLocation($event)"></app-locationpicker>
         <div class="action-menu">
           <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step label="Verify Your Data" optional="false">
-        <form>
+        <form #partnerForm="ngForm" (ngSubmit)="submit()">
           <mat-card-content>General Information:</mat-card-content>
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="Name" required name="name" type="text" [(ngModel)]="partner.name">
@@ -28,47 +28,38 @@
           </mat-form-field>
           <br>
           <br>
-          <mat-card-content>Personal Information:</mat-card-content>
+          <mat-card-content>Place Information:</mat-card-content>
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="phone" required name="phone" type="text" [(ngModel)]="partner.phone">
             <mat-hint>ex: 798-987-2823</mat-hint>
           </mat-form-field>
-  
-          <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="type" required name="type" type="text" [(ngModel)]="partner.type">
-            <mat-hint>ex: Bar, Club, Restaurant</mat-hint>
+          <mat-form-field>
+            <mat-select [(value)]="partner.type" placeholder="Partner Type" class="col-md-12 full-width field" required>
+              <mat-option>None</mat-option>
+              <mat-option value="Bar">Bar</mat-option>
+              <mat-option value="Restaurant">Restaurant</mat-option>
+              <mat-option value="Night Club">Night Club</mat-option>
+              <mat-option value="Bar & Restaurant">Bar & Restaurant</mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <br>
-          <mat-card-content>Address:</mat-card-content>
+          <mat-card-content>Location:</mat-card-content>
           <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="line 1" required name="line1" type="text" [(ngModel)]="partner.address.line1">
-            <mat-hint>ex: Street 18 3r4</mat-hint>
+            <input matInput placeholder="Addres" required name="address" type="text" [(ngModel)]="partner.location.address">
+            <mat-hint>ex: PR-108, Mayaguez, PR, 00682</mat-hint>
           </mat-form-field>
           <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="line 2" required name="line2" type="text" [(ngModel)]="partner.address.line2">
-            <mat-hint>ex: unit 12</mat-hint>
+            <input matInput placeholder="City" required name="city" type="text" [(ngModel)]="partner.location.city">
+            <mat-hint>ex: Mayaguez</mat-hint>
           </mat-form-field>
-          <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="city" required name="city" type="text" [(ngModel)]="partner.address.city">
-            <mat-hint>ex: Chicago</mat-hint>
-          </mat-form-field>
-          <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="state" required name="state" type="text" [(ngModel)]="partner.address.state">
-            <mat-hint>ex: GA</mat-hint>
-          </mat-form-field>
-          <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="zip code" required name="zip" type="text" [(ngModel)]="partner.address.zip">
-            <mat-hint>ex: 00973</mat-hint>
-          </mat-form-field>
-  
           <br>
           <br>
+          <div class="action-menu">
+            <button mat-raised-button matStepperPrevious>back</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!partnerForm.form.valid">Submit</button>
+          </div>
         </form>
-        <div class="action-menu">
-          <button mat-raised-button matStepperPrevious>back</button>
-          <button mat-raised-button color="primary">Submit</button>
-        </div>
       </mat-step>
     </mat-horizontal-stepper>
   </mat-card>
