@@ -11,15 +11,14 @@ export class PartnerManagerComponent implements OnInit, OnDestroy {
   public partnerList: Partner[];
   private partnerListRef: any;
   public addingNewPartner: boolean;
-  public updatingData: boolean;
-  public partner: Partner;
+  public partnerFormHidden: boolean;
+  public selectedPartner: Partner;
   constructor(private repo: PartnersRepoService, private factory: PartnerFactory) { }
 
   
   ngOnInit() {
-    this.addingNewPartner = false;
-    this.updatingData = false;
-    this.partner = null;
+    this.partnerFormHidden = true;
+    this.selectedPartner = null;
     this.partnerListRef = this.repo.getAllPartners().subscribe(partners => {
       this.partnerList = partners;
     });
@@ -29,49 +28,30 @@ export class PartnerManagerComponent implements OnInit, OnDestroy {
     this.partnerListRef.unsubscribe();
   }
 
-  onShowForm() {
-    this.addingNewPartner = !this.addingNewPartner;
+  showPartnerForm() {
+    this.partnerFormHidden = false;
   }
 
-  onAddNewPartner() {
-    this.updatingData = false;
-    this.partner = this.factory.composeEmptyPartner();
-    this.onShowForm();
+  hidePartnerForm() {
+    this.partnerFormHidden = true;
   }
 
   onUpdatePartner(partner: Partner) {
-    this.updatingData = true;
-    this.partner = partner;
-    this.onShowForm();
+    this.selectedPartner = partner;
+    this.showPartnerForm();
   }
 
-  onSubmitForm(form: any) {
-    if (this.updatingData) {
-      if (form.valid) {
-        this.repo.editPartnerInfo(this.partner);
-        this.partner = null;
-        this.updatingData = false;
-        this.addingNewPartner = false;
-        console.log('update Succefull');
-      } else {
-        console.log('empty fields');
-      }
-    } else {
-      if (form.valid) {
-        this.repo.addNewPartner(this.partner);
-        this.partner = null;
-        this.updatingData = false;
-        this.addingNewPartner = false;
-        console.log('Insert Succefull');
-      } else {
-        console.log('empty fields');
-      }
-
-    }
+  onAddNewPartner() {
+    this.selectedPartner = null;
+    this.showPartnerForm();
   }
 
   onRemovePartner(part: Partner) {
     this.repo.removePartner(part);
+  }
+
+  public monitorCancel(cancel: boolean) {
+    this.hidePartnerForm();
   }
 
 

@@ -1,4 +1,4 @@
-<div *ngIf="!addingNewPartner">
+<div *ngIf="partnerFormHidden">
   <button mat-raised-button color="primary"  style="margin:15px" (click)="onAddNewPartner()">Add Partner</button>
   <mat-card *ngFor="let partner of partnerList" class="card">
       <mat-card-title>{{partner.name}}</mat-card-title>
@@ -10,6 +10,6 @@
   </mat-card>
 </div>
 
-<div *ngIf="addingNewPartner" class="container-fluid">
-  <app-add-partner-form></app-add-partner-form>
+<div *ngIf="!partnerFormHidden" class="container-fluid">
+  <app-add-partner-form [partner]="selectedPartner" (onCancel)="monitorCancel($event)"></app-add-partner-form>
 </div>

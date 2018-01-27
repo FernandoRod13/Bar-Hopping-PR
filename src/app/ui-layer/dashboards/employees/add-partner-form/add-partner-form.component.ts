@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Partner } from '../../../../domainLayer/structures/Partner';
 import { PartnerFactory } from './../../../../domainLayer/factories/partnerFactory';
 import { LocationDataTransfeerService } from './../../../../domainLayer/services/data-transfer/location-data-transfeer.service';
@@ -11,8 +11,8 @@ import { PartnersRepoService } from './../../../../domainLayer/repositories/part
   styleUrls: ['./add-partner-form.component.css']
 })
 export class AddPartnerFormComponent implements OnInit {
-  public partner: Partner;
-
+  @Input() public partner: Partner;
+  @Output() onCancel = new EventEmitter<boolean>();
   constructor (
     private factory: PartnerFactory,
     private locationData: LocationDataTransfeerService,
@@ -20,7 +20,9 @@ export class AddPartnerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.partner = this.factory.composeEmptyPartner();
+    if (this.partner == null) {
+      this.partner = this.factory.composeEmptyPartner();
+    }
   }
 
   public recieveLocation (place: GooglePlacesResult) {
@@ -32,9 +34,12 @@ export class AddPartnerFormComponent implements OnInit {
 
   public submit() {
     this.repo.addNewPartner(this.partner).then(() => {
-      console.log("added");
-    }) ;
+      console.log('added');
+    });
   }
 
+  public cancel() {
+    this.onCancel.emit(true);
+  }
 
 }

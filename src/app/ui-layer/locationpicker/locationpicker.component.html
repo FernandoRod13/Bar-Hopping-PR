@@ -1,6 +1,6 @@
 <mat-form-field>
   <input name="location" id="location" matInput placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off"
-    type="text" class="form-control" #search [formControl]="searchControl" required>
+    type="text" class="form-control" #search [formControl]="searchControl" [(ngModel)]="location" required>
   <mat-error *ngIf="searchControl.hasError('required')">
     Location is
     <strong>required</strong>
