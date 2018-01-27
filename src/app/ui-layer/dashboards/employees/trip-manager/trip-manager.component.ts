@@ -15,15 +15,15 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   private tripListRef: any;
   private partnerListRef: any;
   private employeesRef: any;
-  
+
 
   private tripList: Trip[];
   private employeesList: Employee[];
-  private employeesNames: { [id: string] : string; } = {}
+  private employeesNames: { [id: string]: string; } = {}
 
 
   private partnerList: Partner[];
-  private partnersNames: { [id: string] : string; } = {}
+  private partnersNames: { [id: string]: string; } = {}
 
   private addingNewTrip: boolean;
   private updatingTrip: boolean;
@@ -48,19 +48,19 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.partnerListRef = this.partnerRepo.getAllPartners().subscribe(partners => {
       this.partnerList = partners;
 
-      for(let partner of partners){
+      for (let partner of partners) {
 
         this.partnersNames[partner.pId] = partner.name;
-       }
+      }
     });
 
     this.employeesRef = this.employeeRepo.getAllEmployees().subscribe(employees => {
       this.employeesList = employees;
-       
-      for(let employee of employees){
+
+      for (let employee of employees) {
 
         this.employeesNames[employee.eId] = employee.firstName;
-       }
+      }
     });
   }
 
@@ -72,7 +72,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.trip = this.factory.composeEmptyTrip();
   }
 
-  onShowTrips(){
+  onShowTrips() {
     this.addingNewTrip = false;
     this.updatingTrip = false;
     this.showTrips = true;
@@ -83,26 +83,22 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
   onUpdateTrip(trip: Trip) {
 
-    if (trip.manifest){
-      this.manifestExist = true;
-    }
-    else{
-      this.manifestExist = false;
-    }
-
     this.updatingTrip = true;
     this.showTrips = false;
     this.addingNewTrip = false;
     this.trip = trip;
   }
 
+
+
   onSubmitAddingTrip(form: any) {
     if (form.valid) {
-      
-      
+
+
       const dateToUse = new Date(this.trip.date)
-      
-      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.tripRoute, this.trip.staff, this.trip.typeOfTrip)
+
+      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.tripRoute,
+        this.trip.staff, this.trip.typeOfTrip, this.trip.seatsTaken)
 
 
       this.tripsRepo.addNewTrip(trip);
@@ -121,7 +117,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
 
 
-  onSubmitEditTrip(form : any) {
+  onSubmitEditTrip(form: any) {
     if (form.valid) {
 
       console.log(form);
@@ -129,7 +125,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
       console.log(this.trip);
       this.tripsRepo.editTrip(this.trip)
       console.log('edit succesfull');
-      
+
       this.updatingTrip = false;
       this.addingNewTrip = false;
       this.showTrips = true;

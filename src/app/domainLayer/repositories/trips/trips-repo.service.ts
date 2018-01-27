@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs/Observable';
 import { Trip } from '../../structures/Trip';
 import { TripGroup } from '../../structures/TripGroup';
-import { TripManifest } from '../../structures/TripManifest';
+
 
 import { TripFactory } from '../../factories/tripFactory';
 
@@ -69,11 +69,11 @@ export class TripsRepoService {
 
   /**This function will add a group to the trip */
   addGroupToTrip(tripGroup: TripGroup, tripId: string): void {
-    this.getSpecificTrip(tripId).subscribe(trip => {
+    // this.getSpecificTrip(tripId).subscribe(trip => {
 
-      trip.manifest.participants.push(this.parseTripGroupToJSON(tripGroup));
-      this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
-    });
+    //   trip.manifest.participants.push(this.parseTripGroupToJSON(tripGroup));
+    //   this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
+    // });
 
   }
 
@@ -81,29 +81,29 @@ export class TripsRepoService {
   deleteGroupFromTrip(customerId: string, tripId: string): void {
     this.getSpecificTrip(tripId).subscribe(trip => {
 
-      var i = 0;
-      var tripGroups = trip.manifest.participants;
-      var participantsAmmount = trip.manifest.size;
-      var tripGroupSizeToRemove = 0;
-      var indexOfTripGroupToRemove = -1
+    //   var i = 0;
+    //   var tripGroups = trip.manifest.participants;
+    //   var participantsAmmount = trip.manifest.size;
+    //   var tripGroupSizeToRemove = 0;
+    //   var indexOfTripGroupToRemove = -1
 
-      for (let entry of tripGroups) {
-        if (entry.customerId == customerId) {
-          tripGroupSizeToRemove = entry.guests.length + 1; // The plus one is the leader
-          indexOfTripGroupToRemove = i;
-        }
-        i++;
-      }
+    //   for (let entry of tripGroups) {
+    //     if (entry.customerId == customerId) {
+    //       tripGroupSizeToRemove = entry.guests.length + 1; // The plus one is the leader
+    //       indexOfTripGroupToRemove = i;
+    //     }
+    //     i++;
+    //   }
 
-      if (indexOfTripGroupToRemove != -1) {
-        trip.manifest.participants.splice(indexOfTripGroupToRemove, 1);
-        trip.manifest.size = trip.manifest.size - tripGroupSizeToRemove;
-        this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
-      }
-      else {
-        console.log('Trip Group not found');
-      }
-    });
+    //   if (indexOfTripGroupToRemove != -1) {
+    //     trip.manifest.participants.splice(indexOfTripGroupToRemove, 1);
+    //     trip.manifest.size = trip.manifest.size - tripGroupSizeToRemove;
+    //     this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
+    //   }
+    //   else {
+    //     console.log('Trip Group not found');
+    //   }
+   });
   }
 
   /**This function will add a stop to the trip */
@@ -196,13 +196,14 @@ export class TripsRepoService {
   }
 
   /**This fucntion will query for the manifest of that trip. */
-  getTripManifest(tripId: string): Observable<TripManifest> {
-    return this.tripsCollection.doc(tripId).snapshotChanges().map(item => {
-      var trip = this.factory.composeTripFromDB(item.payload);
-      return trip.manifest;
-    })
+  getTripManifest(tripId: string): any {
 
+    //TODO
+
+    return null
   }
+
+
   /**This fucntion will query for all trips registered to a specific user int the database. */
   getUserTrips(userID: string): Observable<any> {
     return null;
@@ -221,53 +222,31 @@ export class TripsRepoService {
 
   parseTripToJSON(tripDetails: Trip): any {
 
-    if (tripDetails.manifest) {
-      var trip = {
-        capacity: tripDetails.capacity,
-        date: tripDetails.date,
-        manifest: this.parseManifestToJSON(tripDetails.manifest),
-        tripRoute: tripDetails.tripRoute,
-        typeOfTrip: tripDetails.typeOfTrip,
-        staff: tripDetails.staff,
 
-      };
-      return trip;
-    }
-    else {
-      var tripWithoutManifest = {
-        capacity: tripDetails.capacity,
-        date: tripDetails.date,
-        tripRoute: tripDetails.tripRoute,
-        typeOfTrip: tripDetails.typeOfTrip,
-        staff: tripDetails.staff,
-
-      };
-      return tripWithoutManifest
-
-
-    }
+    var trip = {
+      capacity: tripDetails.capacity,
+      date: tripDetails.date,
+      tripRoute: tripDetails.tripRoute,
+      typeOfTrip: tripDetails.typeOfTrip,
+      staff: tripDetails.staff,
+      seatsTaken: tripDetails.seatsTaken
+    };
+    return trip;
   }
 
-  parseManifestToJSON(tripManifestDetails: TripManifest): any {
-    var listOfparticipants = []
-
-    for (let tripGroup of tripManifestDetails.participants) {
-      listOfparticipants.push(this.parseTripGroupToJSON(tripGroup))
-    }
-
-
-    var tripManifest = {
-      participants: listOfparticipants,
-      size: tripManifestDetails.size
-    }
-
-    return tripManifest;
-  }
 
   parseTripGroupToJSON(tripGroupDetails: TripGroup): any {
+
     var tripGroupToReturn = {
+
+      tripId: tripGroupDetails.tripId,
+      customerId: tripGroupDetails.customerId,
       customerName: tripGroupDetails.customerName,
-      customerId:tripGroupDetails.customerId,
+      guests: tripGroupDetails.guests,
+      size: tripGroupDetails.size,
+      emergencyContactName: tripGroupDetails.emergencyContactName,
+      emergencyContactNumber: tripGroupDetails.emergencyContactNumber,
+
       // guests: tripGroupDetails.guests
     };
     return tripGroupToReturn;

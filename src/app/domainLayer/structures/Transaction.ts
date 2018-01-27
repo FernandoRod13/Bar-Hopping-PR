@@ -1,11 +1,12 @@
 
 export class Transaction {
+    id: string;
     cId: string;
     date: Date;
     guests: string[];
     tripCost: number;
     tId: string;
-    id: string;
+    
 
     constructor(id: string, cId: string, date: Date, guests: string[], cost: number, tId: string) {
         this.id = id;

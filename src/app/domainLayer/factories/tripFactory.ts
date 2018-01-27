@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Address } from '../structures/Address';
-import { TripManifest } from '../structures/TripManifest';
 import { Trip } from '../structures/Trip'
 import { TripGroup } from '../structures/TripGroup'
 
@@ -11,46 +10,25 @@ export class TripFactory {
 
     composeTripFromDB(json: any): Trip {
         const data = json.data();
-        
-        // Create the manifest 
-        if (data.manifest) {
-            const tripGroupsJSON = data.manifest.participants;
 
-            let tripGroups: any = []
-
-            for (let entry of tripGroupsJSON) 
-            {
-                var tripGroup = new TripGroup(entry.customerId, entry.customerName, entry.guests);
-                tripGroups.push(tripGroup);
-            }
-            const tripManifest = new TripManifest(tripGroups, data.manifest.size)
-            
-            return new Trip(json.id, data.capacity, data.date, data.tripRoute, data.typeOfTrip, data.staff, tripManifest);
-        }
-
-        else {
-            return new Trip(json.id, data.capacity, data.date, data.tripRoute, data.typeOfTrip, data.staff);
-        }
-
-
+        return new Trip(json.id, data.capacity, data.date, data.tripRoute, 
+            data.typeOfTrip, data.staff,data.seatsTaken)
     }
 
-    composeNewTrip(capacity: number, date: Date, tripRouteList: [string], staff: [string], type: string): Trip {
+    composeNewTrip(capacity: number, date: Date, tripRouteList: [string], staff: [string],
+         type: string, seatsTaken: number): Trip {
 
-        return new Trip('', capacity, date, tripRouteList, type, staff);
+        return new Trip('', capacity, date, tripRouteList, type, staff, seatsTaken );
 
     }
 
     composeEmptyTrip() {
 
         const date = new Date()
-        let participants: [TripGroup];
-
-        const manifest = new TripManifest(participants, 0)
         let tripRoute: [string];
         let staff: [string];
 
-        return new Trip('', 25, date, tripRoute, 'default', staff);
+        return new Trip('', 25, date, tripRoute, 'default', staff, 0);
     }
 
 }
