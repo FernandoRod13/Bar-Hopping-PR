@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Partner } from './../../structures/Partner';
-import { Address } from './../../structures/Address';
+import { Location } from './../../structures/Location';
 import { PartnerFactory } from './../../factories//partnerFactory';
 import { AuthenticationService } from './../../services//authentication/authentication.service';
 import { Promise } from 'q';
+import { DocumentRef } from '@agm/core/utils/browser-globals';
+import { FirebaseApp } from 'angularfire2';
 @Injectable()
 
 export class PartnersRepoService {
@@ -16,8 +18,8 @@ export class PartnersRepoService {
     this.partnersCollection = db.collection('partners');
   }
   /**This function will add a new partner to the database. */
-  addNewPartner(partnerData: Partner): void {
-    this.partnersCollection.add(this.parsePartnerToJSON(partnerData));
+  addNewPartner(partnerData: Partner) {
+    return this.partnersCollection.add(this.parsePartnerToJSON(partnerData));
 
 
   }
@@ -61,7 +63,7 @@ export class PartnersRepoService {
 
   parsePartnerToJSON(partnerData: Partner): any {
     const partner = {
-        address: this.parseAddressToJSON(partnerData.address),
+        location: this.parseLocationToJSON(partnerData.location),
         name: partnerData.name,
         phone: partnerData.phone,
         manager: partnerData.manager,
@@ -69,20 +71,20 @@ export class PartnersRepoService {
         description: partnerData.description,
         image: partnerData.image,
         announcement: partnerData.announcement,
+        website: partnerData.website
     };
     return partner;
 }
 
-parseAddressToJSON(addressData: Address): any {
-  var address = {
-      city: addressData.city,
-      line1: addressData.line1,
-      line2: addressData.line2,
-      state: addressData.state,
-      zip: addressData.zip    
+parseLocationToJSON(locationData: Location): any {
+  const location = {
+      city: locationData.city,
+      address: locationData.address,
+      latitude: locationData.latitude,
+      longitude: locationData.longitude
   };
-  return address;
-  }
+  return location;
+}
 
 
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationDataTransfeerService } from './../../domainLayer/services/data-transfer/location-data-transfeer.service';
 import { Location } from './../../domainLayer/structures/Location';
+import { GooglePlacesResult } from './../../domainLayer/structures/GooglePlacesResult';
 @Component({
   selector: 'app-locationpicker',
   templateUrl: './locationpicker.component.html',
@@ -16,6 +17,7 @@ export class LocationpickerComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   public autocomplete: String;
+  @Output() onFoundLocation = new EventEmitter<GooglePlacesResult>();
 
   constructor (
     private mapsAPILoader: MapsAPILoader,
@@ -70,23 +72,23 @@ export class LocationpickerComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          console.log(place.formatted_address);
-          console.log(place.name);
-          console.log(place.website);
-          console.log(place.types[0]);
           // set latitude, longitude and zoom
+          console.log(place);
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
-          const location = new Location(this.latitude, this.longitude, place.formatted_address, '');
-          this.announceLocation(location);
+          const city = place.formatted_address.split(',').reverse()[2];
+          const location = new Location(this.latitude, this.longitude, place.formatted_address, city.trim());
+          const googlePlace: GooglePlacesResult = { location: location,
+            website: place.website, phone: place.formatted_phone_number, name: place.name};
+          this.announceLocation(googlePlace);
 
         });
       });
     });
   }
 
-  private announceLocation(location: Location) {
-    this.locationData.announceLocation(location);
+  private announceLocation(place: GooglePlacesResult) {
+    this.onFoundLocation.emit(place);
   }
 }
