@@ -1,8 +1,8 @@
-import {Address} from './Address';
+import { Location } from './Location';
 
 export class Partner {
     pId: string;
-    address: Address;
+    location: Location;
     name: string;
     phone: string;
     manager: string;
@@ -10,11 +10,12 @@ export class Partner {
     description: string;
     image: string;
     announcement: string;
+    website: string;
 
-    constructor(id: string, address: Address, name: string, phone: string, manager: string, type: string, description: string,
-        image: string, announcement: string) {
+    constructor(id: string, location: Location, name: string, phone: string, manager: string, type: string, description: string,
+        image: string, announcement: string, website: string) {
         this.pId = id;
-        this.address = address;
+        this.location = location;
         this.name = name;
         this.phone = phone;
         this.manager = manager;
@@ -22,6 +23,7 @@ export class Partner {
         this.description = description;
         this.image = image;
         this.announcement = announcement;
+        this.website = website;
     }
 
 }
