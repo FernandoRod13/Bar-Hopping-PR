@@ -50,11 +50,11 @@ export class LoginComponent implements OnInit {
               response => {
 
                 if (response) {
-                  console.log("Ist Customer");
                   this.router.navigate(['/home']);
+                  console.log("Ist Customer");
                 }
                 else {
-                  this.router.navigate(['/employee']);
+                  this.router.navigate(['/login-employee']);
                   console.log("Its employeeee");
                 }
               });

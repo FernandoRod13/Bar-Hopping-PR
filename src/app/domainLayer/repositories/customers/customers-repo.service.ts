@@ -89,19 +89,16 @@ export class CustomersRepoService {
 
     return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
       
-      console.log("Entro aqui1")
-      console.log(data.payload);
       if(data.payload.data() == null){
-        console.log("Entro aqui2")
+        //Ist not a customer
         return false;
       }
-
       if (data.payload.data().userType == "Customer") {
-        console.log("Entro aqui33")
+        
         return true;
       }
       else {
-        console.log("Entro aqui4")
+       //Ist not a customer
         return false;
       }
     })
