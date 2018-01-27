@@ -27,7 +27,7 @@ import { TripFactory } from './domainLayer/factories/tripFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
 import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { PartnersComponent } from './ui-layer/partners/partners.component';
-import { TripsComponent } from './ui-layer/trips/trips.component';
+import { TripsComponent } from './ui-layer/dashboards/customer/trips/trips.component';
 import { AccountComponent } from './ui-layer/account/account.component';
 import { CreateAccountComponent } from './ui-layer/authentication/create-account/create-account.component';
 import { EmployeeManagerComponent } from './ui-layer/dashboards/employees/employee-manager/employee-manager.component';
@@ -39,6 +39,9 @@ import { AuthGuardService } from './domainLayer/services/authentication/auth-gua
 import { AddPartnerFormComponent } from './ui-layer/dashboards/employees/add-partner-form/add-partner-form.component';
 import { LocationDataTransfeerService } from './domainLayer/services/data-transfer/location-data-transfeer.service';
 import { LogInEmployeeComponent } from './ui-layer/authentication/log-in-employee/log-in-employee.component'
+import { CustomerContainerComponent } from './ui-layer/dashboards/customer/customer-container/customer-container.component';
+import { ContactComponent } from './ui-layer/dashboards/customer/contact/contact.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +57,9 @@ import { LogInEmployeeComponent } from './ui-layer/authentication/log-in-employe
     TripManagerComponent,
     LocationpickerComponent,
     AddPartnerFormComponent,
-    LogInEmployeeComponent
+    LogInEmployeeComponent,
+    CustomerContainerComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

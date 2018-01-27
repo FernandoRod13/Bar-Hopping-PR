@@ -2,8 +2,9 @@
     <mat-card-title>Add New Partner</mat-card-title>
     <mat-horizontal-stepper>
       <mat-step label="Search Location" optional="true">
-        <app-locationpicker (onFoundLocation)="recieveLocation($event)"></app-locationpicker>
+        <app-locationpicker (onFoundLocation)="recieveLocation($event)" [location]="partner.location.address"></app-locationpicker>
         <div class="action-menu">
+          <button mat-raised-button (click)="cancel()">Cancel</button>
           <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </mat-step>

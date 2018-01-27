@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild, EventEmitter, Output, Input } from '@angular/core';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,6 +18,7 @@ export class LocationpickerComponent implements OnInit {
   public zoom: number;
   public autocomplete: String;
   @Output() onFoundLocation = new EventEmitter<GooglePlacesResult>();
+  @Input() location: string;
 
   constructor (
     private mapsAPILoader: MapsAPILoader,
@@ -73,7 +74,6 @@ export class LocationpickerComponent implements OnInit {
             return;
           }
           // set latitude, longitude and zoom
-          console.log(place);
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
