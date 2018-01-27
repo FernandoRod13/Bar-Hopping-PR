@@ -1,8 +1,13 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened="true">
-    <div style="background-color:#4a148c">
-      <h3 style="color:white">Bar Hopping</h3>
+
+<mat-toolbar color="primary">
+    <span>Bar Hopping PR</span>
+    <!-- This fills the remaining space of the current row -->
+    <div class="button-row">
+      <a mat-button routerLink="/employee/account">Account</a>
     </div>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened="true">
     <mat-nav-list>
         <mat-list-item routerLink="/employee/hr">
           <mat-icon mat-list-icon>people</mat-icon>
