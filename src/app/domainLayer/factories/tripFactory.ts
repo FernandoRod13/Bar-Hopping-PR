@@ -11,14 +11,14 @@ export class TripFactory {
     composeTripFromDB(json: any): Trip {
         const data = json.data();
 
-        return new Trip(json.id, data.capacity, data.date, data.tripRoute, 
+        return new Trip(json.id, data.name, data.capacity, data.date, data.tripRoute, 
             data.typeOfTrip, data.staff,data.seatsTaken)
     }
 
-    composeNewTrip(capacity: number, date: Date, tripRouteList: [string], staff: [string],
+    composeNewTrip(name: string, capacity: number, date: Date, tripRouteList: [string], staff: [string],
          type: string, seatsTaken: number): Trip {
 
-        return new Trip('', capacity, date, tripRouteList, type, staff, seatsTaken );
+        return new Trip('', name, capacity, date, tripRouteList, type, staff, seatsTaken );
 
     }
 
@@ -28,7 +28,7 @@ export class TripFactory {
         let tripRoute: [string];
         let staff: [string];
 
-        return new Trip('', 25, date, tripRoute, 'default', staff, 0);
+        return new Trip('', '' ,25, date, tripRoute, 'default', staff, 0);
     }
 
 }

@@ -28,7 +28,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   private addingNewTrip: boolean;
   private updatingTrip: boolean;
   private showTrips: boolean;
-  private manifestExist: boolean;
+ 
   private trip: any;
 
 
@@ -38,7 +38,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.addingNewTrip = false;
     this.updatingTrip = false;
-    this.manifestExist = false;
+    
     this.showTrips = true;
     this.trip = null;
     this.tripListRef = this.tripsRepo.getAllTrips().subscribe(trips => {
@@ -68,7 +68,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.addingNewTrip = true;
     this.updatingTrip = false;
     this.showTrips = false;
-    this.manifestExist = false;
+    
     this.trip = this.factory.composeEmptyTrip();
   }
 
@@ -76,7 +76,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
     this.addingNewTrip = false;
     this.updatingTrip = false;
     this.showTrips = true;
-    this.manifestExist = false;
+    
 
   }
 
@@ -97,7 +97,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
       const dateToUse = new Date(this.trip.date)
 
-      const trip = this.factory.composeNewTrip(this.trip.capacity, dateToUse, this.trip.tripRoute,
+      const trip = this.factory.composeNewTrip(this.trip.name, this.trip.capacity, dateToUse, this.trip.tripRoute,
         this.trip.staff, this.trip.typeOfTrip, this.trip.seatsTaken)
 
 
@@ -107,7 +107,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
       this.updatingTrip = false;
       this.addingNewTrip = false;
       this.showTrips = true;
-      this.manifestExist = false;
+      
 
     } else {
       console.log('empty fields');
@@ -129,7 +129,7 @@ export class TripManagerComponent implements OnInit, OnDestroy {
       this.updatingTrip = false;
       this.addingNewTrip = false;
       this.showTrips = true;
-      this.manifestExist = false;
+      
       this.trip = null;
 
     } else {

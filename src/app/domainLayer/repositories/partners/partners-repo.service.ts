@@ -69,7 +69,7 @@ export class PartnersRepoService {
         manager: partnerData.manager,
         type: partnerData.type,
         description: partnerData.description,
-        image: partnerData.image,
+        image: 'https://www.dropbox.com/s/yqp7cm9tu4hbzao/Barhopping_background.jpeg?raw=1',
         announcement: partnerData.announcement,
         website: partnerData.website
     };

@@ -224,6 +224,7 @@ export class TripsRepoService {
 
 
     var trip = {
+      name: tripDetails.name,
       capacity: tripDetails.capacity,
       date: tripDetails.date,
       tripRoute: tripDetails.tripRoute,

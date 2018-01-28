@@ -1,5 +1,6 @@
 export class Trip {
     id?: string;
+    name: string;
     capacity: number;
     date: Date;
     seatsTaken: number;
@@ -9,11 +10,12 @@ export class Trip {
     
 
 
-    constructor(id: string, capacity: number, date: Date, tripRoute: [string],
+    constructor(id: string, name: string, capacity: number, date: Date, tripRoute: [string],
         typeOfTrip: string, staff: [string], seatsTaken?: number) {
 
         if(seatsTaken){
         this.id = id;
+        this.name = name;
         this.capacity = capacity;
         this.date = date;
         this.tripRoute = tripRoute;
@@ -23,6 +25,7 @@ export class Trip {
         }
         else{
         this.id = id;
+        this.name = name;
         this.capacity = capacity;
         this.date = date;
         this.tripRoute = tripRoute;

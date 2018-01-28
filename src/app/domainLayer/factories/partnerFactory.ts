@@ -11,9 +11,9 @@ export class PartnerFactory {
         return new Partner(json.id, location, data.name, data.phone, data.manager, data.type, data.description, data.image,
         data.announcement, data.website);
     }
-
+ 
     composeEmptyPartner() {
         const location = new Location(0.00, 0.00, '', '');
-        return new Partner('', location, '', '', '', '', '', '', '', '');
+        return new Partner('', location, '', '', '', '', '', 'https://www.dropbox.com/s/yqp7cm9tu4hbzao/Barhopping_background.jpeg?raw=1', '', '');
     }
 }

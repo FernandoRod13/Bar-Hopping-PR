@@ -5,7 +5,7 @@
   <mat-card *ngFor="let trip of tripList" class="card">
 
 
-    <mat-card-title>Trip Id: {{trip.id}}</mat-card-title>
+    <mat-card-title>{{trip.name}}</mat-card-title>
     <mat-card-title>Trip Date: {{trip.date | date}}</mat-card-title>
 
     <mat-card-subtitle class="d-inline">Stops:</mat-card-subtitle>
@@ -31,7 +31,7 @@
     </mat-card-actions>
   </mat-card>
 </div>
-
+ 
 
 
 
@@ -45,6 +45,10 @@
         <mat-card-title *ngIf="addingNewTrip">Add New trip</mat-card-title>
 
         <form class="create-Trip-form " (ngSubmit)="onSubmitAddingTrip(form)" #form="ngForm">
+
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Trip name" required name="name" type="text" [(ngModel)]="trip.name">
+          </mat-form-field>
 
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="Capacity" required name="capacity" type="number" value="20" [(ngModel)]="trip.capacity">
@@ -107,7 +111,11 @@
 
         <form class="edit-Trip-form " (ngSubmit)="onSubmitEditTrip(form)" #form="ngForm">
 
-          <mat-card-title>ID: {{trip.id}}</mat-card-title>
+          <mat-card-title>Name: {{trip.name}}</mat-card-title>
+
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Trip name" required name="name" type="text" [(ngModel)]="trip.name">
+          </mat-form-field>
 
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="Capacity:" required name="capacity" type="number" value="20" [(ngModel)]="trip.capacity">
@@ -158,48 +166,4 @@
   </div>
 </div>
 
-<br>
 
-<div *ngIf="manifestExist" class="container-fluid">
-  <div class="row">
-    <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
-
-      <mat-card>
-
-        <mat-card-title>Edit Manifest:</mat-card-title>
-
-
-
-        <form class="edit-Trip-form " (ngSubmit)="onSubmitEditTrip(form)" #form="ngForm">
-
-            <p> Number of people attending: {{trip.manifest.size}}</p>
-
-            <mat-card-title>Trip Groups:</mat-card-title>
-          <div *ngFor="let tripGroup of trip.manifest.participants">
-
-            <p>Customer Name: {{tripGroup.customerName}}</p>
-            <p>ID: {{tripGroup.customerId}}</p>
-            <p>Guests:</p>
-
-
-            <br><br>
-
-          </div>
-
-
-
-
-          <!-- Here its supposed to be the form to edit the manifest-->
-
-          <div class="row">
-            <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>
-            <span class="col-md-1"></span>
-            <button mat-raised-button color="primary" class="col-md-8" type="submit" *ngIf="updatingTrip">Update Trip Manifest</button>
-
-          </div>
-        </form>
-      </mat-card>
-    </div>
-  </div>
-
-</div>
