@@ -7,6 +7,9 @@ import { Partner } from './../../../../domainLayer/structures/Partner';
 import { TripGroup } from './../../../../domainLayer/structures/TripGroup';
 import { TripFactory } from './../../../../domainLayer/factories/tripFactory'
 import { TripGroupFactory } from './../../../../domainLayer/factories/tripGroupFactory'
+import { AuthenticationService } from '../../../../domainLayer/services/authentication/authentication.service'
+import {MatChipInputEvent} from '@angular/material';
+import {ENTER, COMMA} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-trips',
@@ -15,6 +18,13 @@ import { TripGroupFactory } from './../../../../domainLayer/factories/tripGroupF
 })
 export class TripsComponent implements OnInit {
 
+  visible: boolean = true;
+  selectable: boolean = true;
+  removable: boolean = true;
+  addOnBlur: boolean = true;
+
+  // Enter, comma
+  separatorKeysCodes = [ENTER, COMMA];
 
   private tripListRef: any;
   private partnerListRef: any;
@@ -22,6 +32,7 @@ export class TripsComponent implements OnInit {
   private tripList: Trip[];
 
   private tripGroup: TripGroup;
+  private userInfo: any;
 
 
   private partnerList: Partner[];
@@ -31,10 +42,10 @@ export class TripsComponent implements OnInit {
   private createTripGroupForm: boolean;
   private showTrips: boolean;
   private trip: any;
-  private guestList: string[];
+  private guestList: any;
 
 
-  constructor(private tripsRepo: TripsRepoService,
+  constructor(private tripsRepo: TripsRepoService,private auth: AuthenticationService,
     private partnerRepo: PartnersRepoService, private factory: TripGroupFactory) { }
 
   ngOnInit() {
@@ -45,8 +56,8 @@ export class TripsComponent implements OnInit {
     this.trip = null;
     this.tripGroup = null;
 
-    this.guestList = new Array<string>();
-    this.guestList.push('jesus')
+    this.guestList = new Array<any>();
+    this.guestList = [{name: "helloo"}]
 
     this.tripListRef = this.tripsRepo.getAllTrips().subscribe(trips => {
       this.tripList = trips;
@@ -63,6 +74,35 @@ export class TripsComponent implements OnInit {
 
   }
 
+  add(event: MatChipInputEvent): void {
+    let input = event.input;
+    let value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.guestList.push({ name: value.trim() });
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(guest: any): void {
+    let index = this.guestList.indexOf(guest);
+
+    if (index >= 0) {
+      this.guestList.splice(index, 1);
+    }
+  }
+
+
+
+  
+   
+
+    
   onShowTrips() {
     this.createTripGroupForm = false;
     this.payForm = false;
@@ -81,30 +121,31 @@ export class TripsComponent implements OnInit {
     this.payForm = true;
   }
 
-
-
   OnCreateTripGroupForm(trip: Trip) {
     console.log(trip);
 
     this.trip = trip;
 
+    
 
-    // I Need Customer info to create the TripGroup
+    // this.auth.getUserInfo().subscribe( data => function(data){
+    //   this.userInfo = data;
+    //   console.log(data);
+
+    // });
 
     let dataToCreateTripGroup = {
       tripId: trip.id,
       customerId: '',
-      customerName: '',
+      customerName: '', //this.userInfo.firstName + this.userInfo.lasttName,
       guests: this.guestList
     }
-
+    // I Need Customer info to create the TripGroup
     this.tripGroup = this.factory.NewTripTemplate(dataToCreateTripGroup)
     this.onCreateTripGroup()
+   
   }
 
-  increaseSifeOfGuestsList() {
-    this.guestList.push('Helloo');
-  }
 
 
   onReserveTripSubmit() {

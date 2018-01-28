@@ -26,8 +26,9 @@ export class AuthenticationService {
     });
   }
 
-  getUserInfo() {
+  getUserInfo(): any {
     if (this.authState) {
+      console.log(this.authState)
       return this.afDB.collection('users').doc(this.authState.uid).valueChanges();
     }
   }

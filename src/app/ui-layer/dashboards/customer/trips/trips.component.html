@@ -39,6 +39,21 @@
 
 
           <mat-card-subtitle>Guest list:</mat-card-subtitle>
+
+          <mat-form-field class="demo-chip-list">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let guest of guestList" [selectable]="selectable"
+                         [removable]="removable" (remove)="remove(guest)">
+                  
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New Guest..."
+                       [matChipInputFor]="guestList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)" />
+              </mat-chip-list>
+            </mat-form-field>
           
           
           <mat-form-field class="col-md-12 full-width field">
