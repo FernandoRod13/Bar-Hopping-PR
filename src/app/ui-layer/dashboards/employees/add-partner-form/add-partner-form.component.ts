@@ -34,7 +34,7 @@ export class AddPartnerFormComponent implements OnInit {
 
   public submit() {
     this.repo.addNewPartner(this.partner).then(() => {
-      console.log('added');
+      this.cancel();
     });
   }
 

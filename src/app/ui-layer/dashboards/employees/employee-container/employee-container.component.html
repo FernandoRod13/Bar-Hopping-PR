@@ -1,34 +1,33 @@
-
 <mat-toolbar color="primary">
-    <span>Bar Hopping PR</span>
-    <!-- This fills the remaining space of the current row -->
-    <div class="button-row">
-      <a mat-button routerLink="/employee/account">Account</a>
-    </div>
-  </mat-toolbar>
-  <mat-sidenav-container class="example-container">
+  <span>Bar Hopping PR</span>
+  <!-- This fills the remaining space of the current row -->
+  <div class="button-row">
+    <a mat-button routerLink="/employee/account">Account</a>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" opened="true">
     <mat-nav-list>
-        <mat-list-item routerLink="/employee/hr">
-          <mat-icon mat-list-icon>people</mat-icon>
-          Employee Manager 
-        </mat-list-item>
-        <mat-list-item routerLink="/employee/partners">
-          <mat-icon mat-list-icon>store</mat-icon>
-          Partner Manager
-        </mat-list-item>
-        <mat-list-item routerLink="/employee/trips">
-          <mat-icon mat-list-icon>directions_bus</mat-icon>
-          Trip Manager
-        </mat-list-item>
-        <mat-list-item routerLink="/employee/account">
-          <mat-icon mat-list-icon>account_circle</mat-icon>
-          Account
-        </mat-list-item>
-        <mat-list-item routerLink="/home">
-          <mat-icon mat-list-icon>home</mat-icon>
-          Home
-        </mat-list-item>
+      <mat-list-item routerLink="/employee/hr">
+        <mat-icon mat-list-icon>people</mat-icon>
+        Employee Manager
+      </mat-list-item>
+      <mat-list-item routerLink="/employee/partners">
+        <mat-icon mat-list-icon>store</mat-icon>
+        Partner Manager
+      </mat-list-item>
+      <mat-list-item routerLink="/employee/trips">
+        <mat-icon mat-list-icon>directions_bus</mat-icon>
+        Trip Manager
+      </mat-list-item>
+      <mat-list-item routerLink="/employee/account">
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        Account
+      </mat-list-item>
+      <mat-list-item routerLink="/home">
+        <mat-icon mat-list-icon>home</mat-icon>
+        Home
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
