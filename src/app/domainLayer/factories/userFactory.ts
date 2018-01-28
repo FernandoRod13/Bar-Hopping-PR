@@ -20,7 +20,6 @@ export class UserFactory {
         if (data.userType === 'Employee') {
             return this.composeEmployee(data);
         }
-        
-        return new Customer(data.firstName, data.lastName, data.email)
+        return new Customer(data.firstName, data.lastName, data.email);
     }
 }
