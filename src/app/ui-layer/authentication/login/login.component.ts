@@ -15,10 +15,6 @@ export class LoginComponent implements OnInit {
 
   private shortPassword: boolean;
   private wrongPassword: boolean;
-  private employeeData: any;
-
-
-
 
   constructor(private auth: AuthenticationService, private router: Router,
     location: Location, private customerRepo: CustomersRepoService) {
@@ -35,38 +31,28 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: any) {
-    let employee: any;
     if (form.valid) {
       if (form.value.password.length > 7) {
-
-
         this.auth.loginUser(form.value.email, form.value.password).then(response => {
-          if (response == 0) {
+          const redirect = this.auth.url;
+          if (response === 0) {
             this.wrongPassword = true;
-          }
-          else {
-
-            this.customerRepo.itsCustomer(response.uid).subscribe(
-              response => {
-
-                if (response) {
-                  this.router.navigate(['/home']);
-                  console.log("Ist Customer");
-                }
-                else {
-                  this.router.navigate(['/login-employee']);
-                  console.log("Its employeeee");
-                }
-              });
+          } else {
+            this.customerRepo.itsCustomer(response.uid).subscribe(resp => {
+              if (resp) {
+                this.router.navigate(['/dashboard']);
+                console.log('It Customer');
+              } else {
+                this.router.navigate(['/login-employee']);
+                console.log('Its employeeee');
+              }
+            });
           }
         });
-      }
-      else {
+      } else {
         this.shortPassword = true;
       }
-      
-    }
-    else {
+    } else {
       console.log('empty fields');
     }
   }

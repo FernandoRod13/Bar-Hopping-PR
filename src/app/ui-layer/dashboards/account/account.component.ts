@@ -11,8 +11,13 @@ export class AccountComponent implements OnInit {
   constructor( private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.user = this.auth.getUserInfo;
-    console.log('The user is ' + this.user);
+    this.auth.getUserInfo().subscribe( data => {
+      this.user = data;
+    });
+
+  }
+  public logout() {
+    this.auth.logout();
   }
 
 }
