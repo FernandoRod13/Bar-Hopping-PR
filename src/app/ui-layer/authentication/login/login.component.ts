@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
           if (response === 0) {
             this.wrongPassword = true;
           } else {
+            if (redirect) {
+              this.router.navigate([redirect]);
+            }
             this.customerRepo.itsCustomer(response.uid).subscribe(resp => {
               if (resp) {
                 this.router.navigate(['/dashboard']);
