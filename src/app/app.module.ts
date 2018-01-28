@@ -43,6 +43,7 @@ import { LocationDataTransfeerService } from './domainLayer/services/data-transf
 import { LogInEmployeeComponent } from './ui-layer/authentication/log-in-employee/log-in-employee.component'
 import { CustomerContainerComponent } from './ui-layer/dashboards/customer/customer-container/customer-container.component';
 import { ContactComponent } from './ui-layer/dashboards/customer/contact/contact.component';
+import { TripSpecificationsService } from './domainLayer/specifications/trip-specifications.service'
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ContactComponent } from './ui-layer/dashboards/customer/contact/contact
     TripFactory,
     AuthGuardService,
     LocationDataTransfeerService,
-    TripGroupFactory
+    TripGroupFactory,
+    TripSpecificationsService
   ],
   bootstrap: [AppComponent]
 })

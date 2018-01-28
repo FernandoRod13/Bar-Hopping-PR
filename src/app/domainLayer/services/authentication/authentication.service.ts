@@ -20,11 +20,14 @@ export class AuthenticationService {
       this.authState = auth;
     });
   }
-
+ 
   loginUser(email: string, password: string): Promise<any> {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then( data => {
-      return data;
-    });
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
+      return firebaseUser
+  })
+ .catch(function(error) {
+      return error
+ });
   }
 
   getUserInfo(): Observable<User> {

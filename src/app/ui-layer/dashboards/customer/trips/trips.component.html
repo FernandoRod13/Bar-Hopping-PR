@@ -57,6 +57,13 @@
           <br>
           <br>
 
+          <div *ngIf="wrongForm">
+              <br>
+          </div>
+          <div *ngIf="wrongForm" class="alert alert-danger" role="alert">
+              {{errorMessage}}
+            </div>
+
 
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="Emergency contact Name" required name="EmergencyContact" type="text" [(ngModel)]="tripGroup.emergencyContactName">

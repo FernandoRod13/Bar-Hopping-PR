@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor(private CustomerRepo: CustomersRepoService, private router: Router) { }
 
+  public wrongForm = false;
+  public errorMessage = ''
+
+  constructor(private CustomerRepo: CustomersRepoService, private router: Router) { }
+  
   ngOnInit() {
   }
 
@@ -19,17 +23,22 @@ export class CreateAccountComponent implements OnInit {
     if (form.valid) {
       if (form.value.password1.length > 7) {
         if (form.value.password1 === form.value.password2) {
+        this.wrongForm = false;
         const customer = new Customer(form.value.firstName, form.value.lastName, form.value.email);
         this.CustomerRepo.createNewCustomer(customer, form.value.password1);
         this.router.navigate(['/dashboard']);
         } else {
-          console.log('passwords are differents');
+          this.wrongForm = true;
+          this.errorMessage = 'passwords are differents';
         }
       }else {
-        console.log('short password');
+        this.wrongForm = true;
+        this.errorMessage = 'short password';
       }
     } else {
-      console.log('empty fields');
+      this.wrongForm = true;
+
+      this.errorMessage = 'empty fields';
     }
   }
 

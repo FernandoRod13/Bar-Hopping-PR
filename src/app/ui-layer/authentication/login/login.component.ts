@@ -33,9 +33,11 @@ export class LoginComponent implements OnInit {
   onLogin(form: any) {
     if (form.valid) {
       if (form.value.password.length > 7) {
+        
         this.auth.loginUser(form.value.email, form.value.password).then(response => {
           const redirect = this.auth.url;
-          if (response === 0) {
+          
+          if (response.code == "auth/wrong-password") {
             this.wrongPassword = true;
           } else {
             if (redirect) {

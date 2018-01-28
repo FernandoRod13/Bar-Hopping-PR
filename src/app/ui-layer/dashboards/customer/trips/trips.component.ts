@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../../../domainLayer/services/authenti
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
+import { TripSpecificationsService } from './../../../../domainLayer/specifications/trip-specifications.service'
 
 @Component({
   selector: 'app-trips',
@@ -40,6 +41,9 @@ export class TripsComponent implements OnInit, OnDestroy {
   private trip: any;
   public guestList: any = []
   public priceToPay = (this.guestList.length * 25) + 25
+  public wrongForm = false;
+  public errorMessage = ''
+
 
 
   constructor(
@@ -47,7 +51,8 @@ export class TripsComponent implements OnInit, OnDestroy {
     private auth: AuthenticationService,
     private partnerRepo: PartnersRepoService,
     private factory: TripGroupFactory,
-    private router: Router
+    private router: Router, 
+    private specifications: TripSpecificationsService
   ) { }
 
   ngOnInit() {
@@ -83,6 +88,15 @@ export class TripsComponent implements OnInit, OnDestroy {
     if ((value || '').trim()) {
       this.guestList.push({ name: value.trim() });
       this.priceToPay += 25;
+
+      if(this.specifications.spaceAvailable(this.trip.capacity, this.trip.seatsTaken, this.guestList.length + 1 )){
+        //Its ok
+      }
+      else{
+        this.wrongForm = true;
+        this.errorMessage = 'There is no space available';
+      }
+
     }
 
     // Reset the input value
