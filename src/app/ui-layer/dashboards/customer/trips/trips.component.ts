@@ -10,6 +10,7 @@ import { TripGroupFactory } from './../../../../domainLayer/factories/tripGroupF
 import { AuthenticationService } from '../../../../domainLayer/services/authentication/authentication.service'
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trips',
@@ -28,28 +29,25 @@ export class TripsComponent implements OnInit, OnDestroy {
 
   private tripListRef: any;
   private partnerListRef: any;
-
   private tripList: Trip[];
-
   private tripGroup: TripGroup;
   private userInfo: any;
-
-
   private partnerList: Partner[];
   private partnersNames: { [id: string]: string; } = {};
-
   public payForm: boolean;
   public createTripGroupForm: boolean;
   public showTrips: boolean;
   private trip: any;
-  public guestList: any;
+  public guestList: any = []
+  public priceToPay = (this.guestList.length * 25) + 25
 
 
   constructor(
     private tripsRepo: TripsRepoService,
     private auth: AuthenticationService,
     private partnerRepo: PartnersRepoService,
-    private factory: TripGroupFactory
+    private factory: TripGroupFactory,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -59,6 +57,7 @@ export class TripsComponent implements OnInit, OnDestroy {
     this.showTrips = true;
     this.trip = null;
     this.tripGroup = null;
+    
 
     this.guestList = new Array<any>();
 
@@ -70,7 +69,6 @@ export class TripsComponent implements OnInit, OnDestroy {
       this.partnerList = partners;
 
       for (let partner of partners) {
-
         this.partnersNames[partner.pId] = partner.name;
       }
     });
@@ -81,9 +79,10 @@ export class TripsComponent implements OnInit, OnDestroy {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
+    // Add our guest
     if ((value || '').trim()) {
       this.guestList.push({ name: value.trim() });
+      this.priceToPay += 25;
     }
 
     // Reset the input value
@@ -97,6 +96,7 @@ export class TripsComponent implements OnInit, OnDestroy {
 
     if (index >= 0) {
       this.guestList.splice(index, 1);
+      this.priceToPay -= 25;
     }
   }
 
@@ -119,18 +119,15 @@ export class TripsComponent implements OnInit, OnDestroy {
   }
 
   OnCreateTripGroupForm(trip: Trip) {
-    console.log(trip);
-
+    
     this.trip = trip;
 
     this.auth.getUserInfo().subscribe(data => {
-      this.userInfo = data;
-      console.log(data);
-
+    
       const dataToCreateTripGroup = {
         tripId: trip.id,
-        customerId: this.userInfo.uid,
-        customerName: this.userInfo.firstName + ' ' + this.userInfo.lastName, // this.userInfo.firstName + this.userInfo.lasttName,
+        customerId: data.uid,
+        customerName: data.firstName + ' ' + data.lastName,
         guests: this.guestList
       };
       // I Need Customer info to create the TripGroup
@@ -142,19 +139,17 @@ export class TripsComponent implements OnInit, OnDestroy {
 
 
   onReserveTripSubmit() {
-    console.log(this.tripGroup);
-    let guestStrings = []
-    for (let guest of this.tripGroup.guests){
-      guestStrings.push(guest
-    }
     this.tripGroup.guests = this.guestList;
     this.tripGroup.size = 1 + this.guestList.length;
     console.log(this.tripGroup);
+
     this.onPayFormButton();
   }
 
   onPayFormSubmit() {
-    this.onShowTrips();
+    this.tripsRepo.addNewTripGroup(this.tripGroup)
+    this.router.navigate(['/dashboard/confirmation']);
+
   }
 
   ngOnDestroy() {

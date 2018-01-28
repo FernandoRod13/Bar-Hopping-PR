@@ -27,6 +27,7 @@ import { TripFactory } from './domainLayer/factories/tripFactory';
 import { TripGroupFactory } from './domainLayer/factories/tripGroupFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
 import { HomePageComponent } from './ui-layer/homePage/homePage.component';
+import { ConfirmationComponent } from './ui-layer/dashboards/customer/confirmation/confirmation.component'
 import { PartnersComponent } from './ui-layer/dashboards/customer/partners/partners.component';
 import { TripsComponent } from './ui-layer/dashboards/customer/trips/trips.component';
 import { AccountComponent } from './ui-layer/dashboards/account/account.component';
@@ -60,7 +61,8 @@ import { ContactComponent } from './ui-layer/dashboards/customer/contact/contact
     AddPartnerFormComponent,
     LogInEmployeeComponent,
     CustomerContainerComponent,
-    ContactComponent
+    ContactComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,

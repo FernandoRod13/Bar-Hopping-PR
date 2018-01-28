@@ -13,9 +13,11 @@ import { TripFactory } from '../../factories/tripFactory';
 export class TripsRepoService {
 
   private tripsCollection: AngularFirestoreCollection<Trip>;
+  private tripGroupsCollection: AngularFirestoreCollection<TripGroup>;
 
   constructor(db: AngularFirestore, private factory: TripFactory) {
     this.tripsCollection = db.collection('trips')
+    this.tripGroupsCollection = db.collection('tripgroups')
   }
 
   /**This function will add a new trip to the database if trip was successful. */
@@ -35,11 +37,6 @@ export class TripsRepoService {
 
   }
 
-
-
-
-
-
   /**This function will edit a trip max capacity */
   addBussesToTheTrip(addedCapacity: number, tripId: string): void {
 
@@ -49,11 +46,7 @@ export class TripsRepoService {
       trip.capacity = newMaxCapacity;
       this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
     });
-
-
-
   }
-
 
 
   /**This function will edit a trip date */
@@ -68,13 +61,8 @@ export class TripsRepoService {
   }
 
   /**This function will add a group to the trip */
-  addGroupToTrip(tripGroup: TripGroup, tripId: string): void {
-    // this.getSpecificTrip(tripId).subscribe(trip => {
-
-    //   trip.manifest.participants.push(this.parseTripGroupToJSON(tripGroup));
-    //   this.tripsCollection.doc(tripId).update(this.parseTripToJSON(trip));
-    // });
-
+  addNewTripGroup(tripGroup: TripGroup): void {
+    this.tripGroupsCollection.add(this.parseTripGroupToJSON(tripGroup));
   }
 
   /**This function will delete a group from the trip */
@@ -248,7 +236,6 @@ export class TripsRepoService {
       emergencyContactName: tripGroupDetails.emergencyContactName,
       emergencyContactNumber: tripGroupDetails.emergencyContactNumber,
 
-      // guests: tripGroupDetails.guests
     };
     return tripGroupToReturn;
   }

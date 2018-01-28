@@ -44,10 +44,8 @@ export class LoginComponent implements OnInit {
             this.customerRepo.itsCustomer(response.uid).subscribe(resp => {
               if (resp) {
                 this.router.navigate(['/dashboard']);
-                console.log('It Customer');
               } else {
                 this.router.navigate(['/login-employee']);
-                console.log('Its employeeee');
               }
             });
           }

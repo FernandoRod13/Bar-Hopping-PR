@@ -13,7 +13,7 @@ import { PartnerManagerComponent } from './ui-layer/dashboards/employees/partner
 import { TripManagerComponent } from './ui-layer/dashboards/employees/trip-manager/trip-manager.component';
 import { AuthGuardService } from './domainLayer/services/authentication/auth-guard.service';
 import { LogInEmployeeComponent } from './ui-layer/authentication/log-in-employee/log-in-employee.component';
-
+import { ConfirmationComponent } from './ui-layer/dashboards/customer/confirmation/confirmation.component'
 import { CustomerContainerComponent} from './ui-layer/dashboards/customer/customer-container/customer-container.component';
 import { ContactComponent} from './ui-layer/dashboards/customer/contact/contact.component';
 const appRoutes: Routes = [
@@ -30,6 +30,7 @@ const appRoutes: Routes = [
         { path: 'trips', component: TripsComponent },
         { path: 'catalogue', component: PartnersComponent },
         { path: 'account', component: AccountComponent },
+        { path: 'confirmation', component: ConfirmationComponent },
         { path: 'contact', component: ContactComponent }
     ]},
     { path: 'employee', redirectTo: '/employee/hr', pathMatch: 'full'},

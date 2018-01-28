@@ -3,7 +3,7 @@ export class TripGroup {
     tripId: string;
     customerId: string;
     customerName: string;
-    guests: string[];
+    guests: any[];
     size: number;
     emergencyContactName: string;
     emergencyContactNumber: string;

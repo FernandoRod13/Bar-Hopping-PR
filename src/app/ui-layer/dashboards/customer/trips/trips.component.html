@@ -1,3 +1,8 @@
+
+
+
+<button mat-button color="primary" (click)="OnCreateTripGroupForm(trip)">Create Custom Trip</button>
+
 <div *ngIf="showTrips" class="container-fluid">
 
   <mat-card *ngFor="let trip of tripList" class="card">
@@ -37,26 +42,28 @@
             <input matInput placeholder="Customer Name" required name="name" type="text" [(ngModel)]="tripGroup.customerName">
           </mat-form-field>
 
-
-          <mat-card-subtitle>Guest list:</mat-card-subtitle>
-
           <mat-form-field class="chip-list col-md-12 full-width field">
+
             <mat-chip-list #chipList>
               <mat-chip *ngFor="let guest of guestList" [selectable]="true" [removable]="true" (remove)="remove(guest)">
                 {{guest.name}}
                 <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
               </mat-chip>
-              <input placeholder="New Guest..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)"/>
+              <input placeholder="Guest list: " [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)" />
             </mat-chip-list>
-            <mat-hint>Press ENTER o add a COMMA after typing guest name to add another.</mat-hint>
+            <mat-hint>Press ENTER or add a COMMA after typing guest name to add another.</mat-hint>
           </mat-form-field>
+          <br>
+          <br>
 
 
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="Emergency contact Name" required name="EmergencyContact" type="text" [(ngModel)]="tripGroup.emergencyContactName">
           </mat-form-field>
- 
+
+
+
 
 
           <mat-form-field class="col-md-12 full-width field">
@@ -66,6 +73,21 @@
 
           <br>
           <br>
+          <mat-card-title>Price: ${{priceToPay}}</mat-card-title>
+
+
+          <div class="row">
+            <div class="col-md-12 full-width field">
+              <p> Here goes all the user agreements........</p>
+
+              <mat-checkbox class="col-md-6"> By checking this you agree </mat-checkbox>
+              
+
+            </div>
+
+          </div>
+
+
 
           <div class="row">
             <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>

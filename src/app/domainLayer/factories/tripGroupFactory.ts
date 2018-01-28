@@ -40,9 +40,6 @@ export class TripGroupFactory {
 
     NewTripTemplate(json: any): TripGroup {
         
-
-        
-
         return new TripGroup(json.tripId, json.customerId, json.customerName, json.guests,
             0, '', '')
     }
