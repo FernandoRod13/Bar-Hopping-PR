@@ -18,7 +18,7 @@ import {ENTER, COMMA} from '@angular/cdk/keycodes';
 })
 export class TripsComponent implements OnInit, OnDestroy {
 
-  visible: boolean = true;
+  visible = true;
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = true;
@@ -38,9 +38,9 @@ export class TripsComponent implements OnInit, OnDestroy {
   private partnerList: Partner[];
   private partnersNames: { [id: string]: string; } = {};
 
-  private payForm: boolean;
-  private createTripGroupForm: boolean;
-  private showTrips: boolean;
+  public payForm: boolean;
+  public createTripGroupForm: boolean;
+  public showTrips: boolean;
   private trip: any;
   public guestList: any;
 

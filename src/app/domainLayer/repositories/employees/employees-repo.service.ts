@@ -75,7 +75,7 @@ parseEmployeeToJSON(employeeData: Employee): any {
   const employee = {
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
-      //address: this.parseAddressToJSON(employeeData.address),
+      address: this.parseAddressToJSON(employeeData.address),
       phone: employeeData.phone,
       email: employeeData.email,
       role: employeeData.role,
@@ -86,12 +86,12 @@ parseEmployeeToJSON(employeeData: Employee): any {
 }
 
 parseAddressToJSON(addressData: Address): any {
-  var address = {
+  const address = {
       city: addressData.city,
       line1: addressData.line1,
       line2: addressData.line2,
       state: addressData.state,
-      zip: addressData.zip    
+      zip: addressData.zip
   };
   return address;
   }

@@ -11,7 +11,7 @@ import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 export class PartnersComponent implements OnInit, OnDestroy {
 
   private partnersRef: any;
-  private partnerList: any;
+  public partnerList: any;
 
   public latitude = 18.2194106;
   public longitude = -66.8002616;
@@ -25,7 +25,7 @@ export class PartnersComponent implements OnInit, OnDestroy {
     this.partnersRef = this.repo.getAllPartners().subscribe(partners => {
       this.partnerList = partners;
     });
-    this.mapsAPILoader.load()
+    this.mapsAPILoader.load();
   }
 
 
