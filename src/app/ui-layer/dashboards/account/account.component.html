@@ -1,3 +1,11 @@
 <mat-card class="container">
   <mat-card-title>Account Info</mat-card-title>
+  <mat-card-content>
+    {{user.firstName}} {{user.lastName}}
+    {{user.email}}
+    {{user.phone}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="logout()"> Sign Out </button>
+  </mat-card-actions>
 </mat-card>

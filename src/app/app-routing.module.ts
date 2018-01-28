@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     // { path: 'partners', component: PartnersComponent },
     { path: 'create-account', component: CreateAccountComponent },
     { path: 'dashboard', redirectTo: '/dashboard/catalogue', pathMatch: 'full'},
-    { path: 'dashboard', component: CustomerContainerComponent, children: [
+    { path: 'dashboard', canActivate: [AuthGuardService], component: CustomerContainerComponent, children: [
         { path: 'trips', component: TripsComponent },
         { path: 'catalogue', component: PartnersComponent },
         { path: 'account', component: AccountComponent },
