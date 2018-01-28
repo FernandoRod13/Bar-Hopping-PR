@@ -4,18 +4,13 @@ export class Customer {
     email: string;
     userType: string;
 
-    constructor( name: string, email: string, id?: string,) {
-        if(id){
+    constructor(name: string, email: string, id?: string) {
+        if (id) {
             this.cId = id;
-            this.name = name;
-            this.email = email;
-            this.userType = "Customer"
         }
-        else{
         this.name = name;
         this.email = email;
-        this.userType = "Customer"
-        }
-    };
+        this.userType = 'Customer';
+    }
 
 }
