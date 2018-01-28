@@ -110,7 +110,7 @@ export class CustomersRepoService {
   parseCustomerToJSON(customerData: Customer): any {
 
     var customer = {
-      fistName: customerData.firstName,
+      firstName: customerData.firstName,
       lastName: customerData.lastName,
       email: customerData.email,
       userType: customerData.userType

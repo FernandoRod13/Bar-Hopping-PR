@@ -40,26 +40,23 @@
 
           <mat-card-subtitle>Guest list:</mat-card-subtitle>
 
-          <mat-form-field class="demo-chip-list">
-              <mat-chip-list #chipList>
-                <mat-chip *ngFor="let guest of tripGroup.guest" [selectable]="selectable"
-                         [removable]="removable" (remove)="remove(guest)">
-                  
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input placeholder="New Guest..."
-                       [matChipInputFor]="tripGroup.guests"
-                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                       [matChipInputAddOnBlur]="addOnBlur"
-                       (matChipInputTokenEnd)="add($event)" />
-              </mat-chip-list>
-            </mat-form-field>
-          
-          
+          <mat-form-field class="chip-list col-md-12 full-width field">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let guest of guestList" [selectable]="true" [removable]="true" (remove)="remove(guest)">
+                {{guest.name}}
+                <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New Guest..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"/>
+            </mat-chip-list>
+            <mat-hint>Press ENTER o add a COMMA after typing guest name to add another.</mat-hint>
+          </mat-form-field>
+
+
           <mat-form-field class="col-md-12 full-width field">
             <input matInput placeholder="Emergency contact Name" required name="EmergencyContact" type="text" [(ngModel)]="tripGroup.emergencyContactName">
           </mat-form-field>
-
+ 
 
 
           <mat-form-field class="col-md-12 full-width field">
@@ -78,7 +75,7 @@
           </div>
 
         </form>
-       
+
       </mat-card>
     </div>
   </div>
