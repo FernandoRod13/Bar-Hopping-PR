@@ -13,8 +13,8 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  private shortPassword: boolean;
-  private wrongPassword: boolean;
+  public shortPassword: boolean;
+  public wrongPassword: boolean;
 
   constructor(private auth: AuthenticationService, private router: Router,
     location: Location, private customerRepo: CustomersRepoService) {

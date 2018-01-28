@@ -19,15 +19,15 @@ export class TripManagerComponent implements OnInit, OnDestroy {
 
   private tripList: Trip[];
   private employeesList: Employee[];
-  private employeesNames: { [id: string]: string; } = {}
+  private employeesNames: { [id: string]: string; } = {};
 
 
   private partnerList: Partner[];
-  private partnersNames: { [id: string]: string; } = {}
+  private partnersNames: { [id: string]: string; } = {};
 
-  private addingNewTrip: boolean;
-  private updatingTrip: boolean;
-  private showTrips: boolean;
+  public addingNewTrip: boolean;
+  public updatingTrip: boolean;
+  public showTrips: boolean;
  
   private trip: any;
 
