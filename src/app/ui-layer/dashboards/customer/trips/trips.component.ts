@@ -16,7 +16,7 @@ import {ENTER, COMMA} from '@angular/cdk/keycodes';
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.css']
 })
-export class TripsComponent implements OnInit {
+export class TripsComponent implements OnInit, OnDestroy {
 
   visible: boolean = true;
   selectable: boolean = true;
@@ -36,17 +36,21 @@ export class TripsComponent implements OnInit {
 
 
   private partnerList: Partner[];
-  private partnersNames: { [id: string]: string; } = {}
+  private partnersNames: { [id: string]: string; } = {};
 
   private payForm: boolean;
   private createTripGroupForm: boolean;
   private showTrips: boolean;
   private trip: any;
-  private guestList: any;
+  public guestList: any;
 
 
-  constructor(private tripsRepo: TripsRepoService,private auth: AuthenticationService,
-    private partnerRepo: PartnersRepoService, private factory: TripGroupFactory) { }
+  constructor(
+    private tripsRepo: TripsRepoService,
+    private auth: AuthenticationService,
+    private partnerRepo: PartnersRepoService,
+    private factory: TripGroupFactory
+  ) { }
 
   ngOnInit() {
 
@@ -57,7 +61,6 @@ export class TripsComponent implements OnInit {
     this.tripGroup = null;
 
     this.guestList = new Array<any>();
-    this.guestList = [{name: "helloo"}]
 
     this.tripListRef = this.tripsRepo.getAllTrips().subscribe(trips => {
       this.tripList = trips;
@@ -75,8 +78,8 @@ export class TripsComponent implements OnInit {
   }
 
   add(event: MatChipInputEvent): void {
-    let input = event.input;
-    let value = event.value;
+    const input = event.input;
+    const value = event.value;
 
     // Add our fruit
     if ((value || '').trim()) {
@@ -90,19 +93,13 @@ export class TripsComponent implements OnInit {
   }
 
   remove(guest: any): void {
-    let index = this.guestList.indexOf(guest);
+    const index = this.guestList.indexOf(guest);
 
     if (index >= 0) {
       this.guestList.splice(index, 1);
     }
   }
 
-
-
-  
-   
-
-    
   onShowTrips() {
     this.createTripGroupForm = false;
     this.payForm = false;
@@ -126,53 +123,36 @@ export class TripsComponent implements OnInit {
 
     this.trip = trip;
 
-    
-
     // this.auth.getUserInfo().subscribe( data => function(data){
     //   this.userInfo = data;
     //   console.log(data);
 
     // });
 
-    let dataToCreateTripGroup = {
+    const dataToCreateTripGroup = {
       tripId: trip.id,
       customerId: '',
-      customerName: '', //this.userInfo.firstName + this.userInfo.lasttName,
+      customerName: '', // this.userInfo.firstName + this.userInfo.lasttName,
       guests: this.guestList
-    }
+    };
     // I Need Customer info to create the TripGroup
-    this.tripGroup = this.factory.NewTripTemplate(dataToCreateTripGroup)
-    this.onCreateTripGroup()
-   
+    this.tripGroup = this.factory.NewTripTemplate(dataToCreateTripGroup);
+    this.onCreateTripGroup();
   }
 
 
 
   onReserveTripSubmit() {
-
-    
-
-    console.log(this.tripGroup)
-
-    this.tripGroup.guests = this.guestList;
-    this.tripGroup.size = 1 + this.guestList.length
-
     console.log(this.tripGroup);
-
-    this.onPayFormButton()
-
+    this.tripGroup.guests = this.guestList;
+    this.tripGroup.size = 1 + this.guestList.length;
+    console.log(this.tripGroup);
+    this.onPayFormButton();
   }
 
-  
   onPayFormSubmit() {
-
-    this.onShowTrips()
+    this.onShowTrips();
   }
-
-
-
-
-
 
   ngOnDestroy() {
     this.tripListRef.unsubscribe();
