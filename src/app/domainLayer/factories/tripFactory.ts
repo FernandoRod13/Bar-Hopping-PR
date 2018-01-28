@@ -11,6 +11,7 @@ export class TripFactory {
     composeTripFromDB(json: any): Trip {
         const data = json.data();
 
+        console.log(data)
         return new Trip(json.id, data.name, data.capacity, data.date, data.tripRoute, 
             data.typeOfTrip, data.staff,data.seatsTaken)
     }

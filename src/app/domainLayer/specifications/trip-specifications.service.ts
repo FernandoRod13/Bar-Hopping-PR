@@ -7,13 +7,13 @@ export class TripSpecificationsService {
 
 
 
-  spaceAvailable(tripCapacity: number, seatsTaken: number, groupSize: number): boolean {
+  public spaceAvailable(tripCapacity: number, seatsTaken: number, groupSize: number): boolean {
 
     if (seatsTaken + groupSize > tripCapacity) {
       return false;
     }
     else {
-      return false;
+      return true;
       
     }
   }

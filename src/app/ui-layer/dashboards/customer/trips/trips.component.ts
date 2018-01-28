@@ -111,6 +111,12 @@ export class TripsComponent implements OnInit, OnDestroy {
     if (index >= 0) {
       this.guestList.splice(index, 1);
       this.priceToPay -= 25;
+      if(this.specifications.spaceAvailable(this.trip.capacity, this.trip.seatsTaken, this.guestList.length + 1 )){
+        this.wrongForm = false;
+      }
+      else{
+        
+      }
     }
   }
 

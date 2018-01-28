@@ -63,6 +63,12 @@ export class TripsRepoService {
   /**This function will add a group to the trip */
   addNewTripGroup(tripGroup: TripGroup): void {
     this.tripGroupsCollection.add(this.parseTripGroupToJSON(tripGroup));
+
+    this.getSpecificTrip(tripGroup.tripId).subscribe(trip => {
+
+      trip.seatsTaken =+ tripGroup.size;
+      this.tripsCollection.doc(tripGroup.tripId).update(this.parseTripToJSON(trip));
+    });
   }
 
   /**This function will delete a group from the trip */

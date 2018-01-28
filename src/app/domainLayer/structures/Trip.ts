@@ -9,7 +9,7 @@ export class Trip {
     staff: [string]; // the ids of the employees
     
 
-
+ 
     constructor(id: string, name: string, capacity: number, date: Date, tripRoute: [string],
         typeOfTrip: string, staff: [string], seatsTaken?: number) {
 
