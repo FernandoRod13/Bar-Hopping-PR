@@ -30,6 +30,7 @@ export class AuthenticationService {
   getUserInfo(): Observable<User> {
     if (this.authState) {
       return this.afDB.collection('users').doc(this.authState.uid).snapshotChanges().map( item => {
+        console.log(item.payload.data())
         return new User(item.payload.id, item.payload.data().email, item.payload.data().firstName, item.payload.data().lastName);
       });
     }

@@ -129,10 +129,11 @@ export class TripsComponent implements OnInit {
     
 
     // this.auth.getUserInfo().subscribe( data => function(data){
-    //   this.userInfo = data;
-    //   console.log(data);
+    //    this.userInfo = data;
 
-    // });
+    //    console.log(data);
+       
+    //  });
 
     let dataToCreateTripGroup = {
       tripId: trip.id,
@@ -142,6 +143,8 @@ export class TripsComponent implements OnInit {
     }
     // I Need Customer info to create the TripGroup
     this.tripGroup = this.factory.NewTripTemplate(dataToCreateTripGroup)
+
+
     this.onCreateTripGroup()
    
   }
@@ -150,7 +153,7 @@ export class TripsComponent implements OnInit {
 
   onReserveTripSubmit() {
 
-    
+
 
     console.log(this.tripGroup)
 
