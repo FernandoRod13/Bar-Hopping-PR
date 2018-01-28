@@ -6,7 +6,6 @@ import { Address } from '../structures/Address';
 export class UserFactory {
     /**This function will contrusct an employee from a json from the database. */
     composeEmployee(json: any): Employee {
-        
         const data = json.data();
         const addressRef = data.address;
         const address = new Address(addressRef.city, addressRef.line1, addressRef.line2, addressRef.state, addressRef.zip);
@@ -18,8 +17,7 @@ export class UserFactory {
     }
 
     composeCustomer(data: any): any {
-        
-        if(data.userType == "Employee"){
+        if (data.userType === 'Employee') {
             return this.composeEmployee(data);
         }
         

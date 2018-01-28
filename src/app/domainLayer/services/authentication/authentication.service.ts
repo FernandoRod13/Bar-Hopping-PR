@@ -6,6 +6,7 @@ import { AngularFireModule } from 'angularfire2';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { User } from './../../structures/user';
 
 
 @Injectable()
@@ -26,10 +27,11 @@ export class AuthenticationService {
     });
   }
 
-  getUserInfo(): any {
+  getUserInfo(): Observable<User> {
     if (this.authState) {
-      console.log(this.authState)
-      return this.afDB.collection('users').doc(this.authState.uid).valueChanges();
+      return this.afDB.collection('users').doc(this.authState.uid).snapshotChanges().map( item => {
+        return new User(item.payload.id, item.payload.data().email, item.payload.data().firstName, item.payload.data().lastName);
+      });
     }
   }
 

@@ -35,7 +35,7 @@ export class CustomersRepoService {
         this.addCustomerToCollection(user.uid, customerData);
 
       }).catch(error => {
-        console.log(error)
+        console.log(error);
       });
   }
 
@@ -75,26 +75,21 @@ export class CustomersRepoService {
   /**This function will return an observable object of a specific customer. */
   getSpecificCustomer(customerID: string): Observable<Customer> {
     return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
-      console.log(data.payload.data());
       if (data.payload.data() == undefined) {
         console.log("Hay error");
         throw new Error('is an employee');
       }
-      return this.factory.composeCustomer(data.payload.data())
+      return this.factory.composeCustomer(data.payload.data());
     });
   }
 
   itsCustomer(customerID: string): Observable<boolean> {
-    console.log(customerID)
-
     return this.customerCollection.doc(customerID).snapshotChanges().map(data => {
-      
-      if(data.payload.data() == null){
+      if (data.payload.data() == null) {
         //Ist not a customer
         return false;
       }
-      if (data.payload.data().userType == "Customer") {
-        
+      if (data.payload.data().userType === 'Customer') {
         return true;
       }
       else {

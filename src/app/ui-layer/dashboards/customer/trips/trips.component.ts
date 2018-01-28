@@ -150,6 +150,8 @@ export class TripsComponent implements OnInit {
 
   onReserveTripSubmit() {
 
+    
+
     console.log(this.tripGroup)
 
     this.tripGroup.guests = this.guestList;
