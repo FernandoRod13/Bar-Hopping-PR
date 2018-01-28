@@ -3,20 +3,20 @@ export class TripGroup {
     tripId: string;
     customerId: string;
     customerName: string;
-    guests: [string];
+    guests: string[];
     size: number;
     emergencyContactName: string;
     emergencyContactNumber: string;
 
 
-    constructor(tripId: string, customerID: string, customerName: string, guests: [string], size: number,
+    constructor(tripId: string, customerId: string, customerName: string, guests: string[], size: number,
         emergencyContactName: string, emergencyContactNumber: string, tripGroupId?: string) {
 
         // To show 
         if (tripGroupId) {
             this.tripGroupId = tripGroupId;
             this.tripId = tripId;
-            this.customerId = customerID;
+            this.customerId = customerId;
             this.customerName = customerName;
             this.guests = guests;
             this.size = size;
@@ -27,7 +27,7 @@ export class TripGroup {
         else {
 
             this.tripId = tripId;
-            this.customerId = customerID;
+            this.customerId = customerId;
             this.customerName = customerName;
             this.guests = guests;
             this.size = size;
@@ -38,6 +38,6 @@ export class TripGroup {
 
     }
 
-}
+} 
 
 

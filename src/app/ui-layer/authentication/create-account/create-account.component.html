@@ -6,9 +6,15 @@
           <form class="create-account-form " (ngSubmit)="onCreateAccount(form)" #form="ngForm">
             
               <mat-form-field class="col-md-12 full-width field">
-                  <input matInput placeholder="Name" required name="name" type="text" ngModel>
+                  <input matInput placeholder="First Name" required name="firstName" type="text" ngModel>
                   <mat-hint>Pepito Morales</mat-hint>
               </mat-form-field>
+
+              <mat-form-field class="col-md-12 full-width field">
+                  <input matInput placeholder="Last Name" required name="lastName" type="text" ngModel>
+                  <mat-hint>Pepito Morales</mat-hint>
+              </mat-form-field>
+
             <mat-form-field class="col-md-12 full-width field">
               <input matInput placeholder="Email" required name="email" type="email" ngModel>
               <mat-hint>Ex: john.smith@gmail.com</mat-hint>

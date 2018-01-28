@@ -1,4 +1,4 @@
-<div *ngIf="showTrips" class="container-fluid" >
+<div *ngIf="showTrips" class="container-fluid">
 
   <mat-card *ngFor="let trip of tripList" class="card">
 
@@ -11,74 +11,59 @@
     <mat-card-subtitle *ngFor="let pid of trip.tripRoute" class="d-inline">
       || {{partnersNames[pid]}}
     </mat-card-subtitle>
-    
-    <br><br>
-    <mat-card-subtitle >Trip Capacity: {{trip.capacity}}  </mat-card-subtitle>
-    <mat-card-subtitle >Number of participants: {{trip.seatsTaken}}</mat-card-subtitle>
+
+    <br>
+    <br>
+    <mat-card-subtitle>Trip Capacity: {{trip.capacity}} </mat-card-subtitle>
+    <mat-card-subtitle>Number of participants: {{trip.seatsTaken}}</mat-card-subtitle>
 
     <mat-card-actions>
-      <button mat-button color="primary" (click)="onReserveTripButton()">Reserve Trip</button>
+      <button mat-button color="primary" (click)="OnCreateTripGroupForm(trip)">Reserve Trip</button>
     </mat-card-actions>
   </mat-card>
 </div>
 
 
-<div *ngIf="reserveTrip" class="container-fluid">
+<div *ngIf="createTripGroupForm" class="container-fluid">
   <div class="row">
-    <div id="create-trip-card" class="col-md-8 offset-md-2 align-self-center content">
+    <div id="create-tripGroup-card" class="col-md-8 offset-md-2 align-self-center content">
       <mat-card>
 
         <mat-card-title>Reserve Trip: {{trip.name}} </mat-card-title>
 
-        <form class="reserve-Trip-form " (ngSubmit)="onSubmitAddingTrip(form)" #form="ngForm">
+        <form class="reserve-Trip-form " (ngSubmit)="onReserveTripSubmit()" #form="ngForm">
 
           <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="Trip name" required name="name" type="text" [(ngModel)]="trip.name">
-          </mat-form-field>
-
-          <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="Capacity" required name="capacity" type="number" value="20" [(ngModel)]="trip.capacity">
-          </mat-form-field>
-
-          <mat-form-field class="col-md-12 full-width field">
-            <input placeholder="Date of the trip" matInput [matDatepicker]="myDatepicker" required name="date" [(ngModel)]="trip.date">
-            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #myDatepicker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field class="col-md-12 full-width field">
-            <mat-select placeholder="Staff" required name="staff" multiple [(ngModel)]="trip.staff">
-              <mat-option *ngFor="let employee of employeesList" [value]="employee.eId"> {{employee.firstName}} </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class="col-md-12 full-width field">
-            <mat-select placeholder="Trip Stops" required name="tripRoute" multiple [(ngModel)]="trip.tripRoute">
-              <mat-option *ngFor="let partner of partnerList" [value]="partner.pId"> {{partner.name}} </mat-option>
-            </mat-select>
+            <input matInput placeholder="Customer Name" required name="name" type="text" [(ngModel)]="tripGroup.customerName">
           </mat-form-field>
 
 
+          <mat-card-subtitle>Guest list:</mat-card-subtitle>
+          
+          
           <mat-form-field class="col-md-12 full-width field">
-            <mat-select placeholder="Type of trip" required name="typeOfTrip" [(ngModel)]="trip.typeOfTrip">
-              <mat-option value="default" selected>default</mat-option>
-              <mat-option value="custom">custom</mat-option>
-
-            </mat-select>
-            <!-- <input matInput placeholder="Type" required name="typeOfTrip" type="text" [(ngModel)]="trip.typeOfTrip">
-              <mat-hint>Ex: Custom or default.</mat-hint> -->
+            <input matInput placeholder="Emergency contact Name" required name="EmergencyContact" type="text" [(ngModel)]="tripGroup.emergencyContactName">
           </mat-form-field>
+
+
+
+          <mat-form-field class="col-md-12 full-width field">
+            <input matInput placeholder="Emergency contact Number" required name="EmergencyContactNumber" type="text" [(ngModel)]="tripGroup.emergencyContactNumber">
+          </mat-form-field>
+
+
           <br>
           <br>
 
           <div class="row">
             <button mat-raised-button class="col-md-3 login-button" (click)="onShowTrips()">Cancel</button>
             <span class="col-md-1"></span>
-            <button mat-raised-button color="primary" class="col-md-8" type="submit" *ngIf="!updatingTrip">Add New Trip</button>
+            <button mat-raised-button color="primary" class="col-md-8" type="submit">Pay and confirm</button>
 
           </div>
 
         </form>
+       
       </mat-card>
     </div>
   </div>
@@ -86,89 +71,79 @@
 
 
 
-<div class="container">
+<div *ngIf="payForm" class="container-fluid">
   <div class="row">
-      <!-- You can make it whatever width you want. I'm making it full width
-           on <= small devices and 4/12 page width on >= medium devices -->
-      <div class="col-xs-12 col-md-4">
-      
-      
-          <!-- CREDIT CARD FORM STARTS HERE -->
-          <div class="panel panel-default credit-card-box">
-              <div class="panel-heading display-table" >
-                  <div class="row display-tr" >
-                      <h3 class="panel-title display-td" >Payment Details</h3>
-                      <div class="display-td" >                            
-                          <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
-                      </div>
-                  </div>                    
+    <div id="pay-trip-card" class="col-md-8 offset-md-2 align-self-center content">
+
+
+      <mat-card>
+
+        <!-- CREDIT CARD FORM STARTS HERE -->
+        <div class="panel panel-default credit-card-box">
+          <div class="panel-heading display-table">
+            <div class="row display-tr">
+              <h3 class="panel-title display-td">Payment Details</h3>
+              <div class="display-td">
+                <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
               </div>
-              <div class="panel-body">
-                  <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
-                      <div class="row">
-                          <div class="col-xs-12">
-                              <div class="form-group">
-                                  <label for="cardNumber">CARD NUMBER</label>
-                                  <div class="input-group">
-                                      <input 
-                                          type="tel"
-                                          class="form-control"
-                                          name="cardNumber"
-                                          placeholder="Valid Card Number"
-                                          autocomplete="cc-number"
-                                          required autofocus 
-                                      />
-                                      <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-                                  </div>
-                              </div>                            
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-xs-7 col-md-7">
-                              <div class="form-group">
-                                  <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
-                                  <input 
-                                      type="tel" 
-                                      class="form-control" 
-                                      name="cardExpiry"
-                                      placeholder="MM / YY"
-                                      autocomplete="cc-exp"
-                                      required 
-                                  />
-                              </div>
-                          </div>
-                          <div class="col-xs-5 col-md-5 pull-right">
-                              <div class="form-group">
-                                  <label for="cardCVC">CV CODE</label>
-                                  <input 
-                                      type="tel" 
-                                      class="form-control"
-                                      name="cardCVC"
-                                      placeholder="CVC"
-                                      autocomplete="cc-csc"
-                                      required
-                                  />
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-xs-12">
-                              <div class="form-group">
-                                  <label for="couponCode">COUPON CODE</label>
-                                  <input type="text" class="form-control" name="couponCode" />
-                              </div>
-                          </div>                        
-                      </div>
-                      <div class="row">
-                          <div class="col-xs-12">
-                              <button class="subscribe btn btn-success btn-lg btn-block" type="button">Start Subscription</button>
-                          </div>
-                      </div>
-                      <div class="row" style="display:none;">
-                          <div class="col-xs-12">
-                              <p class="payment-errors"></p>
-                          </div>
-                      </div>
-                  </form>
+            </div>
+          </div>
+          <div class="panel-body">
+            <form class="reserve-Trip-form " (ngSubmit)="onPayFormSubmit()" #form="ngForm">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="cardNumber">CARD NUMBER</label>
+                    <div class="input-group">
+                      <input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required
+                        autofocus />
+                      <span class="input-group-addon">
+                        <i class="fa fa-credit-card"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
-          </div> 
+              <div class="row">
+                <div class="col-xs-7 col-md-7">
+                  <div class="form-group">
+                    <label for="cardExpiry">
+                      <span class="hidden-xs">EXPIRATION</span>
+                      <span class="visible-xs-inline">EXP</span> DATE</label>
+                    <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required />
+                  </div>
+                </div>
+                <div class="col-xs-5 col-md-5 pull-right">
+                  <div class="form-group">
+                    <label for="cardCVC">CV CODE</label>
+                    <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="couponCode">COUPON CODE</label>
+                    <input type="text" class="form-control" name="couponCode" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <button mat-raised-button class="col-md-3 login-button" (click)="onCreateTripGroup()">Cancel</button>
+                <span class="col-md-1"></span>
+                <button mat-raised-button color="primary" class="col-md-8" type="submit">Pay and confirm</button>
+
+
+              </div>
+              <div class="row" style="display:none;">
+                <div class="col-xs-12">
+                  <p class="payment-errors"></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </mat-card>
+    </div>
+  </div>

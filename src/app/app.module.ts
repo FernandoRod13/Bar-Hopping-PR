@@ -24,6 +24,7 @@ import { UserFactory } from './domainLayer/factories/userFactory';
 import { PartnerFactory } from './domainLayer/factories/partnerFactory';
 import { TransactionFactory } from './domainLayer/factories/transactionFactory';
 import { TripFactory } from './domainLayer/factories/tripFactory';
+import { TripGroupFactory } from './domainLayer/factories/tripGroupFactory';
 import { LoginComponent } from './ui-layer/authentication/login/login.component';
 import { HomePageComponent } from './ui-layer/homePage/homePage.component';
 import { PartnersComponent } from './ui-layer/dashboards/customer/partners/partners.component';
@@ -90,7 +91,8 @@ import { ContactComponent } from './ui-layer/dashboards/customer/contact/contact
     TransactionFactory,
     TripFactory,
     AuthGuardService,
-    LocationDataTransfeerService
+    LocationDataTransfeerService,
+    TripGroupFactory
   ],
   bootstrap: [AppComponent]
 })

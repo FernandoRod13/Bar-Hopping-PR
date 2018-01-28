@@ -19,7 +19,7 @@ export class CreateAccountComponent implements OnInit {
     if (form.valid) {
       if (form.value.password1.length > 7) {
         if (form.value.password1 === form.value.password2) {
-        const customer = new Customer('', form.value.name, form.value.email);
+        const customer = new Customer(form.value.firstName, form.value.lastName, form.value.email);
         this.CustomerRepo.createNewCustomer(customer, form.value.password1);
         this.router.navigate(['/dashboard']);
         } else {

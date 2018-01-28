@@ -23,6 +23,6 @@ export class UserFactory {
             return this.composeEmployee(data);
         }
         
-        return new Customer(data.name, data.email)
+        return new Customer(data.firstName, data.lastName, data.email)
     }
 }
