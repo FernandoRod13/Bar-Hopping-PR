@@ -31,9 +31,13 @@
           <br>
           <mat-card-content>Place Information:</mat-card-content>
           <mat-form-field class="col-md-12 full-width field">
-            <input matInput placeholder="phone" required name="phone" type="text" [(ngModel)]="partner.phone">
-            <mat-hint>ex: 798-987-2823</mat-hint>
+            <input matInput placeholder="Website" required name="website" type="url" [(ngModel)]="partner.website">
+            <mat-hint>ex: https://facebook.com</mat-hint>
           </mat-form-field>
+          <mat-form-field class="col-md-12 full-width field">
+              <input matInput placeholder="Phone" required name="phone" type="text" [(ngModel)]="partner.phone">
+              <mat-hint>ex: 798-987-2823</mat-hint>
+            </mat-form-field>
           <mat-form-field>
             <mat-select [(value)]="partner.type" placeholder="Partner Type" class="col-md-12 full-width field" required>
               <mat-option>None</mat-option>

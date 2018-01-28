@@ -1,0 +1,35 @@
+<div class="container-fluid">
+
+
+  <div class="jumbotron">
+    <h2 class="center-block">Here you can find a list of bars and restaurants that you can visit with our services</h2>
+  </div>
+  <div class="row">
+    <div id="create-partner-card" class="col-md-6 align-self-center content card-list">
+      <mat-card *ngFor="let partner of partnerList" class="card">
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <img src="{{partner.image}}" class="img-responsive center-block" style="width: 250px; height: 250px;" alt="unable to load image">
+          </div>
+          <div class="col-md-6">
+            <mat-card-title>{{partner.name}}</mat-card-title>
+            <p>Description: {{partner.description}}</p>
+            <p>Announcement: {{partner.announcement}}</p>
+            <p>Services: {{partner.type}}</p>
+            <p>Phone: {{partner.phone}}</p>
+          </div>
+        </div>
+
+      </mat-card>
+    </div>
+
+    <div class="col-md-6">
+      <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="partner.location.latitude" [longitude]="partner.location.longitude" *ngFor="let partner of partnerList"></agm-marker>
+      </agm-map>
+    </div>
+
+  </div>
+</div>
